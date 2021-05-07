@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RaspberryPiにusbメモリのID指定でマウントさせる | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="【やりたいこと】cronとかでデータ保存の自動実行などする際、usbをつけっぱなしにして自動マウントにしているとデバイス名やマウント先が稀に異なってきてしまって例えばファイルの保存先が異なると最悪データを保存できないなどある(usb挿しっぱなしだと本当に稀だとは思われるが) ので、デバイス名などを指定しておき確実に自分の指定した名前でマウントできるようにする 自分の実行環境はRaspberryPi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RaspberryPiにusbメモリのID指定でマウントさせる">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/08/14/raspberrypi-usb-mount-by-using-id/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="【やりたいこと】cronとかでデータ保存の自動実行などする際、usbをつけっぱなしにして自動マウントにしているとデバイス名やマウント先が稀に異なってきてしまって例えばファイルの保存先が異なると最悪データを保存できないなどある(usb挿しっぱなしだと本当に稀だとは思われるが) ので、デバイス名などを指定しておき確実に自分の指定した名前でマウントできるようにする 自分の実行環境はRaspberryPi">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-08-14T07:52:36.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.673Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="RaspberryPi">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-raspberrypi-usb-mount-by-using-id" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/raspberrypi-usb-mount-by-using-id/" class="article-date">
+  <time datetime="2016-08-14T07:52:36.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RaspberryPiにusbメモリのID指定でマウントさせる
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>【やりたいこと】<br>cronとかでデータ保存の自動実行などする際、usbをつけっぱなしにして自動マウントにしていると<br>デバイス名やマウント先が稀に異なってきてしまって<br>例えばファイルの保存先が異なると最悪データを保存できないなどある(usb挿しっぱなしだと本当に稀だとは思われるが)</p>
+<p>ので、デバイス名などを指定しておき確実に自分の指定した名前でマウントできるようにする</p>
+<p>自分の実行環境は<br>RaspberryPi2, OS Raspbian Jessie</p>
+<p>参考<br><a target="_blank" rel="noopener" href="http://lil68060.hatenablog.com/entry/2015/07/01/034254">Raspberry PiでUSBに繋いだストレージ(USBメモリ・HDD・SSDなど)をマウントするちょっと素敵な方法</a></p>
+<p>基本的に上記参考URLと全く同じ方法で出来るのでちょっとしたメモ追記がてら記載</p>
+<p>ちなみに、もし <code>$ sudo apt-get install usbmount</code> でusbの自動マウントパッケージを入れていると<br>目的のことができないので<code>$ sudo apt-get remove usbmount</code>でひとまずアンインストールしておくこと</p>
+<span id="more"></span>
+<h1 id="どのSCSIデバイスに認識されているか調べる"><a href="#どのSCSIデバイスに認識されているか調べる" class="headerlink" title="どのSCSIデバイスに認識されているか調べる"></a>どのSCSIデバイスに認識されているか調べる</h1><p>dfコマンドなどで、RaspberryPiのどのSCSIデバイスに認識されているか調べる<br>マウントされていない場合は、<br>$ ls /dev/sd*<br>とすれば、認識されているusbメモリが確認できる</p>
+<p>例えば、sda1とかが出てくると思われる</p>
+<h1 id="udevadmでデバイスIDの確認"><a href="#udevadmでデバイスIDの確認" class="headerlink" title="udevadmでデバイスIDの確認"></a>udevadmでデバイスIDの確認</h1><p>udevとは userspace device management のことらしい<br><a target="_blank" rel="noopener" href="http://d.hatena.ne.jp/qpSHiNqp/20110214/1297651801">udevによるデバイスの命名の固定化</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">$ sudo udevadm info -q all -n /dev/sda</span><br><span class="line"></span><br><span class="line">P: /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.4/1-1.4:1.0/host0/target0:0:0/0:0:0:0/block/sda</span><br><span class="line">N: sda</span><br><span class="line">S: disk/by-id/usb-BUFFALO_USB_Flash_Disk_0AB15160A3036AC7-0:0</span><br><span class="line">S: disk/by-path/platform-3f980000.usb-usb-0:1.4:1.0-scsi-0:0:0:0</span><br><span class="line">E: DEVLINKS=/dev/disk/by-id/usb-BUFFALO_USB_Flash_Disk_0AB15160A3036AC7-0:0 /dev/disk/by-path/platform-3f980000.usb-usb-0:1.4:1.0-scsi-0:0:0:0</span><br><span class="line">E: DEVNAME=/dev/sda</span><br><span class="line">E: DEVPATH=/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.4/1-1.4:1.0/host0/target0:0:0/0:0:0:0/block/sda</span><br><span class="line">E: DEVTYPE=disk</span><br><span class="line">E: ID_BUS=usb</span><br><span class="line">E: ID_INSTANCE=0:0</span><br><span class="line">E: ID_MODEL=USB_Flash_Disk</span><br><span class="line">E: ID_MODEL_ENC=USB\x20Flash\x20Disk\x20\x20</span><br><span class="line">E: ID_MODEL_ID=0089</span><br><span class="line">E: ID_PART_TABLE_TYPE=dos</span><br><span class="line">E: ID_PATH=platform-3f980000.usb-usb-0:1.4:1.0-scsi-0:0:0:0</span><br><span class="line">E: ID_PATH_TAG=platform-3f980000_usb-usb-0_1_4_1_0-scsi-0_0_0_0</span><br><span class="line">E: ID_REVISION=3.00</span><br><span class="line">E: ID_SERIAL=BUFFALO_USB_Flash_Disk_0AB15160A3036AC7-0:0</span><br><span class="line">E: ID_SERIAL_SHORT=0AB15160A3036AC7</span><br><span class="line">E: ID_TYPE=disk</span><br><span class="line">E: ID_USB_DRIVER=usb-storage</span><br><span class="line">E: ID_USB_INTERFACES=:080650:</span><br><span class="line">E: ID_USB_INTERFACE_NUM=00</span><br><span class="line">E: ID_VENDOR=BUFFALO</span><br><span class="line">E: ID_VENDOR_ENC=BUFFALO\x20</span><br><span class="line">E: ID_VENDOR_ID=0411</span><br><span class="line">E: MAJOR=8</span><br><span class="line">E: MINOR=0</span><br><span class="line">E: SUBSYSTEM=block</span><br><span class="line">E: UDEV_LOG=3</span><br><span class="line">E: UDISKS_PARTITION_TABLE=1</span><br><span class="line">E: UDISKS_PARTITION_TABLE_COUNT=1</span><br><span class="line">E: UDISKS_PARTITION_TABLE_SCHEME=mbr</span><br><span class="line">E: UDISKS_PRESENTATION_NOPOLICY=0</span><br><span class="line">E: USEC_INITIALIZED=5560560</span><br></pre></td></tr></table></figure>
+<h3 id="sudo-udevadm-info-q-all-n-dev-sdaに関して"><a href="#sudo-udevadm-info-q-all-n-dev-sdaに関して" class="headerlink" title="sudo udevadm info -q all -n /dev/sdaに関して"></a>sudo udevadm info -q all -n /dev/sdaに関して</h3><p>info:<br>Queries the udev database for device information stored in the udev database. It can also query the properties of a device from its sysfs representation to help creating udev rules that match this device.</p>
+<p>udevデータベース内のデバイスインフォーメーションからのクエリ-(データの問い合わせや要求).<br>デバイスにマッチするudevルール作成補助のsysfs表現からデバイスのプロパティも問い合わせる</p>
+<p>つまり要するにデバイス情報を引っ張ってくるってこと</p>
+<p>-q: query type.<br>  name,symlink, path, property, all.　がある</p>
+<p>例えば<br>$ sudo udevadm info -q name -n /dev/sda<br>とすると<br>sda<br>だけが帰ってくる</p>
+<p>-n(–name):<br>  file名<br>  まぁ/dev/sdaを指定している</p>
+<p>##で、必要な部分</p>
+<p>ID_SERIAL=BUFFALO_USB_Flash_Disk_0AB15160A3036AC7-0:0<br>の部分が必要になる</p>
+<p>自分はBuffaloのusbメモリを用いているのでこういう名前になってた</p>
+<h1 id="usbをひっこぬいて、デバイスの固有の名前を考える"><a href="#usbをひっこぬいて、デバイスの固有の名前を考える" class="headerlink" title="usbをひっこぬいて、デバイスの固有の名前を考える"></a>usbをひっこぬいて、デバイスの固有の名前を考える</h1><p><a target="_blank" rel="noopener" href="http://lil68060.hatenablog.com/entry/2015/07/01/034254">参考リンク先</a><br>だと、固有の名前は usbmem_backup となっていたのでそれに倣って<br>usbmem_backupとして設定していくことにする</p>
+<h1 id="udevのルールを-etc-udev-rules-d-内に書く"><a href="#udevのルールを-etc-udev-rules-d-内に書く" class="headerlink" title="udevのルールを /etc/udev/rules.d 内に書く"></a>udevのルールを /etc/udev/rules.d 内に書く</h1><p>/etc/udev/rules.d 内に、デバイスの名前を割り当てるためのルールファイルを書く<br>ファイル名の先頭に出来るだけ大きな2桁の数字をつける<br>(rules.d内では、数字の小さいものから実行されるため)</p>
+<p><a target="_blank" rel="noopener" href="http://mux03.panda64.net/docs/udevrules_ja.html">udev ルールの書き方</a></p>
+<p>たとえば、ルールファイル名を<br>98-usbmem_backup.rules</p>
+<p>とする(自分の場合は、99は既に使われていた)</p>
+<p>で、内容は以下のようにする</p>
+<figure class="highlight sh"><figcaption><span>98-usbmem_backup.rules</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SUBSYSTEM==<span class="string">&quot;block&quot;</span>,</span><br><span class="line">ENV&#123;ID_BUS&#125;==<span class="string">&quot;usb&quot;</span>,</span><br><span class="line">ENV&#123;ID_SERIAL&#125;==<span class="string">&quot;BUFFALO_USB_Flash_Disk_0AB15160A3036AC7-0:0&quot;</span>, </span><br><span class="line">SYMLINK+=<span class="string">&quot;usbmem_backup%n&quot;</span></span><br></pre></td></tr></table></figure>
+<p>長いから行を分けているけど実際は1行で記述するらしい<br>ということは以下のようになるのかな</p>
+<figure class="highlight sh"><figcaption><span>98-usbmem_backup.rules</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUBSYSTEM==<span class="string">&quot;block&quot;</span>, ENV&#123;ID_BUS&#125;==<span class="string">&quot;usb&quot;</span>, ENV&#123;ID_SERIAL&#125;==<span class="string">&quot;BUFFALO_USB_Flash_Disk_0AB15160A3036AC7-0:0&quot;</span>,  SYMLINK+=<span class="string">&quot;usbmem_backup%n&quot;</span></span><br></pre></td></tr></table></figure>
+<p>ENV{ID_SERIAL}==”BUFFALO_USB_Flash_Disk_0AB15160A3036AC7-0:0”<br>のところは、自分だと Buffaloのusbメモリだったのでこうなったので自分の使ってるusbメモリの名前を<br>前述通り確認した名前のものを入れること</p>
+<p>確かに、Raspi内あったもともとのファイルのは以下のようになっていた<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cat /etc/udev/rules.d/40-scratch.rules </span><br><span class="line">ATTRS&#123;idVendor&#125;==&quot;0694&quot;, ATTRS&#123;idProduct&#125;==&quot;0003&quot;, SUBSYSTEMS==&quot;usb&quot;, ACTION==&quot;add&quot;, MODE=&quot;0666&quot;, GROUP=&quot;plugdev&quot;</span><br></pre></td></tr></table></figure></p>
+<p>ただ、もう一つファイルがあってそっちは<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cat /etc/udev/rules.d/99-com.rules </span><br><span class="line">SUBSYSTEM==&quot;gpio*&quot;, PROGRAM=&quot;/bin/sh -c &#x27;chown -R root:gpio /sys/class/gpio &amp;&amp; chmod -R 770 /sys/class/gpio; chown -R root:gpio /sys/devices/virtual/gpio &amp;&amp; chmod -R 770 /sys/devices/virtual/gpio&#x27;&quot;</span><br><span class="line">SUBSYSTEM==&quot;input&quot;, GROUP=&quot;input&quot;, MODE=&quot;0660&quot;</span><br><span class="line">SUBSYSTEM==&quot;i2c-dev&quot;, GROUP=&quot;i2c&quot;, MODE=&quot;0660&quot;</span><br><span class="line">SUBSYSTEM==&quot;spidev&quot;, GROUP=&quot;spi&quot;, MODE=&quot;0660&quot;</span><br></pre></td></tr></table></figure><br>だった<br>改行がはいってても大丈夫なのかな？</p>
+<h1 id="で、完了"><a href="#で、完了" class="headerlink" title="で、完了"></a>で、完了</h1><p>usbメモリを挿して、確認してみると</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls /dev/usb*</span><br><span class="line">/dev/usbmem_backup  /dev/usbmem_backup1</span><br></pre></td></tr></table></figure>
+<p>だったので、ちゃんと指定した名前で認識されているのがわかる</p>
+<p>ので、後は適当なディレクトリにmount可能となる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mount /dev/usbmem_backup1 /media</span><br><span class="line">$ df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/root        15G  4.2G  9.8G  30% /</span><br><span class="line">devtmpfs        427M     0  427M   0% /dev</span><br><span class="line">tmpfs            87M  260K   86M   1% /run</span><br><span class="line">tmpfs           5.0M     0  5.0M   0% /run/lock</span><br><span class="line">tmpfs           173M     0  173M   0% /run/shm</span><br><span class="line">/dev/mmcblk0p1   56M   21M   36M  38% /boot</span><br><span class="line">none            432M     0  432M   0% /sys/fs/cgroup</span><br><span class="line">/dev/sda1       492M  397M   96M  81% /media</span><br></pre></td></tr></table></figure>
+<p>ちゃんとmountされた!<br>mountされた後の名前はちゃんと /dev/sda1 となるらしい<br>確かに確認してみたら<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls /dev/sd*</span><br><span class="line">/dev/sda  /dev/sda1</span><br><span class="line"></span><br><span class="line">$ ls /dev/usb*</span><br><span class="line">/dev/usbmem_backup  /dev/usbmem_backup1</span><br></pre></td></tr></table></figure></p>
+<p>両方同時に存在していることになってるし、usbメモリを引っこ抜くとちゃんと両方共なくなることが確認された</p>
+<p>ひとまずこれで、cronとかで自動実行する際も指定した名前のやつでmountしてやればいいので<br>確実に間違うことなくデバイスを認識させることができる</p>
+<h3 id="ちなみに"><a href="#ちなみに" class="headerlink" title="ちなみに"></a>ちなみに</h3><p><a target="_blank" rel="noopener" href="http://www.ratocsystems.com/products/subpage/scsi/scsi.html">ラトックシステムSCSI用語解説</a></p>
+<p>SCSIデバイス:<br>  Small Computer System Interfaceのこと<br>  SCSIは規格<br>  物理的仕様(ケーブルやコネクタ、電気信号など)と論理仕様(機器間のやりとりの取り決め)からなります<br>  代表的なSCSIデバイス<br>    HDD, CD-ROM, MO, テープ, スキャナ, プリンタ, ZIP</p>
+<p>IDEデバイス:<br>  Integrated Drive Electronicsの略<br>  フロッピーディスクなど<br>  今あるのかな?</p>
+<p>らしい</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/raspberrypi-usb-mount-by-using-id/" data-id="ckodzxw2i003696z5akzwe7m4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/24/load-module-by-stack-ghci/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          stack ghciで読み込まれるファイルはcabalファイルで設定する
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/14/raspbian-jessie-auto-login-by-cui/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Raspbian JessieでCUIから自動ログイン設定</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

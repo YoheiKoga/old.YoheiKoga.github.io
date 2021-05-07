@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python3とscrapyを使ってスクレイピング始め | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="scrapyというpythonのスクレイピングフレームワークが徐々に人気が出てきているようなので試してみる 公式サイトhttps:&#x2F;&#x2F;scrapy.org&#x2F; チュートリアルhttp:&#x2F;&#x2F;doc.scrapy.org&#x2F;en&#x2F;latest&#x2F;intro&#x2F;tutorial.html 自分の環境はMacOSX 10.11 El CapitanPython 3.5.1 :: Anaconda 2.5.0Scr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python3とscrapyを使ってスクレイピング始め">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/09/07/scraping-by-python3-scrapy/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="scrapyというpythonのスクレイピングフレームワークが徐々に人気が出てきているようなので試してみる 公式サイトhttps:&#x2F;&#x2F;scrapy.org&#x2F; チュートリアルhttp:&#x2F;&#x2F;doc.scrapy.org&#x2F;en&#x2F;latest&#x2F;intro&#x2F;tutorial.html 自分の環境はMacOSX 10.11 El CapitanPython 3.5.1 :: Anaconda 2.5.0Scr">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-09-07T01:56:33.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.674Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-scraping-by-python3-scrapy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/07/scraping-by-python3-scrapy/" class="article-date">
+  <time datetime="2016-09-07T01:56:33.000Z" itemprop="datePublished">2016-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python3とscrapyを使ってスクレイピング始め
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>scrapyというpythonのスクレイピングフレームワークが徐々に人気が出てきているようなので<br>試してみる</p>
+<p>公式サイト<br><a target="_blank" rel="noopener" href="https://scrapy.org/">https://scrapy.org/</a></p>
+<p>チュートリアル<br><a target="_blank" rel="noopener" href="http://doc.scrapy.org/en/latest/intro/tutorial.html">http://doc.scrapy.org/en/latest/intro/tutorial.html</a></p>
+<p>自分の環境は<br>MacOSX 10.11 El Capitan<br>Python 3.5.1 :: Anaconda 2.5.0<br>Scrapy 1.1.2</p>
+<span id="more"></span>
+<p>python3やpipが入ってる前提で書くと</p>
+<p><br></p>
+<h1 id="インストールは簡単で、pip-installするだけ"><a href="#インストールは簡単で、pip-installするだけ" class="headerlink" title="インストールは簡単で、pip installするだけ"></a>インストールは簡単で、pip installするだけ</h1><hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install scrapy</span><br></pre></td></tr></table></figure>
+<p>anacondaをつかっているからか特にエラーが出なかったけど<br>エラーが出る場合もあるらしいので、その時は下記リンクを参考にする</p>
+<p><a target="_blank" rel="noopener" href="http://qiita.com/kent_ocean/items/bd79e29d9ab165c90b0d">http://qiita.com/kent_ocean/items/bd79e29d9ab165c90b0d</a></p>
+<p><br></p>
+<h1 id="簡単なコードを書いてみる"><a href="#簡単なコードを書いてみる" class="headerlink" title="簡単なコードを書いてみる"></a>簡単なコードを書いてみる</h1><hr>
+<p>公式サイトのweb spidersを書いてみる<br><a target="_blank" rel="noopener" href="https://scrapy.org/">https://scrapy.org/</a></p>
+<p>適当なディレクトリで下記コードを記述</p>
+<figure class="highlight py"><figcaption><span>myspider.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;blogspider&#x27;</span></span><br><span class="line">    start_urls = [<span class="string">&#x27;https://blog.scrapinghub.com&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> response.css(<span class="string">&#x27;ul li a::attr(&quot;href&quot;)&#x27;</span>).re(<span class="string">&#x27;.*/category/.*&#x27;</span>):</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(response.urljoin(url), self.parse_titles)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_titles</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="keyword">for</span> post_title <span class="keyword">in</span> response.css(<span class="string">&#x27;div.entries &gt; ul &gt; li a::text&#x27;</span>).extract():</span><br><span class="line">            <span class="keyword">yield</span> &#123;<span class="string">&#x27;title&#x27;</span>: post_title&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>で、下記で実行できる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scrapy runspider myspider.py</span><br></pre></td></tr></table></figure>
+<p>どうやら、指定したwebサイトをクローリングしてtitleを取得してくれているみたい<br><code>&#123;&#39;title&#39;: &#39;This Month in Open Source at Scrapinghub March\xa02016 on&#39;&#125;</code><br>みたいなのが出力されてた</p>
+<p>あと同じディレクトリに<code>__pychash__</code>なるファイルが生成された</p>
+<p>spiderはスクレイピング(webサイトから意図した情報を取得する)とクローリング(webサイトをリンクを辿っていき情報を取得する)の両方を行ってくれるclassみたい<br><a target="_blank" rel="noopener" href="http://doc.scrapy.org/en/latest/topics/spiders.html">http://doc.scrapy.org/en/latest/topics/spiders.html</a></p>
+<p><br></p>
+<h3 id="jsonファイルとして保存するspiderの例"><a href="#jsonファイルとして保存するspiderの例" class="headerlink" title="jsonファイルとして保存するspiderの例"></a>jsonファイルとして保存するspiderの例</h3><p>overviewのとこにもう一個spiderの例があって<br>StackOverflowのtop voted questions(<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions?sort=votes)を取得するコード例らしいのでやってみる">http://stackoverflow.com/questions?sort=votes)を取得するコード例らしいのでやってみる</a></p>
+<figure class="highlight py"><figcaption><span>stackoverflow_spider.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StackOverflowSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;stackoverflow&#x27;</span></span><br><span class="line">    start_urls = [<span class="string">&#x27;http://stackoverflow.com/questions?sort=votes&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="keyword">for</span> href <span class="keyword">in</span> response.css(<span class="string">&#x27;.question-summary h3 a::attr(href)&#x27;</span>):</span><br><span class="line">            full_url = response.urljoin(href.extract())</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(full_url, callback=self.parse_question)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_question</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="keyword">yield</span> &#123;</span><br><span class="line">            <span class="string">&#x27;title&#x27;</span>: response.css(<span class="string">&#x27;h1 a::text&#x27;</span>).extract_first(),</span><br><span class="line">            <span class="string">&#x27;votes&#x27;</span>: response.css(<span class="string">&#x27;.question .vote-count-post::text&#x27;</span>).extract_first(),</span><br><span class="line">            <span class="string">&#x27;body&#x27;</span>: response.css(<span class="string">&#x27;.question .post-text&#x27;</span>).extract_first(),</span><br><span class="line">            <span class="string">&#x27;tags&#x27;</span>: response.css(<span class="string">&#x27;.question .post-tag::text&#x27;</span>).extract(),</span><br><span class="line">            <span class="string">&#x27;link&#x27;</span>: response.url,</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>で、下記コマンドで実行するとstackoverflowのtop voteの情報が取得できる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scrapy runspider stackoverflow_spider.py -o top-stackoverflow-questions.json</span><br></pre></td></tr></table></figure>
+<p>で、<code>top-stackoverflow-questions.json</code>という名前のjsonファイルに保存される<br>このjsonファイルは整形されていないので、pythonコマンドでjson.toolを使って整形してやれば見やすくなる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python -m json.tool top-stackoverflow-questions.json &gt; result.json</span><br></pre></td></tr></table></figure>
+<p>これは簡単すぎてスクレイピングライフが捗りそう</p>
+<p>本当はフレームワークなので、使い方はもうちょっと調べて行きたい<br>(このままだとただのスクレイピングコードなので)</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/09/07/scraping-by-python3-scrapy/" data-id="ckodzxw2n003g96z5fh2yds3r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/07/how-to-use-drupal/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Drupalをローカル環境にインストールしてみる
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/01/console-output-by-scala-command/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">scalaコマンド実行でコンソールに出力されたりされなかったり</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

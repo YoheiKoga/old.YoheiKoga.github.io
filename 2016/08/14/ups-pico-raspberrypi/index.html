@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RaspberryPiバックアップバッテリーUPS PIcoの使い方 | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ラズパイを使用していて一番困るのが、いきなり電源が落ちた時などにファイルシステムが破損する恐れがあること そこで、突然の電源停止時にも安全に電源を落とせるようなバックアップとしてのデバイスがUPS PIcoラズベリーパイ &#x2F; Raspberry Pi 専用 UPS 無停電電源ボードUPS PIco 基本的には下記リンク公式のsimple Setting Guideを参考にやっていけばいける(PDF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RaspberryPiバックアップバッテリーUPS PIcoの使い方">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/08/14/ups-pico-raspberrypi/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="ラズパイを使用していて一番困るのが、いきなり電源が落ちた時などにファイルシステムが破損する恐れがあること そこで、突然の電源停止時にも安全に電源を落とせるようなバックアップとしてのデバイスがUPS PIcoラズベリーパイ &#x2F; Raspberry Pi 専用 UPS 無停電電源ボードUPS PIco 基本的には下記リンク公式のsimple Setting Guideを参考にやっていけばいける(PDF">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-08-14T07:34:38.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.684Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="RaspberryPi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ups-pico-raspberrypi" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/ups-pico-raspberrypi/" class="article-date">
+  <time datetime="2016-08-14T07:34:38.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RaspberryPiバックアップバッテリーUPS PIcoの使い方
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>ラズパイを使用していて一番困るのが、いきなり電源が落ちた時などに<br>ファイルシステムが破損する恐れがあること</p>
+<p>そこで、突然の電源停止時にも安全に電源を落とせるようなバックアップとしてのデバイスがUPS PIco<br><a target="_blank" rel="noopener" href="http://www.furutaka-netsel.co.jp/utility/upspico.html">ラズベリーパイ / Raspberry Pi 専用 UPS 無停電電源ボードUPS PIco</a></p>
+<p>基本的には下記リンク公式のsimple Setting Guideを参考にやっていけばいける<br>(PDF注意)<br><a target="_blank" rel="noopener" href="http://pimodules.com/_pdf/Simple_Setting_Guide_for_the_UPS_PIco.pdf">Simple Setting Guide for the UPS PIco</a></p>
+<p>いろいろレジスタなどいじれるがひとまず使ってみる</p>
+<p>2016年4月26日現在<br>使用している環境は</p>
+<p>・RaspberryPi2 B<br>・OS: Raspbian Jessie(2016-02)<br>・UPS PIco (HAT v1.1)</p>
+<span id="more"></span>
+<hr>
+<h2 id="UARTとI2Cの設定"><a href="#UARTとI2Cの設定" class="headerlink" title="UARTとI2Cの設定"></a>UARTとI2Cの設定</h2><hr>
+<p>UPS PIcoはRaspberryPiとの接続で<br>UARTとI2Cを使用するので使用可能な状態に設定してやる</p>
+<p>まずはI2Cに必要なライブラリをapt-getでインストールする</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install i2c-tools libi2c-dev python-smbus</span><br></pre></td></tr></table></figure>
+<p>次に設定を行う</p>
+<p>設定はRaspberryPi Jessieの場合簡単で</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo raspi-config</span><br></pre></td></tr></table></figure>
+<p>でラズベリーパイの設定画面から<br>Advanced optionsを選択して</p>
+<p>Serialをdisableにする(最初の選択肢で “NO” を選択してやればよい)<br>=&gt; SerialコンソールがdisableになるのでUARTとしてGPIOを使用可能になる</p>
+<p>I2Cをenableにする(最初の選択肢で “YES” を選択してやればよい)</p>
+<p>これで再起動したら設定が反映されます</p>
+<p>UARTが使用できるかどうかはcuコマンドやminicomなどで(後述)<br>I2Cが使用できるかどうかはi2cdetectコマンドなどで(後述)<br>確認可能</p>
+<hr>
+<h2 id="UPS-PIcoをラズパイにはめる"><a href="#UPS-PIcoをラズパイにはめる" class="headerlink" title="UPS PIcoをラズパイにはめる"></a>UPS PIcoをラズパイにはめる</h2><hr>
+<p>manualの手順にはひとまず簡単な文章だけあったが流れとしては</p>
+<ol>
+<li>UPS PIcoにバッテリーをはめる</li>
+<li>Raspiにのせる</li>
+<li>Raspiの電源をいれる</li>
+</ol>
+<p>だけです</p>
+<p>RaspberryPiの電源を入れた状態でUPS PIcoを乗せるのはちょっと危なそうなので<br>必ずラズパイは電源offの状態で乗せるように</p>
+<p>外す場合は、HV1.1(バージョンみたいなもの？手持ちのやつはこれだった)の場合、RaspberryPiの電源ケーブルからの<br>電力はoffにした状態で、UPS PIcoのUPRSボタンを1秒以上押せば安全に取り外せる状態になる</p>
+<p>UPSのバージョンは購入したら箱の裏側に HV1.1みたいなのが書いてあると思われるのでそれで確認</p>
+<hr>
+<h2 id="PIcoとシリアル通信してみる"><a href="#PIcoとシリアル通信してみる" class="headerlink" title="PIcoとシリアル通信してみる"></a>PIcoとシリアル通信してみる</h2><hr>
+<p>シリアル通信で接続を確認してみる<br>マニュアルではminicomを使用してるが自分はよくcuコマンドを使っているので<br>それを使う</p>
+<p>cuコマンドが入っていない場合は下記コマンドでインストール<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install cu</span><br></pre></td></tr></table></figure></p>
+<p>実際にシリアル通信してみる<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cu -s 38400 -l /dev/ttyAMA0</span><br></pre></td></tr></table></figure></p>
+<p>これでUPS Picoと接続できたか確認できるので<br>後はResetボタン(UPSR: UPS Reset Button)を押してみる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Connected.</span><br><span class="line"></span><br><span class="line">UPS PIco RESTART CAUSE: MCLR_FROM_RUN</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------------------</span><br><span class="line">www.pimodules.com</span><br><span class="line">UPS PIco Hardware Release: V1.10 Q</span><br><span class="line">Firmware Release: V1.0 XBMC 11.11.2015 0x54</span><br><span class="line">----------------------</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>みたいなのが表示されたら成功</p>
+<p>もし接続出来ない場合は、AdafruitのUART設定を参考にして</p>
+<p>Raspbian Jessieの場合<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl stop serial-getty@ttyAMA0.service</span><br><span class="line">$ sudo systemctl disable serial-getty@ttyAMA0.service</span><br><span class="line">$ sudo reboot</span><br></pre></td></tr></table></figure></p>
+<p>をしてみる</p>
+<p>I2Cの接続確認は、UPS Picoをラズパイに乗せた状態で</p>
+<p>下記コマンドを打って、以下のように数字が表示されたら成功<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ sudo i2cdetect –y 1</span><br><span class="line"></span><br><span class="line">     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f</span><br><span class="line">00:          -- -- -- -- -- -- -- -- -- -- -- -- -- </span><br><span class="line">10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- </span><br><span class="line">20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- </span><br><span class="line">30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- </span><br><span class="line">40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- </span><br><span class="line">50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- </span><br><span class="line">60: -- -- -- -- -- -- -- -- 68 69 6a 6b -- -- -- -- </span><br><span class="line">70: -- -- -- -- -- -- -- --                   </span><br></pre></td></tr></table></figure></p>
+<p>となれば成功</p>
+<p>しかし、この状態ではまだ電源監視システムは動いていない<br>(一応電力は供給されるみたいだが、自動でshutdownする機能はまだ持っていない)<br>ので<br>サポートファイルをダウンロードして設定してやる</p>
+<hr>
+<h2 id="電源監視をする"><a href="#電源監視をする" class="headerlink" title="電源監視をする"></a>電源監視をする</h2><hr>
+<p>UPS PIcoのサポートファイルをダウンロードして設定してやる<br>(ダウンロードしたスクリプト内にディレクトリ指定などあるので、わからない場合などまずはルートディレクトリで行ってやること)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd</span><br><span class="line">$ wget http://www.pimodules.com/_zip/UPS_PIco_Supporting_Files.zip</span><br><span class="line">$ unzip UPS_PIco_Supporting_Files.zip</span><br></pre></td></tr></table></figure>
+<p>スクリプトファイルとして<br>picofssd.py : 電源監視用pythonスクリプト<br>picofu3.py     : UPS PIco firmware更新用pythonスクリプト<br>pico_status.py  : UPS PIcoのステータス確認用pythonスクリプト</p>
+<p>設定ファイルとして<br>rc.local </p>
+<p>がダウンロードされるので</p>
+<p>試しに picofssd.py を使ってみる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python picofssd.py</span><br></pre></td></tr></table></figure>
+<p>この状態で、UPS PIcoのFSSDボタンを押すと、シャットダウンされるはず</p>
+<p>pythonスクリプトをコンソールから起動させた状態では扱いにくいので<br>ラズパイ立ち上げ時に自動で起動するようにしてやる</p>
+<hr>
+<h2 id="スクリプトファイルをバックグラウンドで起動"><a href="#スクリプトファイルをバックグラウンドで起動" class="headerlink" title="スクリプトファイルをバックグラウンドで起動"></a>スクリプトファイルをバックグラウンドで起動</h2><hr>
+<p>落としてきたzipファイル内に、rc.localのファイルがあるのでこれをコピーして使ってやる</p>
+<p>元々ラズパイにはrc.localファイルが存在するため<br>一応バックアップをとっておく<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /etc/rc.local /etc/original_rc.local</span><br></pre></td></tr></table></figure></p>
+<p>次に、ダウンロードしてきたrc.localを移動してアクセス権限を変更して再起動してやる<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv rc.local /etc/</span><br><span class="line">$ sudo chmod +x /etc/rc.local</span><br><span class="line">$ sudo reboot</span><br></pre></td></tr></table></figure></p>
+<p>これで、電源監視が行われているはずなので<br>試しにラズパイの電源供給を止めてやる</p>
+<p>バッテリーが充電されていたら、電源offから30秒後にシャットダウンが開始されれば成功<br>(2016年4月26日時点でのUPS PIcoのfirmwareのバージョンではデフォルトが30秒後に設定されているが後述の新しいfirmwareではデフォルトが60秒に設定されている)</p>
+<p>もしもうまくいかない場合は、ラズパイのほうをアップデートするなどすると<br>解決することがあるのでやってみる<br>自分の場合は、インストールしたものの原因なのかはわからないが<br>rpi-updateしてやったらfirmwareが更新されてうまくいったところもあった</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br><span class="line">$ sudo rpi-update</span><br></pre></td></tr></table></figure>
+<p>これで基本的なUPS PIcoの使い方はOKなので<br>後は少し捕捉していく</p>
+<hr>
+<h2 id="firmwareの更新"><a href="#firmwareの更新" class="headerlink" title="firmwareの更新"></a>firmwareの更新</h2><hr>
+<p>購入した際、UPS PIcoのfirmwareのバージョンは54だった<br>先ほどダウンロードしたpythonスクリプト(pico_status.py)による確認</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python pico_status.py </span><br><span class="line"></span><br><span class="line">			 pico status V1.0</span><br><span class="line">***********************************</span><br><span class="line">  UPS PIco Firmware: 54</span><br><span class="line">  Powering Mode: RPi</span><br><span class="line">  BAT Volatge: 3.08 V</span><br><span class="line">  RPi Voltage: 4.81 V</span><br><span class="line">  SOT23 Temperature: 28 C</span><br><span class="line">  TO-92 Temperature: 00 C</span><br><span class="line">  A/D1 Voltage: 0.0 V</span><br><span class="line">  A/D2 Voltage: 0.0 V</span><br><span class="line">***********************************</span><br></pre></td></tr></table></figure>
+<p>このfirmwareを更新してやる</p>
+<p>まず、最新のfirmwareをダウンロードしてやる</p>
+<p>もしSerialでのコンソールログインがonになっている場合は<br>前述のとおりraspi-configなどからoffにしてやる</p>
+<p>次にfirmwareをダウンロードしてやる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://www.pimodules.com/_zip/UPS_PIco_Firmware_Update.zip</span><br><span class="line">$ unzip UPS_PIco_Firmware_Update.zip</span><br></pre></td></tr></table></figure>
+<p>これでfirmwareがダウンロードできた<br>2016年4月26日現在でのファイル名は</p>
+<p><code>UPS_PIco_0x5C_25_02_2016.hex</code></p>
+<p>だったのでこれを用いてupdateしてやる<br>updateは、pythonスクリプトのpicofu.pyを用いる<br>(アップデートのスクリプトもバージョンみたいなのがあるらしく、現時点ではpicofu3.pyという名前だった)</p>
+<p>まず、UPS PIcoのリセットボタン(UPSR)を押す</p>
+<p>下記コマンドを打ち込む(firmwareのバージョンによって名前が違う場合は適宜修正する)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo i2cset -y 1 0x6b 0x00 0xff &amp;&amp; sudo python picofu3.py -v -f UPS_PIco_0x5C_25_02_2016.hex</span><br></pre></td></tr></table></figure>
+<p>マニュアルのように<br>……. 10% ……..</p>
+<p>みたいになったら成功<br>終わったらラズパイおよびUPS PIcoを再起動してあげれば<br>更新が適用される</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python pico_status.py</span><br><span class="line"></span><br><span class="line">      pico status V1.0</span><br><span class="line">***********************************</span><br><span class="line">  UPS PIco Firmware: 5c</span><br><span class="line">  Powering Mode: RPi</span><br><span class="line">  BAT Volatge: 3.39 V</span><br><span class="line">  RPi Voltage: 4.8 V</span><br><span class="line">  SOT23 Temperature: 28 C</span><br><span class="line">  TO-92 Temperature: 00 C</span><br><span class="line">  A/D1 Voltage: 0.0 V</span><br><span class="line">  A/D2 Voltage: 0.0 V</span><br><span class="line">***********************************</span><br></pre></td></tr></table></figure>
+<p>Firmwareが5cに更新されてた</p>
+<p>また、firmwareのバージョン確認だけなら以下のコマンドでも確認可能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo i2cget -y 1 0x6b 0x00</span><br><span class="line">0x5c</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="その他気付いたこと"><a href="#その他気付いたこと" class="headerlink" title="その他気付いたこと"></a>その他気付いたこと</h2><hr>
+<h4 id="バッテリーの充電に関して"><a href="#バッテリーの充電に関して" class="headerlink" title="バッテリーの充電に関して"></a>バッテリーの充電に関して</h4><p>UPS PIcoはラズパイに乗せているだけでバッテリーが充電される仕組みになっているが<br>UPS PIcoを用いていて、pico_status.pyで確認した際<br>バッテリー(BAT Voltage)が2.7V付近から充電されないことがあった</p>
+<p>おそらく、これはHDMIでのディスプレイ接続を行っていたため<br>バッテリーが電力を消費するほうにながれていたのではないかと考えられる</p>
+<p>実際、ディスプレイ接続をやめてssh接続でラズパイを確認してやれば<br>すぐにBAT Voltageが3V以上になった</p>
+<p>困った時は色々繋いでるものをいったん外してみよう<br>(特に、RaspberryPi3だとそもそもの電力消費が大きくなる傾向にあるので使うとどうなるかは電力面で判断するほうがよいかも)</p>
+<h4 id="i2cdetectした場合"><a href="#i2cdetectした場合" class="headerlink" title="i2cdetectした場合"></a>i2cdetectした場合</h4><p>i2cdetectした時に、0x68のところに “UU” と出るが<br>これは、Raspbian自身がこのアドレスを管理している、ということらしい<br><a target="_blank" rel="noopener" href="http://news.mynavi.jp/articles/2014/08/21/raspberry-pi4/002.html">http://news.mynavi.jp/articles/2014/08/21/raspberry-pi4/002.html</a></p>
+<p>rc.localで設定したものが反映されてると思われるのでこれはそのままで大丈夫</p>
+<h4 id="色々とコマンドを使える"><a href="#色々とコマンドを使える" class="headerlink" title="色々とコマンドを使える"></a>色々とコマンドを使える</h4><p>詳しくは<a target="_blank" rel="noopener" href="http://pimodules.com/_pdf/UPS_PIco_Manual.pdf">manual</a>(PDF注意)<br>に載っているが、コマンド経由で設定や設定情報の取得など出来る</p>
+<p>例えば、下記コマンドで自動シャットダウンの時間を取得できる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo i2cget -y 1 0x6b 9</span><br><span class="line">0x3c</span><br></pre></td></tr></table></figure>
+<p>0x3cは16進数表記で、10進数だと60のことなので<br>デフォルトでは電源供給が止まってから60秒後にシャットダウンするということがわかる</p>
+<p>これを変更するには<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo i2cset -y 1 0x6b 9 15</span><br></pre></td></tr></table></figure></p>
+<p>としてやれば、シャットダウンまで15秒に変更できる</p>
+<p>一応確認してみる<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo i2cget -y 1 0x6b 9</span><br><span class="line">0x0f</span><br></pre></td></tr></table></figure></p>
+<p>0x0fは15のことなので、これで変更に成功できた</p>
+<p>あとは色々あるが基本的に<br><code>i2cset コマンド</code>で値の設定<br><code>i2cget コマンド</code>で値の取得</p>
+<p>を行う<br>例えば、UPS PIcoに載ってるLED(D5: 青, D6: 赤)のon offも手動で切り替え可能で</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># BLUE-LED on</span><br><span class="line">$ sudo i2cset -y 1 0x6b 12 1</span><br><span class="line"></span><br><span class="line"># BLUE-LED off</span><br><span class="line">$ sudo i2cset -y 1 0x6b 12 0</span><br><span class="line"></span><br><span class="line"># RED-LED on</span><br><span class="line">$ sudo i2cset -y 1 0x6b 13 1</span><br><span class="line"></span><br><span class="line"># RED-LED off</span><br><span class="line">$ sudo i2cset -y 1 0x6b 13 0</span><br></pre></td></tr></table></figure>
+<p>となる</p>
+<p>後は色々manualを見ながら試してみると面白いこと出来そう</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/ups-pico-raspberrypi/" data-id="ckodzxw2u004596z5di1kdg44" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/14/haskell-on-centos/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CentOSでHaskellプログラミング始め
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/14/raspberrypi-bmp180-munin-data/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">RaspberryPi + BMP180 + muninで温度データをグラフ化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

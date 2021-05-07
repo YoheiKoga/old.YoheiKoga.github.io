@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Elmの練習 | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="プログラミングのElmをやってみてる バージョンは現在最新の0.17で、バージョンが変わると動かなくなる可能性あり プログラミングElmを始めてみる Elmの書き方がよくわからないので練習がてら色々試してみる">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elmの練習">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/10/05/elm-training/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="プログラミングのElmをやってみてる バージョンは現在最新の0.17で、バージョンが変わると動かなくなる可能性あり プログラミングElmを始めてみる Elmの書き方がよくわからないので練習がてら色々試してみる">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-10-05T02:08:41.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.576Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="Elm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-elm-training" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/05/elm-training/" class="article-date">
+  <time datetime="2016-10-05T02:08:41.000Z" itemprop="datePublished">2016-10-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Elmの練習
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>プログラミングのElmをやってみてる</p>
+<p>バージョンは現在最新の0.17で、バージョンが変わると動かなくなる可能性あり</p>
+<p><a href="https://yoheikoga.github.io/2016/09/13/start-programming-elm/">プログラミングElmを始めてみる</a></p>
+<p>Elmの書き方がよくわからないので練習がてら色々試してみる</p>
+<span id="more"></span>
+<p><br></p>
+<hr>
+<h1 id="beginnerProgramってなに"><a href="#beginnerProgramってなに" class="headerlink" title="beginnerProgramってなに"></a>beginnerProgramってなに</h1><hr>
+<p>(まだ理解が完璧ではないがおそらく) beginnerProgramはHtml.Appに含まれる関数で</p>
+<p>Elmの初期に実装された、Elm-Architectureに則った書き方をする際に必要な関数</p>
+<p>現行では、subscriptionsという関数が追加されているので、それに則ったprogramという関数もある</p>
+<p>以下は調べた流れ</p>
+<p><br></p>
+<p>Elm書いてたら <code>import Html.App exposing (beginnerProgram)</code></p>
+<p>って出てくるけどこれはいったいなんなんだろうと思って調べてみたら下記がヒットした</p>
+<p><a target="_blank" rel="noopener" href="http://qiita.com/jooex/items/89ab4bf7c953a6f40069">Elmというミニマムでフレームワークにもなる関数型altJS言語を触ってみよう！！！</a></p>
+<blockquote>
+<p>beginnerProgram 関数は引数にmodel、view、update関数をとります。<br>modelは状態の初期値、<br>viewは状態を画面に出す関数、<br>updateは(画面をクリックするなどして)イベントが起きた時の処理を書きます。</p>
+</blockquote>
+<p>らしい</p>
+<p>さらに下記を参考にすると</p>
+<p><a target="_blank" rel="noopener" href="https://giisyu.gitbooks.io/elm_usui_book/content/">プログラミング言語Elmの薄い本(サイト)</a></p>
+<ul>
+<li><p>Elmのmainの型はHtml a か Program a である必要がある</p>
+</li>
+<li><p>Html a 型</p>
+<ul>
+<li>静的な画面</li>
+</ul>
+</li>
+<li><p>Program a 型</p>
+<ul>
+<li>さらに入力や操作ができるアプリケーション(動的？)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Elmには発案初期バージョンと、現行バージョンの2種類のElm-Architectureがある</p>
+</li>
+<li><p>初期型を初期バーション、現行をCmd/Subバージョンと呼ぶことにしている</p>
+</li>
+<li><p>初期のバージョンはビギナー用になっていて、 beginerProgramという関数を使う</p>
+</li>
+<li><p>現行バージョンは program という関数を使う</p>
+</li>
+</ul>
+<p>とのこと</p>
+<p>とりあえず、beginnerProgramは簡単な静的ページ(データのやりとりとかない一枚ページと思えばいいかな)</p>
+<p>を作るのに使う関数っぽくて</p>
+<p>Elmをやるならそこから入るのがいいみたい</p>
+<p><br></p>
+<hr>
+<h1 id="Elm-Architectureについて知らないといけない"><a href="#Elm-Architectureについて知らないといけない" class="headerlink" title="Elm Architectureについて知らないといけない"></a>Elm Architectureについて知らないといけない</h1><hr>
+<p>Elmを書き始めると、何が必須でどこが変更可能なのか最初わかりずらい</p>
+<p>model, view, update, init, subscriptionsといった</p>
+<p>必ず必要な構文があってそれがわからないとおそらく書き方がわからないと思うので</p>
+<p>Elmの構文は公式サイトなどで学んでおくべき</p>
+<p><a target="_blank" rel="noopener" href="https://guide.elm-lang.org/architecture/">https://guide.elm-lang.org/architecture/</a></p>
+<p><br></p>
+<h3 id="何を変更してよくて何がいけないか"><a href="#何を変更してよくて何がいけないか" class="headerlink" title="何を変更してよくて何がいけないか"></a>何を変更してよくて何がいけないか</h3><p>を調べるためにsampleコードを改変してみた</p>
+<p>公式サイトより</p>
+<p><a target="_blank" rel="noopener" href="https://guide.elm-lang.org/">https://guide.elm-lang.org/</a></p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Html <span class="keyword">exposing</span> (<span class="type">Html</span>, button, div, text)</span><br><span class="line"><span class="keyword">import</span> Html.App <span class="keyword">as</span> App</span><br><span class="line"><span class="keyword">import</span> Html.Events <span class="keyword">exposing</span> (onClick)</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> =</span><br><span class="line">  <span class="type">App</span>.beginnerProgram &#123; model = <span class="number">0</span>, view = view, update = update &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="type">Msg</span> = <span class="type">Increment</span> | <span class="type">Decrement</span></span><br><span class="line"></span><br><span class="line"><span class="title">update</span> msg model =</span><br><span class="line">  <span class="keyword">case</span> msg <span class="keyword">of</span></span><br><span class="line">    <span class="type">Increment</span> -&gt;</span><br><span class="line">      model + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="type">Decrement</span> -&gt;</span><br><span class="line">      model - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="title">view</span> model =</span><br><span class="line">  div []</span><br><span class="line">    [ button [ onClick <span class="type">Decrement</span> ] [ text <span class="string">&quot;-&quot;</span> ]</span><br><span class="line">    , div [] [ text (toString model) ]</span><br><span class="line">    , button [ onClick <span class="type">Increment</span> ] [ text <span class="string">&quot;+&quot;</span> ]</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>がもともとのcode</p>
+<p>ただし、どうにも view = viewとか update = updateというのが慣れない</p>
+<p>ので、変えてよさそうなところは変えてみて以下のようにしてみた</p>
+<p>関数名とかほんと適当、でも動くのでこのへんは変えて良いところ(自分で名付けるところ)</p>
+<p>というのがわかった(もちろん慣習に従ったほうがコードは読みやすくはなると思う)</p>
+<p><br></p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Html <span class="keyword">exposing</span> (<span class="type">Html</span>, button, div, text)</span><br><span class="line"><span class="keyword">import</span> Html.App <span class="keyword">as</span> App</span><br><span class="line"><span class="keyword">import</span> Html.Events <span class="keyword">exposing</span> (onClick)</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> =</span><br><span class="line">  <span class="type">App</span>.beginnerProgram &#123; model = <span class="number">0</span>, view = nanoyo, update = desuwa&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="type">PeroPero</span> = <span class="type">Fueru</span> | <span class="type">Heru</span></span><br><span class="line"></span><br><span class="line"><span class="title">desuwa</span> msg potechi =</span><br><span class="line">  <span class="keyword">case</span> msg <span class="keyword">of</span></span><br><span class="line">    <span class="type">Fueru</span> -&gt;</span><br><span class="line">      potechi + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="type">Heru</span> -&gt;</span><br><span class="line">      potechi - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="title">nanoyo</span> model =</span><br><span class="line">  div []</span><br><span class="line">    [ button [ onClick <span class="type">Heru</span>] [text <span class="string">&quot;-&quot;</span>]</span><br><span class="line">    , div [] [text (toString model)]</span><br><span class="line">    , button [ onClick <span class="type">Fueru</span>] [text <span class="string">&quot;+&quot;</span>]</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>こんな感じで自分で色々変更できるとこは変更してやってみるといいかもしれない</p>
+<p>型名とか関数名とか以外と変更可能だったりする</p>
+<p><br></p>
+<hr>
+<h1 id="基本パターン"><a href="#基本パターン" class="headerlink" title="基本パターン"></a>基本パターン</h1><hr>
+<p>Model Update Viewで構成される</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Html <span class="keyword">exposing</span> (..)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Model</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="keyword">alias</span> <span class="type">Model</span> = &#123;...&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Update</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="type">Msg</span> = <span class="type">Reset</span> | ...</span><br><span class="line"></span><br><span class="line"><span class="title">update</span> : <span class="type">Msg</span> -&gt; <span class="type">Model</span> -&gt; <span class="type">Model</span></span><br><span class="line"><span class="title">update</span> msg model =</span><br><span class="line">  <span class="keyword">case</span> msg <span class="keyword">of</span></span><br><span class="line">    <span class="type">Reset</span> -&gt; ...</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- View</span></span><br><span class="line"></span><br><span class="line"><span class="title">view</span> : <span class="type">Model</span> -&gt; <span class="type">Html</span> <span class="type">Msg</span></span><br><span class="line"><span class="title">view</span> model =</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+<p>とりあえず</p>
+<ul>
+<li>main内にbeginnerProgramを記載する、最初はmodel, view, updateだけでいい?</li>
+<li>Model, Update, Viewを記載する<ul>
+<li>Model – アプリケーションの状態を示す、初期値とか変更があったら変更の値とか</li>
+<li>Update – どうやってアップデートするかを記述する、そのまま代入するとか四則演算を使うとか</li>
+<li>View – HTMLとしてどのように見えるかを記述する</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="modelの書き方"><a href="#modelの書き方" class="headerlink" title="modelの書き方"></a>modelの書き方</h3><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="keyword">alias</span> <span class="type">Model</span> =</span><br><span class="line">  &#123; someFunction : someTypes      </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="title">model</span> : <span class="type">Model</span></span><br><span class="line"><span class="title">model</span> =</span><br><span class="line">  &#123; sumeFunction = <span class="string">&quot;初期値を入れる&quot;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>が基本形っぽい</p>
+<p><br></p>
+<h3 id="updateの書き方"><a href="#updateの書き方" class="headerlink" title="updateの書き方"></a>updateの書き方</h3><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="type">Msg</span></span><br><span class="line">  = someUpdateFunction someType</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title">update</span> : <span class="type">Msg</span> -&gt; <span class="type">Model</span> -&gt; <span class="type">Model</span></span><br><span class="line"><span class="title">update</span> msg model =</span><br><span class="line">  <span class="keyword">case</span> msg <span class="keyword">of</span></span><br><span class="line">    someUpdateFunction someNewVariable -&gt;</span><br><span class="line">      &#123; model | content = someNewVariable&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="Viewの書き方"><a href="#Viewの書き方" class="headerlink" title="Viewの書き方"></a>Viewの書き方</h3><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">view</span> : <span class="type">Model</span> -&gt; <span class="type">Html</span> <span class="type">Msg</span></span><br><span class="line"><span class="title">view</span> model = </span><br><span class="line">  div []</span><br><span class="line">    [ input [ placeholder <span class="string">&quot;Text to reverse&quot;</span>, onInput <span class="type">Changemychange</span>][]</span><br><span class="line">    , div [][ text (<span class="type">String</span>.reverse model.content)]</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<hr>
+<h1 id="例えばdivってなんで大カッコ２ついるの？"><a href="#例えばdivってなんで大カッコ２ついるの？" class="headerlink" title="例えばdivってなんで大カッコ２ついるの？"></a>例えばdivってなんで大カッコ２ついるの？</h1><hr>
+<p>Elm書いてると</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">view</span> : <span class="type">Model</span> -&gt; <span class="type">Html</span> <span class="type">Msg</span></span><br><span class="line"><span class="title">view</span> model = </span><br><span class="line">  div []</span><br><span class="line">    [ input [ placeholder <span class="string">&quot;Text to reverse&quot;</span>, onInput <span class="type">Change</span>][]</span><br><span class="line">    , div [][ text (<span class="type">String</span>.reverse model.content)]</span><br><span class="line">    ]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>みたいなことになるけど</p>
+<p>div [] []</p>
+<p>って引数２つのリストなのはなんなんだろう</p>
+<p>色々みてると、第一引数にはcss定義したstyleとかしてて第二引数には初期値とかコンテンツを入れるのかな</p>
+<p>=&gt; そうっぽい</p>
+<p>myStyleが以下のように定義されている時</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">myStyle</span> =</span><br><span class="line">  style</span><br><span class="line">    [ (<span class="string">&quot;width&quot;</span>, <span class="string">&quot;100%&quot;</span>)</span><br><span class="line">    , (<span class="string">&quot;height&quot;</span>, <span class="string">&quot;40px&quot;</span>)</span><br><span class="line">    , (<span class="string">&quot;padding&quot;</span>, <span class="string">&quot;10px 0&quot;</span>)</span><br><span class="line">    , (<span class="string">&quot;font-size&quot;</span>, <span class="string">&quot;2em&quot;</span>)</span><br><span class="line">    , (<span class="string">&quot;text-align&quot;</span>, <span class="string">&quot;center&quot;</span>)</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>例えば以下のようにHTMLに変換されるっぽい</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input [ placeholder &quot;Text to reverse&quot;, onInput NewContent, myStyle ] []</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">placeholder</span>=<span class="string">&quot;Text to reverse&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width: 100%; height: 40px; padding: 10px 0px; font-size: 2em; text-align: center;&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">div [ myStyle ] [ text (String.reverse content) ]</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width: 100%; height: 40px; padding: 10px 0px; font-size: 2em; text-align: center;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>なので</p>
+<p><code>div [styleやidやclassとかを記述] [初期値や変更後の値]</code></p>
+<p>みたいに指定するのかなたぶん</p>
+<p>例えば、inputの第二引数にmyStyleを入れてみたら以下のようなエラーが出た</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">24|       input [ placeholder &quot;Text to reverse&quot;, onInput NewContent, myStyle] [myStyle]</span><br><span class="line">                                                                              ^^^^^^^^^</span><br><span class="line">Function `input` is expecting the 2nd argument to be:</span><br><span class="line"></span><br><span class="line">    List (VirtualDom.Node Msg)</span><br><span class="line"></span><br><span class="line">But it is:</span><br><span class="line"></span><br><span class="line">    List (VirtualDom.Property a)</span><br></pre></td></tr></table></figure>
+<p>inputの第二引数には List型の VirtualDom.Node Msg が入るはずなのに<br>List型の VirtualDom.Property a が入ってるよだめだよ</p>
+<p>ってエラーがでるのでこういうのに従って書いていけばいいのかな</p>
+<p>とりあえずここまで、もうちょいやってみないと</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/10/05/elm-training/" data-id="ckodzxw1v001b96z5dy7m7hpf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/05/elm-training-100502/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Elm練習してみる2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/20/nginx-ruby-sinatra-unicorn/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Nginx + UnicornでRaspberryPiのsinatraアプリを動かしてPCブラウザで確認</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

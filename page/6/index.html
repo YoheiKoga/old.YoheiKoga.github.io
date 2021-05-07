@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="ぬわーーーーーーー！！！">
+<meta property="og:url" content="http://yoheikoga.github.io/page/6/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:locale">
+<meta property="article:author" content="Yohei Koga">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-wiringpi-using-by-ruby" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/wiringpi-using-by-ruby/" class="article-date">
+  <time datetime="2016-08-14T07:27:04.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/wiringpi-using-by-ruby/">Rubyでwiringpiを使う</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <h2 id="wiringPiでPWM制御する"><a href="#wiringPiでPWM制御する" class="headerlink" title="wiringPiでPWM制御する"></a>wiringPiでPWM制御する</h2><p>まずはLEDでやってみるといい(LEDの明暗コントロール)<br>下記サイト参考<br><a target="_blank" rel="noopener" href="http://lchikaamazon.hatenablog.com/entry/2013/11/18/191031">http://lchikaamazon.hatenablog.com/entry/2013/11/18/191031</a></p>
+<p>用いたもの</p>
+<p>RaspberryPi2<br>LED<br>抵抗(470Ω)<br>ジャンパー線2本<br>その他キーボードなど</p>
+<p>以下は、Raspbian Jessieの場合は最初からWiringPiが入っているので<br>やらなくて大丈夫です(むしろやるとバージョン違いの読み込みエラーとか起きるかも？)</p>
+<p>WiringPiが入ってるかどうかはコンソール上で</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ gpio -v</span><br><span class="line">gpio version: 2.32</span><br><span class="line">Copyright (c) 2012-2015 Gordon Henderson</span><br><span class="line">This is free software with ABSOLUTELY NO WARRANTY.</span><br><span class="line">For details type: gpio -warranty</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>みたいなのが出てきたら大丈夫です<br>入ってなかったらたぶん「そんなコマンドないよ」みたいなのが出てくるはず</p>
+<p><strong>————————–ここから</strong><br><strong>————————–</strong><br>wiringpiを使用するためにはちょっと手順があるので記載<br>下記も参考に<br><a target="_blank" rel="noopener" href="https://projects.drogon.net/raspberry-pi/wiringpi/download-and-install/">https://projects.drogon.net/raspberry-pi/wiringpi/download-and-install/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+<p>なければgit-coreもインストール</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git-core</span><br></pre></td></tr></table></figure>
+<p>gitからwiringpiをクローン<br>ディレクトリは適宜自分で作成してても可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://git.drogon.net/wiringPi</span><br><span class="line">$ cd wiringPi</span><br><span class="line">$ git pull origin</span><br><span class="line">$ ./build</span><br></pre></td></tr></table></figure>
+<p>でビルドする</p>
+<p><strong>——————–ここまではRaspbian Jessieの場合はやらなくて大丈夫</strong><br><strong>——————–</strong><br>次に、RubyでWiringPiを使うためのgemを入れる<br>下記を参照にした<br><a target="_blank" rel="noopener" href="http://blog.gaku.net/gpio-control-on-raspberry-pi-with-ruby/">GPIO control on Raspberry Pi with Ruby</a></p>
+<p>ruby-devを入れておかないとどうもgem installがうまくいかなかったので入れます<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -y ruby-dev</span><br><span class="line">$ sudo gem install wiringpi</span><br></pre></td></tr></table></figure></p>
+<p>でwiringpiのgemがインストールされます</p>
+<p>###スクリプトを書く</p>
+<p>wiringpiでのピン番号は、GPIOの番号や順番のピン番号とは異なっているので注意<br>下記参照<br><a target="_blank" rel="noopener" href="http://wiringpi.com/pins/">WiringPi Pins</a></p>
+<p>例えば後述のスクリプト例ではWiringPiの1ピンを用いています<br>これは、GPIO表記だとGPIO18, 普通のピン番号(3.3V出力を1番ピンとして順番に数字をふっているもの)だと12番ピンのことです</p>
+<p>下のように配線してあげました<br>GNDは6番ピンを使ってます</p>
+<p><img src="/2016/04/15/RubyでWiringPiを使う/RaspberryPi.jpg" width="300px" height="200px" alt="RaspberryPi"></p>
+<h3 id="実際にLチカをやってみる"><a href="#実際にLチカをやってみる" class="headerlink" title="実際にLチカをやってみる"></a>実際にLチカをやってみる</h3><p>下記スクリプトを適当な名前で保存して、sudoをつけて実行すれば明暗点滅Lチカが出来ます<br>ファイル名は test.rb にしてます<br>(test.rb)<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&#x27;wiringpi&#x27;</span></span><br><span class="line"></span><br><span class="line">LED = <span class="number">1</span></span><br><span class="line">io = WiringPi::GPIO.new</span><br><span class="line"></span><br><span class="line">io.soft_pwm_create(LED,<span class="number">0</span>,<span class="number">100</span>)</span><br><span class="line">  <span class="number">10</span>.times <span class="keyword">do</span></span><br><span class="line">    (<span class="number">0</span>..<span class="number">100</span>).each <span class="keyword">do</span> <span class="params">|x|</span></span><br><span class="line">      io.soft_pwm_write(LED,x)</span><br><span class="line">      sleep(<span class="number">0.005</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    (<span class="number">0</span>..<span class="number">100</span>).each <span class="keyword">do</span> <span class="params">|x|</span></span><br><span class="line">      io.soft_pwm_write(LED, (<span class="number">100</span>-x))</span><br><span class="line">      sleep(<span class="number">0.005</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>WiringPiを扱う時は基本的にはルートユーザーである必要があるらしいので<br>sudo をつけてrubyを実行してあげます</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ruby test.rb</span><br></pre></td></tr></table></figure>
+<p>以上、明暗点滅が出来ました</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/wiringpi-using-by-ruby/" data-id="ckodzxw2x004e96z577ah9qux" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-FATAL-Cannot-set-property-lastIndex-of-undefined" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/FATAL-Cannot-set-property-lastIndex-of-undefined/" class="article-date">
+  <time datetime="2016-08-14T07:21:43.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/FATAL-Cannot-set-property-lastIndex-of-undefined/">HexoでFATAL-Cannot-set-property-lastIndex-of-undefinedと表示された</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>Hexoを使ってて、突然エラーが発生してHexoコマンドが使えなくなった</p>
+<p>エラーを見てみると</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FATAL Cannot set property &#x27;lastIndex&#x27; of undefined</span><br></pre></td></tr></table></figure>
+<p>みたいなのが表示されていた</p>
+<p>下記リンク先を参考にしてみると<br><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/1786">https://github.com/hexojs/hexo/issues/1786</a><br><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/1627">https://github.com/hexojs/hexo/issues/1627</a></p>
+<p>どうやら、_config.yaml内のauto_detectをfalseにしてやればいいみたい</p>
+<p>highlightのところでインデントされていると思うので、一部抜粋すると下記のようになるはず</p>
+<figure class="highlight yaml"><figcaption><span>_config.yaml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">highlight:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">line_number:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">auto_detect:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">tab_replace:</span></span><br></pre></td></tr></table></figure>
+<p>これで解決するが、詳しくはなんなのかわかってないのでもう少し調べないと・・・</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/FATAL-Cannot-set-property-lastIndex-of-undefined/" data-id="ckodzxw0y000096z5hjfkgmbu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-show-picture-on-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/show-picture-on-hexo/" class="article-date">
+  <time datetime="2016-08-14T07:06:02.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/show-picture-on-hexo/">Hexoで画像を表示させる方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="画像を挿入する"><a href="#画像を挿入する" class="headerlink" title="画像を挿入する"></a>画像を挿入する</h1><p>下記ページを参考にした<br><a target="_blank" rel="noopener" href="http://pagent.github.io/2014/12/03/hexo-image/">http://pagent.github.io/2014/12/03/hexo-image/</a><br><a target="_blank" rel="noopener" href="http://saucer-jp.github.io/2015/04/29/how-to-put-images-in-a-post/">http://saucer-jp.github.io/2015/04/29/how-to-put-images-in-a-post/</a></p>
+<p>タイトルで日本語を使えるように設定しているので、下記ページを参考に設定しておいてください</p>
+<p><a target="_blank" rel="noopener" href="https://atani.github.io/2015/06/hexo%E3%81%A7%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AE%E3%83%91%E3%83%BC%E3%83%9E%E3%83%AA%E3%83%B3%E3%82%AF%E3%82%92%E8%A6%8B%E3%82%8C%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%97%E3%82%88%E3%81%86%EF%BC%81/">hexoで日本語のパーマリンクを見れるようにしよう！</a></p>
+<p>が、大きさなども変更したかったのでさらなる方法も載せてます</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/show-picture-on-hexo/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/show-picture-on-hexo/" data-id="ckodzxw2q003q96z55dri97sx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-snap-raspberrypi-camera-module-by-push-physical-switch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/snap-raspberrypi-camera-module-by-push-physical-switch/" class="article-date">
+  <time datetime="2016-08-14T07:04:18.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/snap-raspberrypi-camera-module-by-push-physical-switch/">RaspberryPiカメラをタクトスイッチで起動させる</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RaspberryPiのデジカメ化を行う<br>やることとしては</p>
+<p>・RaspberryPiの電源を入れると自動ログインする<br>・タクトスイッチを押した時にプログラムが起動してカメラで撮影を行う</p>
+<p>までやれるようにする</p>
+<p>使ったものは<br><a target="_blank" rel="noopener" href="http://jp.rs-online.com/web/p/processor-microcontroller-development-kits/8332699/">RaspberryPi model A+</a><br><a target="_blank" rel="noopener" href="http://jp.rs-online.com/web/p/products/7757731/?cm_mmc=JP-PPC-_-google-_-3_JP_JP_M_SUPPORT_Exact-_-raspberry_pi%7C%E3%83%93%E3%83%87%E3%82%AA%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB&amp;mkwid=sRoelAmR2-dc%7Cpcrid%7C86021785983%7Cpkw%7Craspberry+pi+camera+board%7Cpmt%7Ce%7Cprd%7C">RaspberryPi camera board</a><br><a target="_blank" rel="noopener" href="http://akizukidenshi.com/catalog/g/gP-03647/">タクトスイッチ</a><br>です</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/snap-raspberrypi-camera-module-by-push-physical-switch/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/snap-raspberrypi-camera-module-by-push-physical-switch/" data-id="ckodzxw2q003s96z5f2ii3mjk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-about-curl-command" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/about-curl-command/" class="article-date">
+  <time datetime="2016-08-14T07:02:29.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/about-curl-command/">Particle Electronで使うcurlコマンド</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://yoheikoga.github.io/2016/03/23/particle-Electron%E5%A7%8B%E3%82%81%E3%81%A6%E8%A6%8B%E3%81%9F%E3%81%AE%E3%81%A7%E3%83%A1%E3%83%A2/">particle Electron始めて見たのでメモ</a></p>
+<p>Particle Electronを使ってると、APIを叩こうみたいな場面が出てきて<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/examples/electron/#use">https://docs.particle.io/guide/getting-started/examples/electron/#use</a></p>
+<p>curlコマンドを使うが使い方をよくわかってないとつらい</p>
+<p>APIを叩く時にコマンドライン上でcurlコマンドを打つことが多いみたいなのでメモ<br>尚、curlの詳しいマニュアル(man)は以下を参照<br><a target="_blank" rel="noopener" href="http://www.hcn.zaq.ne.jp/___/unix/curl_manpage.html">curl.1 man ページ</a></p>
+<p>Particle ElectronのAPI詳細については以下を参照<br><a target="_blank" rel="noopener" href="https://docs.particle.io/reference/api/">https://docs.particle.io/reference/api/</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/about-curl-command/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/about-curl-command/" data-id="ckodzxw19000596z549sn8uzd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ruby-regexp-number-from-one-to-ten" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/ruby-regexp-number-from-one-to-ten/" class="article-date">
+  <time datetime="2016-08-14T07:00:32.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/ruby-regexp-number-from-one-to-ten/">Rubyの正規表現で数字の1~10を表す</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>CodeIQのてぃーびーさんからの問題<br><a target="_blank" rel="noopener" href="https://codeiq.jp/q/2768">shoheyコマンド</a><br>をやってみたところ正規表現で少しつまずいたのでメモ</p>
+<p>詳しい問題の内容は上記ページを参照なのですが<br>どうやら正規表現で数字の 1~10 のみを取り出す必要があるみたいです</p>
+<h1 id="Rubyの正規表現で数字の1-10"><a href="#Rubyの正規表現で数字の1-10" class="headerlink" title="Rubyの正規表現で数字の1~10"></a>Rubyの正規表現で数字の1~10</h1><p>意外と情報が出てこなかったのでメモ<br>参考<br><a target="_blank" rel="noopener" href="http://d.hatena.ne.jp/seuzo/20080514/1210756204">http://d.hatena.ne.jp/seuzo/20080514/1210756204</a></p>
+<p>結論から書くと</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">number =~ <span class="regexp">/(?&lt;![\.,])\b[1-9]\b(?![\.,])|\A10\Z/</span></span><br></pre></td></tr></table></figure>
+<p>とすれば、numberが1~10の数字の時にマッチしてくれる(はず)</p>
+<p>(?&lt;!) は正規表現の「否定後よみ」<br>(?!)は正規表現の「否定先読み」<br>\bで単語の境界(今回の場合、数字の前後)を調べる</p>
+<p>つまり、数字の前後に余分なもの(小数だとコンマが入るとか、カンマ区切りの数字だったとか)<br>を排除しつつ<br>1から9の数字の境界とマッチする(つまり数字が2桁以上だと、境界が無くなってしまうのでマッチしなくなる結果数字一桁が得られる)</p>
+<p>プログラマと呼ぶにはまだまだな実力ですが問題も解けました<br>ここに載せるのははばかられるのでひとまず置いておいて</p>
+<p>内容としては有名なFizzBuzz問題のように条件分岐させることで無事クリアできた良かった</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/ruby-regexp-number-from-one-to-ten/" data-id="ckodzxw2k003b96z5fo21eubr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge/" class="article-date">
+  <time datetime="2016-08-14T06:56:59.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge/">RaspberryPi, WebIOPi, HomebridgeでiphoneからLED操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="RaspberryPiのGPIOピンをスマホから操作してみる"><a href="#RaspberryPiのGPIOピンをスマホから操作してみる" class="headerlink" title="RaspberryPiのGPIOピンをスマホから操作してみる"></a>RaspberryPiのGPIOピンをスマホから操作してみる</h1><h1 id="WebIOPi"><a href="#WebIOPi" class="headerlink" title="WebIOPi"></a>WebIOPi</h1><p>RaspberryPiのGPIOを制御できるライブラリ、さらにREST APIも同時に制御できるとのこと(つまりWeb上から制御できる)<br><a target="_blank" rel="noopener" href="http://todotani.cocolog-nifty.com/blog/2016/01/homebridgeraspb.html">http://todotani.cocolog-nifty.com/blog/2016/01/homebridgeraspb.html</a><br><a target="_blank" rel="noopener" href="http://www.hiramine.com/physicalcomputing/raspberrypi/webiopi_install.html">http://www.hiramine.com/physicalcomputing/raspberrypi/webiopi_install.html</a></p>
+<p>インストール方法<br>2016年3月24日現在最新版は 0.7.1みたいなのでそれに合わせた<br>0.7.1はRaspberry Pi 2には、単純インストールは対応してないみたいなので下記リンクなどを参考にインストールすること<br><a target="_blank" rel="noopener" href="http://deviceplus.jp/hobby/raspberrypi_entry_030/">http://deviceplus.jp/hobby/raspberrypi_entry_030/</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge/" data-id="ckodzxw25002196z5ee4rbng0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-particle-electron-beginning" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/particle-electron-beginning/" class="article-date">
+  <time datetime="2016-08-14T06:53:58.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/particle-electron-beginning/">Particle Electronを使ってみる</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <h1 id="Particle-Electron"><a href="#Particle-Electron" class="headerlink" title="Particle Electron"></a>Particle Electron</h1><p>Particle Electronを入手したので、公式のチュートリアル(Particle GUIDE)を読んでみる<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/intro/electron/">https://docs.particle.io/guide/getting-started/intro/electron/</a></p>
+<p>気になるところをメモ</p>
+<h3 id="Electron3G本体は-US-69"><a href="#Electron3G本体は-US-69" class="headerlink" title="Electron3G本体は US$69"></a>Electron3G本体は US$69</h3><p>月$2.99で1MBまで、さらに1MB追加ごとに$1.99<br><a target="_blank" rel="noopener" href="https://store.particle.io/?product=particle-electron&amp;utm_source=Proto&amp;utm_medium=Button&amp;utm_content=Electron&amp;utm_campaign=Buy#electron-3g-americas">https://store.particle.io/?product=particle-electron&amp;utm_source=Proto&amp;utm_medium=Button&amp;utm_content=Electron&amp;utm_campaign=Buy#electron-3g-americas</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$3 per month for 1MB and 99 cents for every megabyte afterwards</span><br></pre></td></tr></table></figure>
+<p>ちなみに、購入したらSIMカードが入ってるので、オンライン上でクレジットカード登録すれば直ぐに使い始めれます便利!<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/start/electron/">https://docs.particle.io/guide/getting-started/start/electron/</a></p>
+<p>その他電池(リチウムイオンポリマー(Lipo))とかUSBケーブルとかアンテナとか必要なものは最初から同封されてるのでこれだけでもまずは始めれます</p>
+<p>2Gの通信規格が使えたらもう少し安いが、日本では3Gの通信規格しか電波が使えないので3Gを選ぶように</p>
+<h3 id="消費電力は-800mA-1800mA"><a href="#消費電力は-800mA-1800mA" class="headerlink" title="消費電力は 800mA ~ 1800mA"></a>消費電力は 800mA ~ 1800mA</h3><p>データシートを眺めてみると</p>
+<p><a target="_blank" rel="noopener" href="https://docs.particle.io/datasheets/electron-datasheet/">https://docs.particle.io/datasheets/electron-datasheet/</a></p>
+<p>GSM module (3Gモジュール) が だいたい800mA ~ 1800mA消費するようです<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u-Blox GSM module on the Electron alone can consume a peak of 800mA to 1800mA</span><br></pre></td></tr></table></figure></p>
+<p>消費電流は180mAから1.8Aまで(5V)で変化するが、ディープスリープモードだと130μAの消費になる<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Typical current consumption is around 180mA and upto 1.8A transients at 5VDC. In deep sleep mode, the quiescent current is 130uA (powered from the battery alone).</span><br></pre></td></tr></table></figure></p>
+<p>付属の電池が2000mAh(2000mAの電力を消費するデバイスを一時間使用可能)なので、ずっと使い続けると1日持たないのかな、という感じ<br>(スマホや携帯と似たような間隔ですね)<br>このあたりはGPSモジュールやWiFiモジュールや3G通信の課題かな</p>
+<p>ちなみにUSBは最大500mAしか供給できないので、基本的には電池を接続したまま使用するということになるようです<br>3Gモジュールの電源はUSB以外にbattery(Lipo、リチウムイオンポリマー)を接続しておく必要がある<br>ということはバッテリーはそこそこで切れてしまうかもだけど<br>充電は簡単</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Most USB ports can supply only a maximum of 500mA, but the u-Blox GSM module on the Electron alone can consume a peak of 800mA to 1800mA of current during transmission. In order to compensate of this deficit, one must connect the LiPo battery at all times when powering from a traditional USB port. The Electron will intelligently source power from the USB most of the time and keep the battery charged. During peak current requirements, the additional power will be sourced from the battery. This reduces the charge-discharge cycle load on the battery, thus improving its longevity.</span><br></pre></td></tr></table></figure>
+<p>実際、Lipoをくっつけた状態でUSBと接続させたら赤色のLEDが点灯して、充電中になった<br>この状態でももちろん使用可能</p>
+<h3 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h3><p><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/start/electron/">https://docs.particle.io/guide/getting-started/start/electron/</a></p>
+<p>USB接続すると充電状態になる<br>で、充電状態だと小さなほうのLEDが赤く光る</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ONBOARD POWER MANAGEMENT</span><br><span class="line">The Electron charges its own battery!</span><br><span class="line">If the small red LED is on, the battery is charging</span><br><span class="line">When the LED turns off, the battery is fully charged</span><br></pre></td></tr></table></figure>
+<p>基板上のMODEボタンを1回押すと、LEDが緑色に点灯して接続強度を5段階で示してくれる<br>(緑色の点滅回数で最大5回)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DISPLAY SIGNAL STRENGTH!</span><br><span class="line">Press MODE once quickly when the Electron is breathing cyan</span><br><span class="line">The signal strength (RSSI) will be shown in a 0-5 green blinks, 5 being the strongest</span><br></pre></td></tr></table></figure>
+<p>MODEボタンを2回素早く押すと、LEDが白く光って数秒後消灯する(SOFT POWER DOWN モード)<br>再起動させたい場合は、RESETスイッチを押す<br>SOFT POWER DOWNモードでの消費電流は約0.13mAである<br>単純に2000mAhの電池なので、満充電後だと繋ぎっぱなしでも約15384時間は持つ(約640日)<br>イメージがサイトにあった<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/modes/electron/#listening-mode">https://docs.particle.io/guide/getting-started/modes/electron/#listening-mode</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOFT POWER DOWN</span><br><span class="line"></span><br><span class="line">Tap MODE twice quickly, then the LED will show white, and then it will turn off in a few seconds</span><br><span class="line">To turn it back on tap RESET once</span><br><span class="line">You can use use soft power down instead of unplugging the battery or power</span><br><span class="line">This uses a deep sleep mode for the Electron, and will still use 0.13mA</span><br></pre></td></tr></table></figure>
+<h3 id="OVERVIEWより"><a href="#OVERVIEWより" class="headerlink" title="OVERVIEWより"></a>OVERVIEWより</h3><p>particleの月の通信容量は初期設定だと5MBが上限に設定されている(無限にデータを上げないように配慮されている)<br>ダッシュボードで容量を変更することもできる(最初は練習がてらなので、不安なら上限を落としておいたほうが良いかもしれない)<br>変更は Dashboardのbillingタブを開いて、estimated costの横にある「・・・」をクリックすると出てきます<br><a target="_blank" rel="noopener" href="https://dashboard.particle.io/user/billing">https://dashboard.particle.io/user/billing</a></p>
+<p>参考画像<br><img src="/2016/08/14/particle-electron-beginning/datalimit.png" width="400px" height="300px"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">OVERVIEW</span><br><span class="line"></span><br><span class="line">Each SIM card will be billed a base rate which includes 1 MB of data</span><br><span class="line">The base rate covers you up to 1.0MB, additional MB are billed at a cheaper rate than the base</span><br><span class="line">We bill your base rate at beginning of a period, additional MB at the end, so you&#x27;ll often see both</span><br><span class="line">Base and additional MB rates are based on your country and Zone</span><br><span class="line">You can set a data limit for each SIM. It defaults to 5MB on new SIMs, but you can change it in the Dashboard</span><br><span class="line">Data limits are soft maximums; we only charge you for the number of MB used, rounded up, and we&#x27;ll cut off usage as quickly as we have updated metering from your carrier</span><br><span class="line">If a SIM goes over the limit, it&#x27;ll be paused and won&#x27;t be able to use more data until the beginning of the next period or you raise the data limit</span><br><span class="line">You can use the Dashboard to manage SIMs, billing, and see data usage</span><br><span class="line">See the full Electron Billing Guide</span><br></pre></td></tr></table></figure>
+<h3 id="iphone-Androidアプリの使い方"><a href="#iphone-Androidアプリの使い方" class="headerlink" title="iphone / Androidアプリの使い方"></a>iphone / Androidアプリの使い方</h3><p><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/tinker/electron/">https://docs.particle.io/guide/getting-started/tinker/electron/</a></p>
+<p>ピンの名前部分をタップすることで配線を設定できる<br>解除する場合はピンを長押しする<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">To begin, tap any of the pins. A menu will pop up showing the functions that pin has available, tap a function name to select the pin functionality. You can reset the pin function by long-pressing it. Each pin can have up to four possible functions:</span><br></pre></td></tr></table></figure></p>
+<p>最大の電圧は3.3Vなので注意<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">digitalWrite: Sets the pin to HIGH or LOW, which either connects it to 3.3V (the maximum voltage of the system) or to GND (ground). Pin D7 is connected to an on-board LED; if you set pin D7 to HIGH, the LED will turn on, and if you set it to LOW, it will turn off.</span><br><span class="line"></span><br><span class="line">analogWrite: Sets the pin to a value between 0 and 255, where 0 is the same as LOW and 255 is the same as HIGH. This is sort of like sending a voltage between 0 and 3.3V, but since this is a digital system, it uses a mechanism called Pulse Width Modulation, or PWM. You could use analogWrite to dim an LED, as an example.</span><br><span class="line"></span><br><span class="line">digitalRead: This will read the digital value of a pin, which can be read as either HIGH or LOW. If you were to connect the pin to 3.3V, it would read HIGH; if you connect it to GND, it would read LOW. Anywhere in between, it&#x27;ll probably read whichever one it&#x27;s closer to, but it gets dicey in the middle.</span><br><span class="line"></span><br><span class="line">analogRead: This will read the analog value of a pin, which is a value from 0 to 4095, where 0 is LOW (GND) and 4095 is HIGH (3.3V). All of the analog pins (A0 to A7) can handle this. analogRead is great for reading data from sensors.</span><br></pre></td></tr></table></figure></p>
+<p>間違っても5Vなどを入力しないこと<br>(最初のチュートリアルではあまりそんなことは無さそうです)</p>
+<h1 id="firmwareの書き込み方"><a href="#firmwareの書き込み方" class="headerlink" title="firmwareの書き込み方"></a>firmwareの書き込み方</h1><h3 id="USB経由で"><a href="#USB経由で" class="headerlink" title="USB経由で"></a>USB経由で</h3><p><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/tools-and-features/cli/electron/#flashing-over-serial-for-the-electron">https://docs.particle.io/guide/tools-and-features/cli/electron/#flashing-over-serial-for-the-electron</a><br>まずは、マシンとUSBでElectronと接続しておく</p>
+<p>1.<br>Electronをlistening modeにしておく<br>Modeボタンを3秒間押しっぱなしにする。LEDが青色に点滅する<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/modes/electron/#listening-mode">https://docs.particle.io/guide/getting-started/modes/electron/#listening-mode</a></p>
+<p>2.<br>particle cli をnpmでインストールしておく(要node.js)<br>インストールしている場合はこの手順は不要<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/tools-and-features/cli/electron/#installing">https://docs.particle.io/guide/tools-and-features/cli/electron/#installing</a></p>
+<p>$ particle login<br>で、自分のparticleと連携できるようにしておく</p>
+<p>さらに、dfu-utilとopensslをインストールしておく<br><a target="_blank" rel="noopener" href="http://community.particle.io/t/tutorial-particle-cli-on-mac-osx-26-sep-2015/5225">http://community.particle.io/t/tutorial-particle-cli-on-mac-osx-26-sep-2015/5225</a></p>
+<p>要 rubyおよびHomebrew(HomebrewをインストールするのにRubyが、dfu-utilをインストールするのにHomebrewが必要)<br>$ brew install dfu-util</p>
+<p>opensslは以下のようにインストールする<br>参考<br><a target="_blank" rel="noopener" href="http://qiita.com/Chrowa3/items/b04e772be959cdda9ac3">http://qiita.com/Chrowa3/items/b04e772be959cdda9ac3</a></p>
+<ol start="3">
+<li>particle web IDEのコードをコンパイルして、firmwareをインストールしておく<br>「&lt; &gt;」みたいなマークをクリックすると、REMOVE APP とか CREATE NEW APP とかのボタンがあるサイドテーブルが出てくるので<br>そこのクラウドボタン(雲のマーク)をクリックすると、コンパイル後 firmware.bin のインストールが始まるので、自分のパソコンの適当なディレクトリに保存しておく</li>
+</ol>
+<p>4.<br>firmware.binを保存したディレクトリまで(Macの場合はterminalで)移動して、下記のコマンドを実行する<br>$ particle flash –serial firmware.bin</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">! PROTIP: Hold the SETUP button on your device until it blinks blue!</span><br><span class="line">? Press ENTER when your device is blinking BLUE </span><br></pre></td></tr></table></figure>
+<p>と出てくる。「今からファームウェア書き込むけどちゃんとリスニングモードになってる？OKだったらENTERキーを押してね！」<br>って意味なのでENTER キーを押す</p>
+<p>これで書き込みが出来る…はずだが、できない・・・</p>
+<p>— 2016年3月25日追記<br>とりあえずフォーラムで同じ現象が起きてて質問してる人がいたのでそれで解決した<br><a target="_blank" rel="noopener" href="https://community.particle.io/t/solved-can-upgrade-electron-ota-but-not-from-cli/20209">https://community.particle.io/t/solved-can-upgrade-electron-ota-but-not-from-cli/20209</a></p>
+<p>解決1. DFU Modeで書き込みを行う</p>
+<p>まずは試しにDFU経由での書き込みを行ってみる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ particle flash --usb firmware.bin</span><br><span class="line"></span><br><span class="line">running dfu-util -l</span><br><span class="line"></span><br><span class="line">!!! I was unable to detect any devices in DFU mode...</span><br><span class="line"></span><br><span class="line">&gt; Your device will blink yellow when in DFU mode.</span><br><span class="line">&gt; If your device is not blinking yellow, please:</span><br><span class="line"></span><br><span class="line">1) Press and hold both the RESET/RST and MODE/SETUP buttons simultaneously.</span><br><span class="line"></span><br><span class="line">2) Release only the RESET/RST button while continuing to hold the MODE/SETUP button.</span><br><span class="line"></span><br><span class="line">3) Release the MODE/SETUP button once the device begins to blink yellow.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Error writing firmware...No DFU device found</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>DFU Modeになってないので書き込みできませんよ、みたいなのが出てくるので<br>これにならってDFU Modeに以降する</p>
+<p>RESETボタンとMODEボタンを同時押しすると、LEDが消灯する<br>↓<br>RESETボタンだけ離すと、一旦LEDが紫色に点滅した後、黄色に点滅する<br>↓<br>黄色に点滅したら、MODEボタンを離す</p>
+<p>これでDFU Modeに移行するので、後は書き込みコマンドを実行する</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ particle flash --usb firmware.bin </span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Flash success!</span><br></pre></td></tr></table></figure>
+<p>最後に Flash seccess!と出れば成功!<br>なんかよくわからないけどParticle側のバグかなんかなのかな・・・しばらくはこの方法でしのごう</p>
+<h3 id="over-the-air-OTA-インターネット経由で"><a href="#over-the-air-OTA-インターネット経由で" class="headerlink" title="over the air(OTA), インターネット経由で"></a>over the air(OTA), インターネット経由で</h3><p>Particle IDEを開いた状態でイナズママークみたいなやつ(Flash)をクリックすると出来ます<br>注意点としては、通信に数KBかかるので、データ量をコントロールしたいならUSB経由のほうがいいみたいです</p>
+<p>以上ひとまず現状ここまで</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/particle-electron-beginning/" data-id="ckodzxw2a002f96z59l1dht8e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-about-shell-script-beginning" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/about-shell-script-beginning/" class="article-date">
+  <time datetime="2016-08-14T06:52:22.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/about-shell-script-beginning/">shellスクリプトについて調べてみた(初心者)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <h1 id="シェルスクリプト"><a href="#シェルスクリプト" class="headerlink" title="シェルスクリプト"></a>シェルスクリプト</h1><p>シェルスクリプトとかシェルコマンドというのは、要するには「黒い画面」に対してコマンドを実行するやつ</p>
+<p>例えばMacだとターミナル、Linuxだとコンソール画面<br>のことになるのかな<br>(UNIXシェルって書いてあるんで、windowsだとどうなるんだろ？？？)</p>
+<h3 id="シェルコマンド"><a href="#シェルコマンド" class="headerlink" title="シェルコマンド"></a>シェルコマンド</h3><p>シェルコマンドは、自分で一行ずつ実行するコマンドで、例えば</p>
+<p>$ cd ~/</p>
+<p>と打てばルートディレクトリに移動するし</p>
+<p>$ mkdir hogehoge</p>
+<p>とすれば、hogehogeというディレクトリ(いわゆるフォルダ)が作成される</p>
+<h3 id="シェルスクリプト-1"><a href="#シェルスクリプト-1" class="headerlink" title="シェルスクリプト"></a>シェルスクリプト</h3><p>シェルスクリプトというのは、このコマンドをまとめてファイルにしたものです</p>
+<p>まずスクリプトとは、</p>
+<blockquote>
+<p>スクリプトとは、メモ帳などのテキスト エディタで作成し、特定のファイル拡張子を付けて保存したプレーン テキスト ファイルです。<br>(引用: <a target="_blank" rel="noopener" href="https://technet.microsoft.com/ja-jp/scriptcenter/ff576118.aspx">https://technet.microsoft.com/ja-jp/scriptcenter/ff576118.aspx</a> )</p>
+</blockquote>
+<p>とありますし、いわゆるファイルのことです</p>
+<p>例えばbashスクリプトで、hogehogeディレクトリを作成してさらに ls コマンドで現在のディレクトリ内容を表示させるようにしたい場合は</p>
+<p>shelltest.sh<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">mkdir hogehoge</span><br><span class="line">ls</span><br></pre></td></tr></table></figure></p>
+<p>というファイルを作成して、下記chmodコマンドで実行権限を付与した後<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x shelltest.sh</span><br></pre></td></tr></table></figure></p>
+<p>コマンドラインで実行してやると結果が表示される</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./test.sh</span><br><span class="line">hogehoge test.sh</span><br><span class="line">$ </span><br></pre></td></tr></table></figure>
+<p>のようになるやつである<br>これも立派なシェルスクリプトである(自分もまだよくわかってないけど)</p>
+<p>こういうのを、foreachやifを使って制御したスクリプトを書くことで<br>時間短縮にもっていけたりするので慣れると便利です</p>
+<p>例えば、RubyやPythonなど(に限らないですが)の環境構築を行う場合に<br>インストールしていくものが多いので、コマンドラインで手打ちしていくと<br>時間もかかるし間違える場合もあったりしますが<br>シェルスクリプトを準備しておくと、自動化できてとても楽です<br>(パッチ処理っていうのかな)</p>
+<h1 id="sh-bash-zsh"><a href="#sh-bash-zsh" class="headerlink" title="sh?bash?zsh?"></a>sh?bash?zsh?</h1><p>元来シェルはshという1種類しかなかったとのこと<br><a target="_blank" rel="noopener" href="http://itref.fc2web.com/unix/shell.html">http://itref.fc2web.com/unix/shell.html</a></p>
+<p>しかしそこはプログラミング言語と同じで、色々な機能をもたせた亜種が登場したみたいです</p>
+<h1 id="初心者はどのシェルを使えばよいのか？"><a href="#初心者はどのシェルを使えばよいのか？" class="headerlink" title="初心者はどのシェルを使えばよいのか？"></a>初心者はどのシェルを使えばよいのか？</h1><p>自分はRubyやPython、さらにRaspberryPiを良く使うのですが、よく見かけるのは<br>bashが多い気がします<br>また、Macの標準ログインシェルはbashみたい<br><a target="_blank" rel="noopener" href="http://blog.tokoyax.com/entry/zsh/bash-to-zsh">http://blog.tokoyax.com/entry/zsh/bash-to-zsh</a></p>
+<p>だから記事もbashが多いのか</p>
+<p>設定も.bash_profileに設定しているのが多い気がします<br>日本語だと検索して出てくる記事もbash_profileが多いので<br>最初慣れない内は、bashを利用して、設定も.bash_profileに記載していくのがいいんじゃないでしょうか(という感想)<br>pythonの記事だとzshのものもちょくちょくみかけます</p>
+<p>どうも調べてみると、zshは玄人向けでとても機能が豊富なシェルみたいです<br><a target="_blank" rel="noopener" href="http://qiita.com/harapeko_wktk/items/47aee77e6e7f7800fa03">ヾ(oﾟωﾟo)ﾉﾞbashからzshに移行して2014年を迎えよう！[ログインシェル]</a><br><a target="_blank" rel="noopener" href="http://qiita.com/mollifier/items/0b618f9e969193ccf5c8">なぜzshを使うのか</a></p>
+<h1 id="bash-profile-bashrc"><a href="#bash-profile-bashrc" class="headerlink" title=".bash_profile? .bashrc?"></a>.bash_profile? .bashrc?</h1><p>bashを使う場合<br>先ほど設定は.bash_profileに記載すると言いましたが<br>.bashrcに設定している記事も見かけます</p>
+<p>こういうの素人だとわけわからないしコピペしてみてるから動かないし・・・</p>
+<p>ひとまず<br>.bash_profile : ログイン時に一度設定すればいいもの<br>.bashrc : 起動するたびに設定する必要のあるもの</p>
+<p>ということみたいです、下記参照<br><a target="_blank" rel="noopener" href="http://qiita.com/hirokishirai/items/5a529c8395c4b336bf31">.bash_profile ? .bashrc ? いろいろあるけどこいつらなにもの？</a><br><a target="_blank" rel="noopener" href="http://dqn.sakusakutto.jp/2012/08/bash_profile_bashrc.html">.bash_profileと.bashrcの違いが覚えられないあなたへの処方箋</a></p>
+<p>普段使用する分には、あまり気にしなくて良いみたい(そもそもそんなに使わない人だと違いが生じない？)</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/about-shell-script-beginning/" data-id="ckodzxw1a000896z5f7p10axb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-setting-wireless-LAN-on-RaspberryPi-by-only-CUI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/setting-wireless-LAN-on-RaspberryPi-by-only-CUI/" class="article-date">
+  <time datetime="2016-08-14T06:49:53.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/setting-wireless-LAN-on-RaspberryPi-by-only-CUI/">CUIだけでラズベリーパイの無線LAN設定を行う</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <h2 id="RaspberryPiを無線LANでネットに接続するための覚書"><a href="#RaspberryPiを無線LANでネットに接続するための覚書" class="headerlink" title="RaspberryPiを無線ＬＡＮでネットに接続するための覚書"></a>RaspberryPiを無線ＬＡＮでネットに接続するための覚書</h2><p>以下のサイトを参考に行った<br><a target="_blank" rel="noopener" href="http://d.hatena.ne.jp/pasela/20121224/raspi_wlan">Raspberry Piを無線LAN化</a><br><a target="_blank" rel="noopener" href="http://denshikousaku.net/raspberry-pi-wifi-lan-usb">Raspberry Piに無線LANのUSBアダプタをつける</a></p>
+<p>また、Buffaloの無線受信機だと発熱が困るという問題があって(実際自分も使ってみたらかなりの熱を発していた)<br>以下のPLANEXの無線受信機を用いた。こいつは発熱しなくてよい<br><a target="_blank" rel="noopener" href="http://www.amazon.co.jp/%E7%84%A1%E7%B7%9ALAN%E5%AD%90%E6%A9%9F-USB%E3%82%A2%E3%83%80%E3%83%97%E3%82%BF%E3%83%BC%E5%9E%8B-433Mbps-X10-10%E5%AF%BE%E5%BF%9C-GW-450S/dp/B00J8CUCLS">PLANEX 無線LAN子機</a></p>
+<p>以下手順を書いておく</p>
+<p>ラズベリーパイのCUIコンソール上で</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iwlist wlan0 scan | grep ESSID</span><br></pre></td></tr></table></figure>
+<p>で、アクセスポイントの名前を確認</p>
+<p>自分のWiFi接続環境のアクセスポイントの名前が出てくるか確認する</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ifdown wlan0</span><br></pre></td></tr></table></figure>
+<p>で、wlan0による無線接続を一旦切っておく<br>こうしないと後々エラーがおきてしまう</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iwconfig wlan0 essid 接続先のSSID key s:接続先のキー</span><br></pre></td></tr></table></figure>
+<p>で接続を設定しておく。<br>例えば、essid(無線ＬＡＮのアクセスポイントの名前)が myHomeWiFi で<br>WiFi接続のパスワードが myWiFiPassword だった場合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iwconfig wlan0 essid myHomeWiFi key s:myWiFiPassword</span><br></pre></td></tr></table></figure>
+<p>とコンソールコマンドを打ち込む</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iwconfig wlan0</span><br></pre></td></tr></table></figure>
+<p>で確認してみて、例えば</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wlan0     IEEE 802.11bgn  ESSID:&quot;myHomeWiFi&quot;  </span><br><span class="line">          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   </span><br><span class="line">          Retry  long limit:7   RTS thr:off   Fragment thr:off</span><br><span class="line">          Power Management:on</span><br></pre></td></tr></table></figure>
+<p>のように、ESSIDのところにアクセスポイントの名前が表示されていたら成功</p>
+<p>次に、 /etc/wpa_supplicant/wpa_supplicant.conf<br>を設定する</p>
+<p>以下のページを参考にした<br><a target="_blank" rel="noopener" href="http://qiita.com/daicham/items/e24ce76f8815d339d070">Raspberry Pi + 無線LAN セットアップ</a></p>
+<p>先ほどと同じで例えば<br>essid(無線ＬＡＮのアクセスポイントの名前)が myHomeWiFi で<br>WiFi接続のパスワードが myWiFiPassword だった場合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sh -c &quot;wpa_passphrase myHomeWiFi myWiFiPassword &gt;&gt; /etc/wpa\_supplicant/wpa_supplicant.conf&quot;</span><br><span class="line"></span><br><span class="line">$ sudo cat /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
+<p>とすることで、wpa_supplicant.confに設定が反映される</p>
+<p>この後<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ifdown wlan0</span><br><span class="line">$ sudo ifup wlan0</span><br></pre></td></tr></table></figure></p>
+<p>とすると、ネットに繋がる(はず)</p>
+<p>つながらない場合は</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dhclient wlan0</span><br></pre></td></tr></table></figure>
+<p>とするとIPアドレスがふられてネットに繋がるはず<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig</span><br></pre></td></tr></table></figure><br>で確認できる</p>
+<h2 id="次に、固定IPを振っていく"><a href="#次に、固定IPを振っていく" class="headerlink" title="次に、固定IPを振っていく"></a>次に、固定IPを振っていく</h2><p>固定IPを振っていないと、毎回IPアドレスが変わってしまうので<br>ssh接続する時などにちょっと不便になるので設定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/network/interfaces</span><br></pre></td></tr></table></figure>
+<p>をすると</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">auto lo</span><br><span class="line">iface lo inet loopback</span><br><span class="line"></span><br><span class="line">auto eth0</span><br><span class="line">allow-hotplug eth0</span><br><span class="line">iface eth0 inet manual</span><br><span class="line"></span><br><span class="line">auto wlan0</span><br><span class="line">allow-hotplug wlan0</span><br><span class="line">iface wlan0 inet dhcp</span><br><span class="line">wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</span><br><span class="line"></span><br><span class="line">auto wlan1</span><br><span class="line">allow-hotplug wlan1</span><br><span class="line">iface wlan1 inet manual</span><br><span class="line">wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>みたいなのが出てくるので</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">auto lo</span><br><span class="line"></span><br><span class="line">iface lo inet loopback</span><br><span class="line">iface eth0 inet dhcp</span><br><span class="line"></span><br><span class="line">allow-hotplug wlan0</span><br><span class="line">#iface wlan0 inet manual</span><br><span class="line">iface wlan0 inet static</span><br><span class="line"></span><br><span class="line">address 192.168.1.200</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway 192.168.1.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf</span><br><span class="line">wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</span><br><span class="line">iface default inet dhcp</span><br></pre></td></tr></table></figure>
+<p>と書き換えて保存。<br>(基本的にnetmaskは 255.255.255.0 と設定してやれば問題なさげ)</p>
+<p>addressは、最後の数字だけを好きな数字にしてあげればよい<br>例えば、今接続されてる無線ＬＡＮのアドレスの調べ方は<br>Macだと下記サイトに書かれている方法で確認して<br><a target="_blank" rel="noopener" href="http://pc-karuma.net/mac-ip-address/">Mac - IPアドレスを確認する方法</a></p>
+<p>使用しているWiFiのIPアドレスが例えば<br>192.168.1.5</p>
+<p>だったとしたら、5のところを好きな数字にしてあげればよいので</p>
+<p>address 192.168.1.200</p>
+<p>のようにしてやればよい。</p>
+<p>gatewayの確認方法は<a target="_blank" rel="noopener" href="http://buffalo.jp/download/manual/bro150/qa/qa/buf1528.html">ここ</a>を参考にして、例えば</p>
+<p>192.168.1.0<br>だとしたら</p>
+<p>gateway 192.168.1.0<br>と設定してやる。</p>
+<p>wlan1はまぁ消しても消さなくてもどっちでもよい、使わないので気になるなら消して良いと思われる</p>
+<p>後は<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ifdown wlan0</span><br><span class="line">$ sudo ifup wlan0</span><br></pre></td></tr></table></figure><br>をすればよいはず</p>
+<p>うまく設定出来ているかは</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig</span><br></pre></td></tr></table></figure>
+<p>で確認できる</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/setting-wireless-LAN-on-RaspberryPi-by-only-CUI/" data-id="ckodzxw2p003n96z55w115d73" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; __(&#39;prev&#39;)</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">__(&#39;next&#39;) &amp;raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

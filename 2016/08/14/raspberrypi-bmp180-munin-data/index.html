@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RaspberryPi + BMP180 + muninで温度データをグラフ化 | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="温度湿度気圧センサのBMP180(Adafruit製)を用いて温度データを取得後、muninというツールを用いてグラフ化した 用いたもの・RaspberryPi2 B (Raspbian wheezy(2015年5月バージョン))・BMP180 pythonはRaspbianに入っていたものをそのままなのでバージョンは2.7.3です">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RaspberryPi + BMP180 + muninで温度データをグラフ化">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/08/14/raspberrypi-bmp180-munin-data/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="温度湿度気圧センサのBMP180(Adafruit製)を用いて温度データを取得後、muninというツールを用いてグラフ化した 用いたもの・RaspberryPi2 B (Raspbian wheezy(2015年5月バージョン))・BMP180 pythonはRaspbianに入っていたものをそのままなのでバージョンは2.7.3です">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoheikoga.github.io/2016/08/14/raspberrypi-bmp180-munin-data/munin.jpg">
+<meta property="article:published_time" content="2016-08-14T07:32:32.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.672Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="RaspberryPi">
+<meta property="article:tag" content="電子工作">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoheikoga.github.io/2016/08/14/raspberrypi-bmp180-munin-data/munin.jpg">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-raspberrypi-bmp180-munin-data" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/raspberrypi-bmp180-munin-data/" class="article-date">
+  <time datetime="2016-08-14T07:32:32.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RaspberryPi + BMP180 + muninで温度データをグラフ化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>温度湿度気圧センサのBMP180(Adafruit製)を用いて<br>温度データを取得後、muninというツールを用いてグラフ化した</p>
+<p>用いたもの<br>・RaspberryPi2 B (Raspbian wheezy(2015年5月バージョン))<br>・BMP180</p>
+<p>pythonはRaspbianに入っていたものをそのままなのでバージョンは2.7.3です</p>
+<span id="more"></span>
+<h3 id="まずはpythonでデータ取得をやってみる"><a href="#まずはpythonでデータ取得をやってみる" class="headerlink" title="まずはpythonでデータ取得をやってみる"></a>まずはpythonでデータ取得をやってみる</h3><p>下記を参考にした、そのままで出来ます<br><a target="_blank" rel="noopener" href="http://qiita.com/masato/items/d5c19a883b0ba3ec7d5b">http://qiita.com/masato/items/d5c19a883b0ba3ec7d5b</a></p>
+<p>i2cを使用可能な状態にしておくこと<br>参考リンク<br><a target="_blank" rel="noopener" href="http://qiita.com/tchisaka/items/e8a2b09c808715dc8515">http://qiita.com/tchisaka/items/e8a2b09c808715dc8515</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install git build-essential python-dev python-smbus</span><br><span class="line">$ git clone https://github.com/adafruit/Adafruit_Python_BMP.git</span><br><span class="line">$ cd Adafruit_Python_BMP</span><br><span class="line">$ sudo python setup.py install</span><br></pre></td></tr></table></figure>
+<p>実際に配線してみてexampleのコードを試してみる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ cd Adafruit_Python_BMP/example</span><br><span class="line">$ sudo python simpletest.py</span><br><span class="line"></span><br><span class="line">Temp = 22.60 *C</span><br><span class="line">Pressure = 100439.00 Pa</span><br><span class="line">Altitude = 73.86 m</span><br><span class="line">Sealevel Pressure = 100439.00 Pa</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>のように表示されたら成功</p>
+<h3 id="muninでグラフ化してみる"><a href="#muninでグラフ化してみる" class="headerlink" title="muninでグラフ化してみる"></a>muninでグラフ化してみる</h3><p>センサからの値をグラフ化する方法は色々あるみたいですが<br><a href="http://yoheikoga.github.io/2016/04/20/python%E3%81%A7%E3%81%AE%E3%82%B0%E3%83%A9%E3%83%95%E6%8F%8F%E7%94%BB%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%AA%BF%E3%81%B9%E3%81%9F/">pythonでのグラフ描画について調べた</a></p>
+<p>RaspberryPiだと、よく使われるのはMuninというツールを使ってやります</p>
+<p>Muninとは、そもそもはリソース管理ツールみたいです<br><a target="_blank" rel="noopener" href="http://www.omakase.org/misc/_munin.html">リソース監視ツール Munin を使う</a></p>
+<p>RaspberryPiに導入するのに色々な情報があって最初は錯綜したけど<br>やってみたらシンプルでした</p>
+<p>以下は設定の参考先<br><a target="_blank" rel="noopener" href="http://www.lisa.jp/index.php/Munin">http://www.lisa.jp/index.php/Munin</a><br><a target="_blank" rel="noopener" href="http://blog.makotokw.com/2013/11/13/raspberry-pi%E3%81%A7%E3%82%B5%E3%83%BC%E3%83%90%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E7%9B%A3%E8%A6%96%E3%81%99%E3%82%8B/">http://blog.makotokw.com/2013/11/13/raspberry-pi%E3%81%A7%E3%82%B5%E3%83%BC%E3%83%90%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E7%9B%A3%E8%A6%96%E3%81%99%E3%82%8B/</a><br><a target="_blank" rel="noopener" href="http://bey.jp/?p=15720">http://bey.jp/?p=15720</a><br><a target="_blank" rel="noopener" href="http://bey.jp/?p=15709">http://bey.jp/?p=15709</a></p>
+<p>2016/04/21現在だと</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install munin munin-node</span><br></pre></td></tr></table></figure>
+<p>してやれば入ります<br>後は<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ startx</span><br></pre></td></tr></table></figure></p>
+<p>してやって、ブラウザを開いて、アドレスバーに<br><code>http://raspberrypi/munin</code><br>と入れてやってmuninの画面が出てきたら成功</p>
+<h3 id="ただしこの状態だと、他のブラウザからは見ることが出来ない"><a href="#ただしこの状態だと、他のブラウザからは見ることが出来ない" class="headerlink" title="ただしこの状態だと、他のブラウザからは見ることが出来ない"></a>ただしこの状態だと、他のブラウザからは見ることが出来ない</h3><p>試してみた↓</p>
+<p>自分のラズベリーパイは、固定IPアドレスに設定しているので<br>例えば<br>address 192.168.11.1<br>とかだったとしたら、パソコンのブラウザなどから<br><code>http://192.168.11.1/munin</code><br>にアクセスしてみると</p>
+<blockquote>
+<p>Forbidden<br>You don’t have permission to access /munin on this server.</p>
+</blockquote>
+<p>みたいなのが表示されます</p>
+<p>どのブラウザからも確認するためには<br>muninの設定を書き換えてあげる必要がある</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/munin/apache.conf</span><br></pre></td></tr></table></figure>
+<p>以下の部分を見つける<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory /var/cache/munin/www&gt;</span><br><span class="line">  Order allow,deny</span><br><span class="line">  Allow from localhost 127.0.0.0/8 ::1</span><br></pre></td></tr></table></figure></p>
+<p>下記のように書き換える</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory /var/cache/munin/www&gt;</span><br><span class="line">  Order allow,deny</span><br><span class="line">  # Allow from localhost 127.0.0.0/8 ::1</span><br><span class="line">  Allow from all </span><br></pre></td></tr></table></figure>
+<p>保存して再起動する</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo reboot</span><br></pre></td></tr></table></figure>
+<p>再起動後、自分のパソコンなどのブラウザから</p>
+<p><code>http://192.168.11.1/munin</code></p>
+<p>でアクセスして、muninの画面が表示されたら成功です</p>
+<h3 id="実際にmuninによるグラフ化を試す"><a href="#実際にmuninによるグラフ化を試す" class="headerlink" title="実際にmuninによるグラフ化を試す"></a>実際にmuninによるグラフ化を試す</h3><p>温度センサのBMP180で試してみた<br>ライブラリのダウンロードや使い方などは以下を参照<br><a target="_blank" rel="noopener" href="http://qiita.com/masato/items/d5c19a883b0ba3ec7d5b">http://qiita.com/masato/items/d5c19a883b0ba3ec7d5b</a></p>
+<p>まずはAdafruitのライブラリのexampleをコピーしておいて、それを書き換える<br>コピーしたファイル名は <code>temp.py</code>にしました</p>
+<p>ディレクトリは以下のようになっている(はず)なので<br>/Adafruit_Python_BMP/examples/</p>
+<p>まずはライブラリのサンプルスクリプトをコピーしてあげて書き直す<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cp simpletest.py temp.py</span><br><span class="line">$ sudo vi temp.py</span><br></pre></td></tr></table></figure></p>
+<p>以下のように書き換える<br>コメントの部分を消去して、最後のほうのprintの行をコメントアウトして、最後の行を追加したら下記のようになる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Adafruit_BMP.BMP085 as BMP085</span><br><span class="line"></span><br><span class="line">sensor = BMP085.BMP085()</span><br><span class="line"></span><br><span class="line">#print(&#x27;Temp = &#123;0:0.2f&#125; *C&#x27;.format(sensor.read_temperature()))</span><br><span class="line">#print(&#x27;Pressure = &#123;0:0.2f&#125; Pa&#x27;.format(sensor.read_pressure()))</span><br><span class="line">#print(&#x27;Altitude = &#123;0:0.2f&#125; m&#x27;.format(sensor.read_altitude()))</span><br><span class="line">#print(&#x27;Sealevel Pressure = &#123;0:0.2f&#125; Pa&#x27;.format(sensor.read_sealevel_pressure()))</span><br><span class="line">print &#x27;&#123;&#125;&#x27;.format(sensor.read_temperature())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>できたら、ファイルをpathの通ったところにコピーする<br>例えば /usr/local/bin がいいのではないかと思われるので以下のようにする</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp temp.py /usr/local/bin</span><br></pre></td></tr></table></figure>
+<h4 id="シェル・スクリプトでプラグインを作る"><a href="#シェル・スクリプトでプラグインを作る" class="headerlink" title="シェル・スクリプトでプラグインを作る"></a>シェル・スクリプトでプラグインを作る</h4><p>下記を参考にした<br><a target="_blank" rel="noopener" href="http://blog.bnikka.com/raspberrypi/dht11-raspberrypi.html">http://blog.bnikka.com/raspberrypi/dht11-raspberrypi.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /usr/share/munin/plugins/temp</span><br></pre></td></tr></table></figure>
+<p>下記を記述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">#%# family=auto</span><br><span class="line">#%# capabilities=autoconf</span><br><span class="line"></span><br><span class="line">GETNUM=`python /usr/local/bin/munin_temp.py 11 4`</span><br><span class="line"></span><br><span class="line">if [ &quot;$1&quot; = &quot;autoconf&quot; ]; then</span><br><span class="line">        if [ -n $&#123;GETNUM&#125; ] ; then</span><br><span class="line">                echo yes</span><br><span class="line">                exit 0</span><br><span class="line">        else</span><br><span class="line">                echo no</span><br><span class="line">                exit 0</span><br><span class="line">        fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ &quot;$1&quot; = &quot;config&quot; ]; then</span><br><span class="line">        echo &#x27;graph_title temperature&#x27;</span><br><span class="line">        echo &#x27;graph_args -r --lower-limit 0&#x27;</span><br><span class="line">        echo &#x27;graph_vlabel C&#x27;</span><br><span class="line">        echo &#x27;graph_category Weather&#x27;</span><br><span class="line">        echo &#x27;total.label temperature&#x27;</span><br><span class="line">        echo &#x27;total.min 0&#x27;</span><br><span class="line">        echo &#x27;total.draw LINE2&#x27;</span><br><span class="line">        echo &#x27;total.type GAUGE&#x27;</span><br><span class="line">        exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;total.value $GETNUM&quot;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>スクリプトの準備が整ったのでコンソールから下記コマンドをうちこんであげる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># ルートアクセス権限を与える</span><br><span class="line">$ sudo chmod 755 /usr/share/munin/plugins/temp</span><br><span class="line"></span><br><span class="line"># muninでグラフ化出来るようにプラグインにシンボリックリンクを与える</span><br><span class="line">$ sudo ln -s /usr/share/munin/plugins/temp /etc/munin/plugins/temp</span><br><span class="line"></span><br><span class="line"># ルート権限でアクセスできるようにする</span><br><span class="line">$ sudo vi /etc/munin/plugin-conf.d/temp</span><br><span class="line"></span><br><span class="line"># 下記2行を記述</span><br><span class="line">[temp]</span><br><span class="line">user root</span><br><span class="line"></span><br><span class="line"># muninを再起動</span><br><span class="line">$ sudo /etc/init.d/munin-node restart</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>後はブラウザからmuninにアクセスすればよい<br>参考リンク先<br><a target="_blank" rel="noopener" href="http://bey.jp/?p=15709">http://bey.jp/?p=15709</a><br>みたいに、muninブラウザの左の欄に “weather” という項目があったら成功</p>
+<p>あとは、温度データは5分に1回の取得になるので<br>何分か待ったら更新される</p>
+<p>やってみたら下みたいなグラフが得られた<br>(30分ぐらいしか動かしてないのでデータ少ない)</p>
+<p><img src="/2016/08/14/raspberrypi-bmp180-munin-data/munin.jpg" width="300px" height="200px" alt="RaspberryPi"></p>
+<p>これでグラフ化が成功しました</p>
+<h2 id="以下はやらなくても大丈夫な追加設定"><a href="#以下はやらなくても大丈夫な追加設定" class="headerlink" title="以下はやらなくても大丈夫な追加設定"></a>以下はやらなくても大丈夫な追加設定</h2><h3 id="負荷を軽減する"><a href="#負荷を軽減する" class="headerlink" title="負荷を軽減する"></a>負荷を軽減する</h3><p>デフォルトの設定だと5分毎にデータをもらってグラフを書き換えているみたいなので<br>ひとまず負荷を軽減する策を講じる</p>
+<h4 id="グラフにブラウザからアクセスする時に更新するようにする"><a href="#グラフにブラウザからアクセスする時に更新するようにする" class="headerlink" title="グラフにブラウザからアクセスする時に更新するようにする"></a>グラフにブラウザからアクセスする時に更新するようにする</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/munin/munin.conf</span><br></pre></td></tr></table></figure>
+<p>以下２つの行を見つける。２つは少し離れているので注意<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#graph_strategy cron</span><br><span class="line"></span><br><span class="line">#cgiurl_graph /munin-cgi/munin-cgi-graph</span><br></pre></td></tr></table></figure></p>
+<p>２つともコメントを外して以下のようにする<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph_strategy cgi</span><br><span class="line"></span><br><span class="line">cgiurl_graph /munin-cgi/munin-cgi-graph</span><br></pre></td></tr></table></figure></p>
+<p>保存する。次にブラウザで見る時の制限を解除する<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/munin/apache.con</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 以下の行をみつける</span><br><span class="line"></span><br><span class="line">&lt;Location /munin-cgi/munin-cgi-graph&gt;</span><br><span class="line">  Order allow,deny</span><br><span class="line">  Allow from localhost 127.0.0.0/8 ::1</span><br><span class="line"></span><br><span class="line">&lt;Location /munin-cgi/munin-cgi-html&gt;</span><br><span class="line">  Order allow,deny</span><br><span class="line">  Allow from localhost 127.0.0.0/8 ::1</span><br><span class="line"></span><br><span class="line"># 次にように書き換える</span><br><span class="line"></span><br><span class="line">&lt;Location /munin-cgi/munin-cgi-graph&gt;</span><br><span class="line">  Order allow,deny</span><br><span class="line">  # Allow from localhost 127.0.0.0/8 ::1</span><br><span class="line">  Allow from all </span><br><span class="line"></span><br><span class="line">&lt;Location /munin-cgi/munin-cgi-html&gt;</span><br><span class="line">  Order allow,deny</span><br><span class="line">  # Allow from localhost 127.0.0.0/8 ::1</span><br><span class="line">  Allow from all </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>保存して再起動する</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo reboot</span><br></pre></td></tr></table></figure>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/raspberrypi-bmp180-munin-data/" data-id="ckodzxw2i003496z50z7mg9pw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/14/ups-pico-raspberrypi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RaspberryPiバックアップバッテリーUPS PIcoの使い方
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/14/graf-by-python/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">pythonのグラフ描画について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

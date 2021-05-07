@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RaspberryPiカメラをタクトスイッチで起動させる | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="RaspberryPiのデジカメ化を行うやることとしては ・RaspberryPiの電源を入れると自動ログインする・タクトスイッチを押した時にプログラムが起動してカメラで撮影を行う までやれるようにする 使ったものはRaspberryPi model A+RaspberryPi camera boardタクトスイッチです">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RaspberryPiカメラをタクトスイッチで起動させる">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/08/14/snap-raspberrypi-camera-module-by-push-physical-switch/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="RaspberryPiのデジカメ化を行うやることとしては ・RaspberryPiの電源を入れると自動ログインする・タクトスイッチを押した時にプログラムが起動してカメラで撮影を行う までやれるようにする 使ったものはRaspberryPi model A+RaspberryPi camera boardタクトスイッチです">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-08-14T07:04:18.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.682Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="プログラミング">
+<meta property="article:tag" content="RaspberryPi">
+<meta property="article:tag" content="電子工作">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-snap-raspberrypi-camera-module-by-push-physical-switch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/snap-raspberrypi-camera-module-by-push-physical-switch/" class="article-date">
+  <time datetime="2016-08-14T07:04:18.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RaspberryPiカメラをタクトスイッチで起動させる
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>RaspberryPiのデジカメ化を行う<br>やることとしては</p>
+<p>・RaspberryPiの電源を入れると自動ログインする<br>・タクトスイッチを押した時にプログラムが起動してカメラで撮影を行う</p>
+<p>までやれるようにする</p>
+<p>使ったものは<br><a target="_blank" rel="noopener" href="http://jp.rs-online.com/web/p/processor-microcontroller-development-kits/8332699/">RaspberryPi model A+</a><br><a target="_blank" rel="noopener" href="http://jp.rs-online.com/web/p/products/7757731/?cm_mmc=JP-PPC-_-google-_-3_JP_JP_M_SUPPORT_Exact-_-raspberry_pi%7C%E3%83%93%E3%83%87%E3%82%AA%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB&amp;mkwid=sRoelAmR2-dc%7Cpcrid%7C86021785983%7Cpkw%7Craspberry+pi+camera+board%7Cpmt%7Ce%7Cprd%7C">RaspberryPi camera board</a><br><a target="_blank" rel="noopener" href="http://akizukidenshi.com/catalog/g/gP-03647/">タクトスイッチ</a><br>です</p>
+<span id="more"></span>
+<p>以下準備を色々とする</p>
+<h1 id="タクトスイッチでshutdownが起こるようにする"><a href="#タクトスイッチでshutdownが起こるようにする" class="headerlink" title="タクトスイッチでshutdownが起こるようにする"></a>タクトスイッチでshutdownが起こるようにする</h1><p>タクトスイッチを押した時にプログラムが動き出すようにするのの練習として<br>スイッチを押した時にシャットダウンが起こるかを試した</p>
+<p>下記参考サイトを参考にした<br><a target="_blank" rel="noopener" href="http://d.hatena.ne.jp/penkoba/20130925/1380129824">Raspberry Pi にシャットダウンボタンをつける</a><br><a target="_blank" rel="noopener" href="http://raspi.seesaa.net/article/418174651.html">タクトスイッチでRaspberryPiをシャットダウンさせてみた【Python】【supervisor】</a></p>
+<h1 id="自動ログインの設定"><a href="#自動ログインの設定" class="headerlink" title="自動ログインの設定"></a>自動ログインの設定</h1><p>Raspberry Piの電源を入れた後、IDやパスワードを入力しないといけない状態だと<br>デジカメとしては不便なので下記サイトを参考に自動ログインするようにした<br><a target="_blank" rel="noopener" href="http://pettomo.azurewebsites.net/?p=4451">Raspberry Piのログインを簡単にする設定（自動ログイン、デスクトップ表示）</a></p>
+<h1 id="スイッチを押すことでカメラ起動して写真を撮ってみる"><a href="#スイッチを押すことでカメラ起動して写真を撮ってみる" class="headerlink" title="スイッチを押すことでカメラ起動して写真を撮ってみる"></a>スイッチを押すことでカメラ起動して写真を撮ってみる</h1><p>下記のpythonスクリプトをホームディレクトリに作成(/home/pi/test.py)<br>尚、今回はGPIO25ピンにタクトスイッチが繋がるようにしている</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO  </span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">GPIO.setmode(GPIO.BCM)  </span><br><span class="line"></span><br><span class="line">GPIO.setup(<span class="number">25</span>, GPIO.IN, pull_up_down=GPIO.PUD_UP)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:  </span><br><span class="line">        GPIO.wait_for_edge(<span class="number">25</span>, GPIO.FALLING)  </span><br><span class="line"><span class="keyword">except</span> KeyboardInterrupt:  </span><br><span class="line">        GPIO.cleanup()  <span class="comment"># clean up GPIO on CTRL+C exit  </span></span><br><span class="line">GPIO.cleanup()          <span class="comment"># clean up GPIO on normal exit  </span></span><br><span class="line">os.system(<span class="string">&quot;raspistill -o /home/pi/test.jpg&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>保存した後にchmodでアクセス権限を与えて起動させてみる<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ chmod u+x test.py</span><br><span class="line">$ sudo python test.py</span><br></pre></td></tr></table></figure></p>
+<p>で実行後、タクトスイッチを押すと、写真撮影がはじまります</p>
+<p>難点は、このままだといちいちpythonスクリプトを起動しないといけないこと<br>これをデーモン化という手法で、バックグラウンドでプロセスを監視させていつでも起動できるようにしておく<br>デーモン化は前述のSupervisorというのを使うと簡単に出来る</p>
+<h1 id="デーモン化により、プログラムの自動起動設定"><a href="#デーモン化により、プログラムの自動起動設定" class="headerlink" title="デーモン化により、プログラムの自動起動設定"></a>デーモン化により、プログラムの自動起動設定</h1><p>supervisorを使って、ボタンを押した時に自動でカメラを起動するようにしてあげる</p>
+<p>supervisorの使い方などは下記を参考にした<br><a target="_blank" rel="noopener" href="http://raspi.seesaa.net/article/415778601.html">Raspberry Piに【Supervisor】をインストールして、motionをデーモン化してみた</a></p>
+<p>まず適当なディレクトリにパイソンのスクリプトファイルを作成する<br>今回は一番上のディレクトリ(/home/pi/)に、camera.pyを作成する<br>pinはGPIO25(22番ピン)を用いて、配置は<a target="_blank" rel="noopener" href="http://raspi.seesaa.net/article/418174651.html">参考サイト</a>と同じ配置です</p>
+<p>camera.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO	</span><br><span class="line"><span class="keyword">import</span> shlex</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"> </span><br><span class="line">pin = <span class="number">25</span></span><br><span class="line">cmd = <span class="string">&#x27;sudo raspistill -o test.jpg&#x27;</span></span><br><span class="line"> </span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line">GPIO.setup(pin, GPIO.IN)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">take_picture</span>():</span></span><br><span class="line">  <span class="built_in">print</span> <span class="string">&quot;take picture&quot;</span></span><br><span class="line">  proc = subprocess.Popen(shlex.split(cmd))</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  GPIO.wait_for_edge(pin, GPIO.FALLING)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">  <span class="built_in">print</span> <span class="string">&quot;Quit&quot;</span></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">  <span class="built_in">print</span> <span class="string">&quot;clean up&quot;</span></span><br><span class="line">  GPIO.cleanup()</span><br><span class="line"> </span><br><span class="line">take_picture()</span><br></pre></td></tr></table></figure>
+<p>次に、supervisorの記述をしていく<br>これも参考サイトと大体同じなのですが<br>・commandのディレクトリが異なる場合は注意<br>・一度カメラを起動すると、プロセスが終了してしまうので、オートリスタート(autorestart)の設定をしてあげる必要がある</p>
+<p>今回ディレクトリは /home/pi/ なので<br>autorestart=true を設置してあげるので<br>confファイルの記述は以下のようにしました</p>
+<p>$ sudo vi /etc/supervisor/conf.d/camera.conf </p>
+<p>でcamera.confを開いて</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[program:camera]</span><br><span class="line">command=sudo python /home/pi/camera.py</span><br><span class="line">numprocs=1</span><br><span class="line">redirect_stderr=true</span><br><span class="line">stdout_logfile=/var/log/camera.log</span><br><span class="line">user=pi</span><br><span class="line">autorestart=true</span><br></pre></td></tr></table></figure>
+<p>:wqで保存<br>あとはsupervisorctlコマンドで reread, addしてあげればよいです</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo supervisorctl reread</span><br><span class="line">$ sudo supervisorctl add camera</span><br></pre></td></tr></table></figure>
+<p>これで、タクトスイッチを押せば、ホームディレクトリに test.jpgが生成される</p>
+<p>これでひとまずデジカメ機能は完成なので後は自分で画像の保存先や名前など好きなように設定してあげればよい</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/snap-raspberrypi-camera-module-by-push-physical-switch/" data-id="ckodzxw2q003s96z5f2ii3mjk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/14/show-picture-on-hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hexoで画像を表示させる方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/14/about-curl-command/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Particle Electronで使うcurlコマンド</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

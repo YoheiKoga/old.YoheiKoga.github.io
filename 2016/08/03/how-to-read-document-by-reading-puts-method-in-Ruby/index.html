@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Rubyのputsメソッドで学ぶdocumentの読み方(初歩の初歩) | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="プログラムを学んでいく上でdocumentとか読めないといけないけどいかんせんどうやって読むのかがまずわからない なんか作法に則って記述されているんだろうけど、プログラム独特の書き方なので単純に日本語を読むようにはいかないっぽいので動きが分かってるメソッドを読み解いてみる">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rubyのputsメソッドで学ぶdocumentの読み方(初歩の初歩)">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/08/03/how-to-read-document-by-reading-puts-method-in-Ruby/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="プログラムを学んでいく上でdocumentとか読めないといけないけどいかんせんどうやって読むのかがまずわからない なんか作法に則って記述されているんだろうけど、プログラム独特の書き方なので単純に日本語を読むようにはいかないっぽいので動きが分かってるメソッドを読み解いてみる">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-08-03T00:52:42.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.578Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="プログラミング">
+<meta property="article:tag" content="Ruby">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-how-to-read-document-by-reading-puts-method-in-Ruby" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/03/how-to-read-document-by-reading-puts-method-in-Ruby/" class="article-date">
+  <time datetime="2016-08-03T00:52:42.000Z" itemprop="datePublished">2016-08-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Rubyのputsメソッドで学ぶdocumentの読み方(初歩の初歩)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>プログラムを学んでいく上でdocumentとか読めないといけないけど<br>いかんせんどうやって読むのかがまずわからない</p>
+<p>なんか作法に則って記述されているんだろうけど、プログラム独特の書き方なので<br>単純に日本語を読むようにはいかないっぽいので<br>動きが分かってるメソッドを読み解いてみる</p>
+<span id="more"></span>
+<p><br><br><br></p>
+<h2 id="putsで学ぶdocument-reference-の読み方-on-Ruby"><a href="#putsで学ぶdocument-reference-の読み方-on-Ruby" class="headerlink" title="putsで学ぶdocument(reference)の読み方 on Ruby"></a>putsで学ぶdocument(reference)の読み方 on Ruby</h2><p>このへんを参考に<br><a target="_blank" rel="noopener" href="http://d.hatena.ne.jp/mailishmaid/20061026/1161851986">http://d.hatena.ne.jp/mailishmaid/20061026/1161851986</a></p>
+<p>まず、putsのreferenceを引いてみる<br><a target="_blank" rel="noopener" href="http://docs.ruby-lang.org/ja/search/version:2.3.0/query:puts/">http://docs.ruby-lang.org/ja/search/version:2.3.0/query:puts/</a></p>
+<p>まず先頭5件みたいなのがでてくる</p>
+<ol>
+<li>Kernel.#puts(*arg) -&gt; nil</li>
+<li>IO#puts(*obj) -&gt; nil</li>
+<li>Zlib::GzipWriter#puts(*str) -&gt; nil</li>
+<li>StringIO#puts(*obj) -&gt; nil</li>
+<li>OpenSSL::Buffering#puts(*objs) -&gt; nil</li>
+</ol>
+<p>順に見ていってみる</p>
+<p><br><br><br></p>
+<ol>
+<li>Kernel.#puts(*arg) -&gt; nil</li>
+</ol>
+<hr>
+<p>(引用)</p>
+<ul>
+<li>引数と改行を順番に、標準出力$stdoutに出力します<br>引数がなければ改行のみを出力します</li>
+</ul>
+<hr>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">puts <span class="string">&quot;hello&quot;</span></span><br></pre></td></tr></table></figure>
+<p>とすると、標準出力(例えばTerminalのコンソールなど)に<code>hello</code>と出力されて、続けて改行されているので<br>改行コードも一緒に出力されている(これは文字としては出力されないのでぱっと見はわからない)</p>
+<p><br><br><br></p>
+<h2 id="モジュール関数ってリンクがあるけどモジュール関数とは？"><a href="#モジュール関数ってリンクがあるけどモジュール関数とは？" class="headerlink" title="モジュール関数ってリンクがあるけどモジュール関数とは？"></a>モジュール関数ってリンクがあるけどモジュール関数とは？</h2><p>そもそもモジュールとは</p>
+<hr>
+<p>(引用)</p>
+<ul>
+<li>Rubyにはモジュールというクラスによく似た機能がある。クラス定義のように任意の式やメソッド定義を記述できるが<br>以下の点でクラスとは異なる<ul>
+<li>インスタンスを生成することは出来ない</li>
+<li>継承することは出来ない<br>モジュールの用途としては主に以下のようなものが挙げられる</li>
+<li>名前空間を作る</li>
+<li>モジュールのメソッドを、あるクラスのインスタンスメソッドとして取り込む</li>
+<li>モジュールのメソッドを、あるオブジェクトの特異メソッド(クラスメソッド)として取り込む</li>
+<li>モジュール関数を定義して使う</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>とある<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module モジュール名</span><br><span class="line">  hogehoge</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
+<p>みたいに定義されているやつ<br>で、<br>Kernel.#puts(*arg) -&gt; nil<br>って書いてあるように<br>module Kernel<br>で定義されているので、モジュール関数なんだなってことかな</p>
+<p>これは<a target="_blank" rel="noopener" href="http://docs.ruby-lang.org/ja/2.1.0/class/Kernel.html">リンク先</a>を見てみると</p>
+<hr>
+<p>(引用)</p>
+<ul>
+<li>全てのクラスから参照できるメソッドを定義しているモジュール。 Object クラスはこのモジュールをインクルードしています。<br>Object クラスのメソッドは実際にはこのモジュールで定義されていま す。これはトップレベルでのメソッドの再定義に対応するためです。</li>
+</ul>
+<hr>
+<p>と書かれているのでひとまず全てのクラスから呼び出すことが可能なんですよって意味に捉えればいいのかな</p>
+<p>じゃあ次のIOってなに？</p>
+<p><br></p>
+<h2 id="IO-puts-obj-gt-nil"><a href="#IO-puts-obj-gt-nil" class="headerlink" title="IO#puts(*obj) -&gt; nil"></a>IO#puts(*obj) -&gt; nil</h2><p>インスタンスメソッドと書かれている</p>
+<p>インスタンスメソッドはクラスメソッドと並列で語られることが多い<br>こちらがわかりやすかったかな<br><a target="_blank" rel="noopener" href="http://nigohiroki.hatenablog.com/entry/2014/03/12/010344">Rails初心者から中級者になったと感じたきっかけ</a></p>
+<hr>
+<p>(引用)</p>
+<ul>
+<li>クラスメソッドはクラスからそのまま呼び出し、インスタンスメソッドはクラスのインスタンスから呼び出します。</li>
+</ul>
+<hr>
+<p>とのこと<br>リンク先では Dogクラスを用いて説明されていたが<br>ひとまず</p>
+<p><br></p>
+<h3 id="クラスメソッドの場合"><a href="#クラスメソッドの場合" class="headerlink" title="クラスメソッドの場合"></a>クラスメソッドの場合</h3><p>・Dogのうち一番年齢の高いDogを取り出すメソッド<br>・Dogのうちオスのみを取り出すメソッド</p>
+<p>は以下のようになる</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> &lt; ActiveRecord::Base</span></span><br><span class="line">    <span class="comment"># 一番年齢の高いDog</span></span><br><span class="line">    def <span class="keyword">self</span>.get_oldest</span><br><span class="line">        <span class="keyword">self</span>.order(<span class="string">&quot;age DESC&quot;</span>).limit(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># オスのみを取り出す</span></span><br><span class="line">    def <span class="keyword">self</span>.get_male</span><br><span class="line">        <span class="keyword">self</span>.where(<span class="symbol">:sex</span> =&gt; <span class="string">&quot;male&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>クラス全体の中から何かを取り出す場合などに利用される</p>
+<p><br></p>
+<h3 id="インスタンスメソッドの場合"><a href="#インスタンスメソッドの場合" class="headerlink" title="インスタンスメソッドの場合"></a>インスタンスメソッドの場合</h3><p>・とあるDogの年齢、性別をHashで取り出すメソッド<br>・とあるDogの親のDogを取り出すメソッド(親が子のIDを持っているケース)</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> &lt; ActiveRecord::Base</span></span><br><span class="line">    <span class="comment"># 年齢、性別</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_profile</span></span></span><br><span class="line">        &#123; <span class="symbol">:age</span> =&gt; <span class="keyword">self</span>.age, <span class="symbol">:sex</span> =&gt; <span class="keyword">self</span>.sex &#125; </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 親を取り出す</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_parent</span></span></span><br><span class="line">        Dog.where(<span class="symbol">:child</span> =&gt; <span class="keyword">self</span>.id)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>「あるインスタンスの何かを取り出す」場合などに利用されます。</p>
+<p>とある</p>
+<p>よし、わからん！</p>
+<p>こっちをよんでみよう<br><a target="_blank" rel="noopener" href="http://www.bokukoko.info/entry/2015/09/12/Ruby_%E3%81%AE_%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E8%A7%A3%E9%87%88_(%E4%B8%AD%E7%B4%9A%E8%80%85%E5%90%91%E3%81%91)">http://www.bokukoko.info/entry/2015/09/12/Ruby_%E3%81%AE_%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E8%A7%A3%E9%87%88_(%E4%B8%AD%E7%B4%9A%E8%80%85%E5%90%91%E3%81%91)</a></p>
+<p><br></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span></span></span><br><span class="line">    puts <span class="string">&quot;from a.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">B</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span></span></span><br><span class="line">    puts <span class="string">&quot;from b.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> &lt; A</span></span><br><span class="line">  <span class="keyword">include</span> B</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span></span></span><br><span class="line">    puts <span class="string">&quot;from c.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">c = C.new</span><br><span class="line">c.instance_method <span class="comment"># どうなる?</span></span><br></pre></td></tr></table></figure>
+<p>おそらく from c. ってコンソールに出てくるんだろうこれはなんとなくわかるやってみよう</p>
+<p>うん、 from c.って出力された</p>
+<hr>
+<p>(引用)</p>
+<ul>
+<li>もしC内になかった場合は次にモジュールBの中を探しに行く。そこにもなかったら親クラスのAを探しに行く。</li>
+</ul>
+<hr>
+<p>とのこと</p>
+<p>あ、この記事わかりやすいかも</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">a</span></span></span><br><span class="line">    puts <span class="string">&quot;a called.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  def <span class="keyword">self</span>.b</span><br><span class="line">    puts <span class="string">&quot;b called.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">obj = A.new</span><br><span class="line"></span><br><span class="line">def obj.c</span><br><span class="line">  puts <span class="string">&quot;c called.&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">obj.a </span><br><span class="line">A.b</span><br><span class="line">obj.c</span><br></pre></td></tr></table></figure>
+<p>これを実行すると</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a called.</span><br><span class="line">b called.</span><br><span class="line">c called.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>となる</p>
+<p>RubyはCのように、作ったオブジェクトからしか呼べないメソッドを定義することができる、これが特異メソッドと呼ばれる</p>
+<p>ちなみに</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def obj.c</span><br><span class="line">  puts <span class="string">&quot;c called.&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">objc</span></span></span><br><span class="line">  puts <span class="string">&quot;c called.&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">obj.c   <span class="comment">#=&gt; classmethod.rb:45:in `&lt;main&gt;&#x27;: undefined local variable or method `obj&#x27; for main:Object (NameError)</span></span><br><span class="line">objc    <span class="comment">#=&gt; c called.</span></span><br></pre></td></tr></table></figure>
+<p>のように、”.”で区切ってしまうとメソッドと認識されてしまうので、objが定義されていない場合はNameErrorが吐き出される</p>
+<p><br><br><br></p>
+<p>ふむ</p>
+<p>で</p>
+<hr>
+<p>(引用)</p>
+<ul>
+<li>Ruby初心者の方は、クラスメソッドは A.class_method というような形でクラスから直接メソッドを呼べるもの、という認識だと思う。<br>ただこれもRuby的には オブジェクトからメソッドを呼び出している 、というに過ぎない。<br>ここがRubyにおいて重要な概念なんだけど、 クラスもオブジェクトである ということが言えるのだ。<br>これをぱっとわかる人はまずいないと思う。ということでサンプル。</li>
+</ul>
+<hr>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts A.<span class="keyword">class</span></span><br><span class="line">p A.methods</span><br><span class="line"></span><br><span class="line">a = A.new</span><br><span class="line">puts A.new.<span class="keyword">class</span></span><br><span class="line">p a.methods</span><br></pre></td></tr></table></figure>
+<p>これで a と A が確認できる</p>
+<p><br></p>
+<p>さっきの例に戻ると</p>
+<hr>
+<p>(引用)</p>
+<ul>
+<li>def obj.c はobjに対しての特異クラスであった。ということは、 この def self.b というのは、 Aクラスに対しての特異メソッドになるのだ！<br>だからこそ、A.bと呼ぶことができるのである。</li>
+</ul>
+<hr>
+<p>つまり・・・？</p>
+<p>def self.b はAクラスの特異メソッドになり、クラスから直接呼び出すことができるのでクラスメソッドとも呼べるみたいな感じで</p>
+<p>A を new して作成した obj に対して定義したメソッド def obj.c は objに対する特異メソッド、なのかな？</p>
+<p>で、ここまで来ると、下の２つの表記は同じことを示すのだということがわかる(はず)</p>
+<p>classがobjを継承して、その中でインスタンスメソッドの c を定義する場合</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">obj = A.new</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> &lt;&lt; obj</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">c</span></span></span><br><span class="line">  puts <span class="string">&quot;c called.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>オブジェクトから直接インスタンスメソッド c を定義する場合</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">obj = A.new</span><br><span class="line"></span><br><span class="line">def obj.c</span><br><span class="line">  puts <span class="string">&quot;c called.&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br><br><br></p>
+<p>ということは・・・ class A.b みたいなやつっていきなり定義できるのかな？<br>よく考えたらdefの書き方がわからんから無理か・・・</p>
+<p>だからクラスメソッドって self を使って定義するんだなー</p>
+<p>じゃあクラスメソッドの有用性ってなんなんだろ？インスタンスメソッドじゃだめなのかな?</p>
+<p>で</p>
+<p>これでいうと</p>
+<hr>
+<p>(引用)</p>
+<ul>
+<li>Object#extend も理解できる。 a.extend(b) は aの特異クラスとしてbを追加するメソッド だ。</li>
+</ul>
+<hr>
+<p>へー、extendってメソッドがあるんだ<br>で、bを特異クラスとして追加してくれるんだ・・・</p>
+<p>自分で書いてもよさそうな気もするけどまぁ</p>
+<p>例)インスタンスオブジェクトの場合</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">D</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">d</span></span></span><br><span class="line">    puts <span class="string">&quot;from d.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">a = A.new</span><br><span class="line">a.extend(D)</span><br><span class="line">a.d <span class="comment"># =&gt; &quot;from d.&quot;</span></span><br></pre></td></tr></table></figure>
+<p>例)クラスオブジェクトの場合</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">B</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">b</span></span></span><br><span class="line">    puts <span class="string">&quot;from b.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line">  A.extend B <span class="comment"># extend B と書いてもok.</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">A.b <span class="comment">#=&gt; &quot;from b.&quot;</span></span><br></pre></td></tr></table></figure>
+<p>結局、インスタンスメソッドもクラスメソッドも結局はオブジェクトから呼び出すメソッドなので<br>実際は小難しく考える必要はないかなまぁ</p>
+<p>話は飛んだけど、つまり、Rubyのリファレンス読むの難しい・・・</p>
+<p>がこうやって読めるようにならないといけないのでがんばる</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/03/how-to-read-document-by-reading-puts-method-in-Ruby/" data-id="ckodzxw20001o96z56n727bm0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/14/setting-wireless-LAN-on-RaspberryPi-by-only-CUI/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CUIだけでラズベリーパイの無線LAN設定を行う
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/20/use-libsvm-by-python/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">pythonでlibsvmを使えるようにする</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="I write this article both English and Japaneseこの記事は日本語と英語で書きます  I tried to install PolSARpro5.0 in Linux Lite(one of the Lightweight Linux) 32bit Linux LiteにPolSARPro5.0を入れてみた if you have any questio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install PolSARpro in Linux Lite &#x2F; Linux LiteにPolSARproいれる">
+<meta property="og:url" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="I write this article both English and Japaneseこの記事は日本語と英語で書きます  I tried to install PolSARpro5.0 in Linux Lite(one of the Lightweight Linux) 32bit Linux LiteにPolSARPro5.0を入れてみた if you have any questio">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro1.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro2.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro3.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro4.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro5.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro6.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro7.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro8.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro9.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro10.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro11.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro12.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro13.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro14.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro15.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro16.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro17.jpg">
+<meta property="og:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro18.jpg">
+<meta property="article:published_time" content="2017-02-28T01:19:34.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.583Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="PolSARpro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/polsarpro1.jpg">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-install-polsarpro-in-linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/28/install-polsarpro-in-linux/" class="article-date">
+  <time datetime="2017-02-28T01:19:34.000Z" itemprop="datePublished">2017-02-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <blockquote>
+<p>I write this article both English and Japanese<br>この記事は日本語と英語で書きます</p>
+</blockquote>
+<p>I tried to install PolSARpro5.0 in Linux Lite(one of the Lightweight Linux) 32bit</p>
+<p>Linux LiteにPolSARPro5.0を入れてみた</p>
+<p>if you have any question, ask via twitter</p>
+<p>何かご質問があればTwitterまでどうぞ</p>
+<p><a target="_blank" rel="noopener" href="https://twitter.com/KYhei">https://twitter.com/KYhei</a></p>
+<span id="more"></span>
+<p><br></p>
+<h2 id="environment-開発環境"><a href="#environment-開発環境" class="headerlink" title="environment 開発環境"></a>environment 開発環境</h2><p>Linux Lite version 3.2 (32 bit)<br>memory: 4GB</p>
+<p>I tried to installed in Linux on VirtualBox</p>
+<p>もしVirtualBox上のLinuxに入れる場合はまず仮想環境を用意しておく</p>
+<p>自分の場合は下記通りに行った</p>
+<p><a href="http://yoheikoga.github.io/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a></p>
+<p>日本語化しておく場合は下記を参考</p>
+<p><a target="_blank" rel="noopener" href="http://superjeter007.blog.jp/archives/3651184.html">http://superjeter007.blog.jp/archives/3651184.html</a></p>
+<p><br></p>
+<h2 id="libraries-install-ライブラリのインストール"><a href="#libraries-install-ライブラリのインストール" class="headerlink" title="libraries install/ライブラリのインストール"></a>libraries install/ライブラリのインストール</h2><p>open the Command Line app and install Libraries and software which are necessery for PolSARpro</p>
+<p>command lineアプリを開いて、PolSARproに必要なライブラリやソフトウェアをインストールしていく</p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro1.jpg" width="300px" height="200px"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade -y</span><br><span class="line">$ sudo apt-get install gnuplot tcl-dev tk-dev bwidget iwidgets4 itcl3 itk3 libtk-img</span><br></pre></td></tr></table></figure>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro2.jpg" width="300px" height="200px"></p>
+<p><br></p>
+<h2 id="softwares-install-ソフトウェアのインストール"><a href="#softwares-install-ソフトウェアのインストール" class="headerlink" title="softwares install/ソフトウェアのインストール"></a>softwares install/ソフトウェアのインストール</h2><p>softwares under those are necessery (someones are already in Linux)</p>
+<p>下記ソフトが必要となる。いくつかはすでにLinuxに入っている</p>
+<ul>
+<li>PDF reader<ul>
+<li>Linux Lite already has /usr/bin/evince</li>
+<li>Linuxにevinceというのが入っている</li>
+</ul>
+</li>
+<li>GIMP viewer<ul>
+<li>Linux Lite already has /usr/bin/gimp</li>
+<li>gimpはすでに入ってる</li>
+</ul>
+</li>
+<li>IMAGE-MAGICK<ul>
+<li>Linux Lite already has /usr/bin/convert</li>
+<li>convertがすでに入っている</li>
+</ul>
+</li>
+<li>GOOGLE Earth<ul>
+<li>you have to install</li>
+<li>インストールする必要がある</li>
+</ul>
+</li>
+<li>MAP READY(asf_mapready)<ul>
+<li>you have to install</li>
+<li>インストールする必要がある</li>
+</ul>
+</li>
+<li>SNAP S1-TBX(s1tbx)<ul>
+<li>you have to install</li>
+<li>インストールする必要がある</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p>you can check to use which command there is software or not</p>
+<p>gimpとかevinceとかconvertが入っているかはwhichコマンドで確認できる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">linuxlitevm@linuxlitevm-VirtualBox:~$ which gimp</span><br><span class="line">/usr/bin/gimp</span><br><span class="line">linuxlitevm@linuxlitevm-VirtualBox:~$ which convert</span><br><span class="line">/usr/bin/convert</span><br><span class="line">linuxlitevm@linuxlitevm-VirtualBox:~$ which evince</span><br><span class="line">/usr/bin/evince</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p>next, install remain software</p>
+<p>で、残りのソフトをインストールしていく</p>
+<p><br></p>
+<h3 id="GOOGLE-Earth"><a href="#GOOGLE-Earth" class="headerlink" title="GOOGLE Earth"></a>GOOGLE Earth</h3><p>installation proseeded by command line</p>
+<p>command lineからインストールしていく</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/Downloads</span><br><span class="line">$ sudo apt-get install gdebi</span><br><span class="line">$ sudo apt-get install libfontconfig1:i386 libx11-6:i386 libxrender1:i386 libxext6:i386 libgl1-mesa-glx:i386 libglu1-mesa:i386 libglib2.0-0:i386 libsm6:i386</span><br><span class="line">$ wget http://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb</span><br><span class="line">$ sudo gdebi google-earth-stable_current_i386.deb</span><br></pre></td></tr></table></figure>
+<p>if you success, be able to check by which command</p>
+<p>成功したらwhich commandでチェックできる。/usr/bin/google-earthと出てきたら成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which google-earth</span><br><span class="line">/usr/bin/google-earth</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="MapReady"><a href="#MapReady" class="headerlink" title="MapReady"></a>MapReady</h3><p>install by command line</p>
+<p>command lineからインストールしていく</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git bison flex g++ gcc libgdal-dev libgtk2.0-dev libglade2-dev libgsl0-dev libproj-dev libtiff-dev libgeotiff-dev libshp-dev fftw-dev libcunit1-dev libfftw3-dev -y</span><br><span class="line">$ cd ~/Downloads</span><br><span class="line">$ git clone https://github.com/asfadmin/ASF_MapReady.git</span><br><span class="line">$ cd ASF_MapReady</span><br><span class="line">$ sudo ./configure</span><br><span class="line">$ sudo make</span><br><span class="line">$ sudo make install</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p>if you success, you can see the sentence <code>The ASF tools Makefile is now fully prepared.</code> like under picture</p>
+<p>まず、<code>$ sudo ./configure</code>に成功すると下記画像のように<code>The ASF tools Makefile is now fully prepared.</code>と出てくる</p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro3.jpg" width="300px" height="200px"></p>
+<p><br></p>
+<p>after success <code>$ sudo make</code>, you can see “XXXXXXXXXXXX ASF MapReady Package Compiled! XXXXXXXXXXX”</p>
+<p><code>$ sudo make</code>に成功したら”XXXXXXXXXXXX ASF MapReady Package Compiled! XXXXXXXXXXX”と最後に出てくる</p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro4.jpg" width="300px" height="200px"></p>
+<p>finally, you do <code>$ sudo make install</code></p>
+<p>最後に、<code>$ sudo make install</code>するだけ</p>
+<p><br></p>
+<p>if you success install asf_mapready, you can check which command</p>
+<p>asf_mapreadyのインストールに成功していたら、whichコマンドで確認できる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which asf_mapready </span><br><span class="line">/usr/local/bin/asf_mapready</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="when-fail-configure-もし-configureに失敗したら"><a href="#when-fail-configure-もし-configureに失敗したら" class="headerlink" title="when fail ./configure / もし./configureに失敗したら"></a>when fail <code>./configure</code> / もし<code>./configure</code>に失敗したら</h3><p>after enter <code>sudo ./configure</code>, if you fail configuration, you can see like under that sentence</p>
+<p><code>sudo ./configure</code>コマンドをうって、もし失敗したら下記のような分が出てくることがある</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./configure</span><br><span class="line">...</span><br><span class="line">library gsl not found</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>for example above, you have to install gsl library by apt-get command </p>
+<p>例えば上記の場合、gsl libraryをapt-getコマンドでインストールすればよい</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libgsl0-dev</span><br></pre></td></tr></table></figure>
+<p>what name library you have to enter when install that, you should search on web</p>
+<p>もしlibraryがないって言われたときは<br>ライブラリ名をなんと打ち込めばよいかなどは、その都度webで検索するなどが必要</p>
+<p><br></p>
+<h3 id="SNAP-S1-TBX"><a href="#SNAP-S1-TBX" class="headerlink" title="SNAP S1-TBX"></a>SNAP S1-TBX</h3><p>you can install by command line, from github repository</p>
+<p>githubリポジトリからもってきてコンパイルする</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/senbox-org/s1tbx">https://github.com/senbox-org/s1tbx</a></p>
+<p><br></p>
+<p>the step is below</p>
+<p>下記ステップで行う</p>
+<ol>
+<li>install Java8 and Maven, set PATH correctly</li>
+<li>clone S1TBX</li>
+<li>mvn install each snap</li>
+</ol>
+<p>in github repository, written to set IntelliJ IDEA, but you don’t need install IntelliJ IDEA to use PolSARpro</p>
+<p>githubリポジトリにはIntelliJ IDEA(JavaのIDE)の設定方法もあるが、PolSARproには必要ないのでインストールしないで大丈夫</p>
+<p><br></p>
+<h3 id="1-install-Java8-and-Maven"><a href="#1-install-Java8-and-Maven" class="headerlink" title="1. install Java8 and Maven"></a>1. install Java8 and Maven</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo add-apt-repository ppa:webupd8team/java</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+<p>on the way, you need to agree license term of oracle</p>
+<p>途中、oracleのlicense termに同意してくださいみたいなのが出るので”Yes”を選択してエンター</p>
+<p><br></p>
+<p>check java version</p>
+<p>javaのバージョンを確認する</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linuxlitevm@linuxlitevm-VirtualBox:~$ java -version</span><br><span class="line">java version &quot;1.8.0_121&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_121-b13)</span><br><span class="line">Java HotSpot(TM) Client VM (build 25.121-b13, mixed mode)</span><br></pre></td></tr></table></figure>
+<p>finally, setting JAVA_HOME PATH by below command</p>
+<p>最後に、下記コマンドでJAVA_HOMEのPATHを設定する</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sh -c &quot;echo &#x27;JAVA_HOME=/usr/lib/jvm/java-8-oracle&#x27; &gt;&gt; /etc/environment&quot;</span><br><span class="line">$ sudo sh -c &quot;echo &#x27;JRE_HOME=/usr/lib/jvm/java-8-oracle/jre&#x27; &gt;&gt; /etc/environment&quot;</span><br></pre></td></tr></table></figure>
+<p>check by cat command like below</p>
+<p>catコマンドで設定できたか確認できる、下記のように出てくる。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cat /etc/environment </span><br><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&quot;</span><br><span class="line">JAVA_HOME=/usr/lib/jvm/java-8-oracle</span><br><span class="line">JRE_HOME=/usr/lib/jvm/java-8-oracle/jre</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p>next, install Maven</p>
+<p>次に、Mavenをインストールする</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ cd /usr/local</span><br><span class="line">$ sudo wget http://ftp.riken.jp/net/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz</span><br><span class="line">$ sudo tar xzf apache-maven-3.3.9-bin.tar.gz</span><br><span class="line">$ sudo ln -s apache-maven-3.3.9 apache-maven</span><br><span class="line">$ sudo sh -c &quot;echo &#x27;export JAVA_HOME=/usr/lib/jvm/java-8-oracle&#x27; &gt;&gt; /etc/profile.d/apache-maven.sh&quot;</span><br><span class="line">$ sudo sh -c &quot;echo &#x27;export M2_HOME=/usr/local/apache-maven&#x27; &gt;&gt; /etc/profile.d/apache-maven.sh&quot;</span><br><span class="line">$ sudo sh -c &quot;echo &#x27;export MAVEN_HOME=/usr/local/apache-maven&#x27; &gt;&gt; /etc/profile.d/apache-maven.sh&quot;</span><br><span class="line">$ sudo sh -c &quot;echo &#x27;export PATH=\$&#123;M2_HOME&#125;/bin:\$&#123;PATH&#125;&#x27; &gt;&gt; /etc/profile.d/apache-maven.sh&quot;</span><br></pre></td></tr></table></figure>
+<p>reboot Linux Lite</p>
+<p>Linux Liteを再起動する</p>
+<p><br></p>
+<p>after reboot, check cat command and mvn version command, below is correct</p>
+<p>再起動後、catコマンドとmvn versionコマンドで確認して下記ようだったらok</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/profile.d/apache-maven.sh </span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-8-oracle</span><br><span class="line">export M2_HOME=/usr/local/apache-maven</span><br><span class="line">export MAVEN_HOME=/usr/local/apache-maven</span><br><span class="line">export PATH=$&#123;M2_HOME&#125;/bin:$&#123;PATH&#125;</span><br><span class="line"></span><br><span class="line">$ mvn -version</span><br><span class="line">Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-11T01:41:47+09:00)</span><br><span class="line">Maven home: /usr/local/apache-maven</span><br><span class="line">Java version: 1.8.0_121, vendor: Oracle Corporation</span><br><span class="line">Java home: /usr/lib/jvm/java-8-oracle/jre</span><br><span class="line">Default locale: ja_JP, platform encoding: UTF-8</span><br><span class="line">OS name: &quot;linux&quot;, version: &quot;4.4.0-45-generic&quot;, arch: &quot;i386&quot;, family: &quot;unix&quot;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="2-clone-S1TBX"><a href="#2-clone-S1TBX" class="headerlink" title="2. clone S1TBX"></a>2. clone S1TBX</h3><p>clone S1TBX where you want. in my case, I make home directory</p>
+<p>S1TBXをクローンしていく。ディレクトリはどこでもいいが、自分はhomeディレクトリに設置した</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cd</span><br><span class="line">$ mkdir SNAP</span><br><span class="line">$ cd SNAP</span><br><span class="line">$ git clone https://github.com/senbox-org/s1tbx.git</span><br><span class="line">$ git clone https://github.com/senbox-org/snap-desktop.git</span><br><span class="line">$ git clone https://github.com/senbox-org/snap-engine.git</span><br><span class="line">$ git clone https://github.com/senbox-org/snap-installer.git</span><br></pre></td></tr></table></figure>
+<p>next, proseed <code>mvn install</code>. after each install, I add picture of command line</p>
+<p>次に<code>mvn install</code>していく。終わったらそれぞれコマンドラインの写真を貼っておく</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/SNAP/snap-engine</span><br><span class="line">$ mvn install</span><br></pre></td></tr></table></figure>
+<p>it took about 1hr in my case especially “Watermask Operator Test”(Its time to take rest)</p>
+<p>自分の場合はここで1時間ぐらいかかった、特に”Watermask Operator Test”みたいなところでかなり時間がかかった</p>
+<p>after</p>
+<p>成功したらBUILD SUCCESSと出て来る</p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro5.jpg" width="300px" height="200px"></p>
+<p><br></p>
+<p>next snap-desktop</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/SNAP/snap-desktop</span><br><span class="line">$ mvn install -DskipTests</span><br></pre></td></tr></table></figure>
+<p>after</p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro6.jpg" width="300px" height="200px"></p>
+<p><br></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/SNAP/s1tbx</span><br><span class="line">$ mvn install -DskipTests</span><br></pre></td></tr></table></figure>
+<p>after</p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro7.jpg" width="300px" height="200px"></p>
+<p><br></p>
+<p>at first, I tried to normal <code>$ mvn install</code> but I catch Test Failure.<br>so insted of that, I skip Test by <code>$ mvn install -DskipTests</code></p>
+<p>最初は普通に<code>$ mvn install</code>していたが、テストで失敗したので<br>代わりに<code>$ mvn install -DskipTests</code>でテストをスキップした。</p>
+<p><br></p>
+<p>so far, library and periferal software was installed. so next install PolSARpro</p>
+<p>ここまでで、必要なソフトやライブラリはインストールできたので</p>
+<p>次にPolSARproをインストールしていく</p>
+<p><br></p>
+<h2 id="install-PolSARpro5-0"><a href="#install-PolSARpro5-0" class="headerlink" title="install PolSARpro5.0"></a>install PolSARpro5.0</h2><p>finally, install PolSARpro5.0 for Linux</p>
+<p>最後に、PolSARpro5.0のLinuxバージョンをインストールする</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/Downloads</span><br><span class="line">$ wget https://earth.esa.int/documents/653194/1960708/PolSARpro_v5.0.4_Linux_20150607</span><br><span class="line">$ mkdir polsar</span><br><span class="line">$ mv PolSARpro_v5.0.4_Linux_20150607 polsar/PolSARpro.rar</span><br><span class="line">$ cd polsar</span><br><span class="line">$ unrar x PolSARpro</span><br><span class="line">$ cd Soft</span><br></pre></td></tr></table></figure>
+<p>next, rewrite backslash() to slash(/) propery for Linux path in Compile_PolSARpro_v5_Linux.bat file</p>
+<p>by vim editor(so if you don’t have vim, <code>$ sudo apt-get install vim</code>)</p>
+<p>次に、Compile_PolSARpro_v5_Linux.batファイル内のバックスラッシュ()を適切にスラッシュ(/)に書き換える</p>
+<p>vimがあると楽なのでvimで置き換える(viでもできる),vimが入ってない場合は<code>$ sudo apt-get install vim</code>しておく</p>
+<p><br></p>
+<p>at first, Compile_PolSARpro_v5_Linux.bat file is like below</p>
+<p>最初、Compile_PolSARpro_v5_Linux.batファイルは下記のようになっている</p>
+<figure class="highlight sh"><figcaption><span>Compile_PolSARpro_v5_Linux.bat</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> PolSARproSIM</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PolSARproSIM&quot;</span></span><br><span class="line">gcc -o PolSARproSim.exe PolSARproSim.c Allometrics.c Attenuation.c Branch.c c3Vector.c c33Matrix.c Complex.c Cone.c Crown.c Cylinder.c d3Vector.c d33Matrix.c Drawing.c Facet.c GraphicIMage.c GrgCyl.c Ground.c InfCyl.c JLkp.c Jnz.c Leaf.c LightingMaterials.c MonteCarlo.c Perspective.c Plane.c PolSARproSim_Direct_Ground.c PolSARproSim_Forest.c PolSARproSim_Procedures.c PolSARproSim_Progress.c PolSARproSim_Short_Vegi.c Ray.c RayCrownIntersection.c Realisation.c SarIMage.c Shuffling.c Sinc.c soilsurface.c Spheroid.c Tree.c YLkp.c -lm</span><br><span class="line">gcc -o PolSARproSim_ImgSize.exe PolSARproSim_ImgSize.c -lm</span><br><span class="line">gcc -o PolSARproSim_FE_Kz.exe ../lib/PolSARproLib.c PolSARproSim_FE_Kz.c -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> PolSARproSIMgr</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PolSARproSIMgr&quot;</span></span><br><span class="line">gcc -o PolSARproSim_gr.exe PolSARproSim.c Allometrics.c Attenuation.c Branch.c c3Vector.c c33Matrix.c Complex.c Cone.c Crown.c Cylinder.c d3Vector.c d33Matrix.c Drawing.c Facet.c GraphicIMage.c GrgCyl.c Ground.c InfCyl.c JLkp.c Jnz.c Leaf.c LightingMaterials.c MonteCarlo.c Perspective.c Plane.c PolSARproSim_Direct_Ground.c PolSARproSim_Forest.c PolSARproSim_Procedures.c PolSARproSim_Progress.c PolSARproSim_Short_Vegi.c Ray.c RayCrownIntersection.c Realisation.c SarIMage.c Shuffling.c Sinc.c soilsurface.c Spheroid.c Tree.c YLkp.c -lm</span><br><span class="line">gcc -o PolSARproSimGR_ImgSize.exe PolSARproSimGR_ImgSize.c -lm</span><br><span class="line">gcc -o PolSARproSim_FE_Kz.exe ../lib/PolSARproLib.c PolSARproSim_FE_Kz.c -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> PolSARproSIMsv</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PolSARproSIMsv&quot;</span></span><br><span class="line">gcc -o PolSARproSim_sv.exe PolSARproSim.c Allometrics.c Attenuation.c Branch.c c3Vector.c c33Matrix.c Complex.c Cone.c Crown.c Cylinder.c d3Vector.c d33Matrix.c Drawing.c Facet.c GraphicIMage.c GrgCyl.c Ground.c InfCyl.c JLkp.c Jnz.c Leaf.c LightingMaterials.c MonteCarlo.c Perspective.c Plane.c PolSARproSim_Direct_Ground.c PolSARproSim_Forest.c PolSARproSim_Procedures.c PolSARproSim_Progress.c PolSARproSim_Short_Vegi.c Ray.c RayCrownIntersection.c Realisation.c SarIMage.c Shuffling.c Sinc.c soilsurface.c Spheroid.c Tree.c YLkp.c -lm</span><br><span class="line">gcc -o PolSARproSimSV_ImgSize.exe PolSARproSimSV_ImgSize.c -lm</span><br><span class="line">gcc -o PolSARproSim_FE_Kz.exe ../lib/PolSARproLib.c PolSARproSim_FE_Kz.c -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> SVM</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;SVM&quot;</span></span><br><span class="line">g++ -Wall -g -Wconversion -O3 -c svm.cpp</span><br><span class="line">g++ -Wall -g -Wconversion -O3 svm-predict.c svm.o -o svm_predict_polsarpro.exe -lm</span><br><span class="line">g++ -Wall -g -Wconversion -O3 svm-train.c svm.o -o svm_train_polsarpro.exe -lm</span><br><span class="line">g++ -Wall -g -Wconversion -O3 svm-scale.c svm.o -o svm_scale_polsarpro.exe -lm</span><br><span class="line">gcc -g ../lib/PolSARproLib.c svm_classifier.c -o svm_classifier.exe -lm</span><br><span class="line">gcc -g ../lib/PolSARproLib.c write_best_cv_results.c -o write_best_cv_results.exe -lm</span><br><span class="line">gcc -g ../lib/PolSARproLib.c grid_polsarpro.c -o grid_polsarpro.exe -lm</span><br><span class="line">gcc -g ../lib/PolSARproLib.c svm_confusion_matrix.c -o svm_confusion_matrix.exe -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> PolSARap</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PolSARap&quot;</span></span><br><span class="line">g++ -I ..\lib\alglib ..\lib\alglib\ap.cpp ..\lib\alglib\alglibinternal.cpp ..\lib\alglib\linalg.cpp ..\lib\alglib\alglibmisc.cpp ..\lib\alglib\solvers.cpp ..\lib\alglib\optimization.cpp PolSARap_Cryosphere_Decomposition.c -o PolSARap_Cryosphere_Decomposition.exe -lm</span><br><span class="line">gcc -g -Wall ..\lib\PolSARproLib.c PolSARap_Cryosphere_Inversion.c -o PolSARap_Cryosphere_Inversion.exe -lm</span><br><span class="line">gcc -g -Wall ..\lib\PolSARproLib.c PolSARap_Agriculture_Decomposition.c -o PolSARap_Agriculture_Decomposition.exe -lm</span><br><span class="line">gcc -g -Wall ..\lib\PolSARproLib.c PolSARap_Agriculture_Inversion_Dihedral.c -o PolSARap_Agriculture_Inversion_Dihedral.exe -lm</span><br><span class="line">gcc -g -Wall ..\lib\PolSARproLib.c PolSARap_Agriculture_Inversion_Surface.c -o PolSARap_Agriculture_Inversion_Surface.exe -lm</span><br><span class="line">gcc -g -Wall ..\lib\PolSARproLib.c PolSARap_Forest_Height_Estimation_Dual_Baseline.c -o PolSARap_Forest_Height_Estimation_Dual_Baseline.exe -lm</span><br><span class="line">gcc -g -Wall ..\lib\PolSARproLib.c PolSARap_Ocean.c -o PolSARap_Ocean.exe -lm</span><br><span class="line">gcc -g -Wall ..\lib\PolSARproLib.c PolSARap_Urban.c -o PolSARap_Urban.exe -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line">LIB_FILES=<span class="string">&quot;lib/PolSARproLib.c&quot;</span></span><br><span class="line">C_FILES=`find ./ \( -name <span class="string">&quot;*.c&quot;</span> \) | egrep -v <span class="string">&quot;lib&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIM&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIMgr&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIMsv&quot;</span>  | egrep -v <span class="string">&quot;SVM&quot;</span>  | egrep -v <span class="string">&quot;PolSARap&quot;</span> `</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> <span class="variable">$C_FILES</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$file</span></span><br><span class="line">gcc -g -Wall <span class="variable">$LIB_FILES</span> <span class="variable">$file</span> -o <span class="variable">$&#123;file%.c&#125;</span>.exe  -lm</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">chmod -R 777 *</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p>after rewrite backslash correctly, below that </p>
+<p>正しく書き換えたものが下記になる</p>
+<figure class="highlight sh"><figcaption><span>Compile_PolSARpro_v5_Linux.bat</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> PolSARproSIM</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PolSARproSIM&quot;</span></span><br><span class="line">gcc -o PolSARproSim.exe PolSARproSim.c Allometrics.c Attenuation.c Branch.c c3Vector.c c33Matrix.c Complex.c Cone.c Crown.c Cylinder.c d3Vector.c d33Matrix.c Drawing.c Facet.c GraphicIMage.c GrgCyl.c Ground.c InfCyl.c JLkp.c Jnz.c Leaf.c LightingMaterials.c MonteCarlo.c Perspective.c Plane.c PolSARproSim_Direct_Ground.c PolSARproSim_Forest.c PolSARproSim_Procedures.c PolSARproSim_Progress.c PolSARproSim_Short_Vegi.c Ray.c RayCrownIntersection.c Realisation.c SarIMage.c Shuffling.c Sinc.c soilsurface.c Spheroid.c Tree.c YLkp.c -lm</span><br><span class="line">gcc -o PolSARproSim_ImgSize.exe PolSARproSim_ImgSize.c -lm</span><br><span class="line">gcc -o PolSARproSim_FE_Kz.exe ../lib/PolSARproLib.c PolSARproSim_FE_Kz.c -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> PolSARproSIMgr</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PolSARproSIMgr&quot;</span></span><br><span class="line">gcc -o PolSARproSim_gr.exe PolSARproSim.c Allometrics.c Attenuation.c Branch.c c3Vector.c c33Matrix.c Complex.c Cone.c Crown.c Cylinder.c d3Vector.c d33Matrix.c Drawing.c Facet.c GraphicIMage.c GrgCyl.c Ground.c InfCyl.c JLkp.c Jnz.c Leaf.c LightingMaterials.c MonteCarlo.c Perspective.c Plane.c PolSARproSim_Direct_Ground.c PolSARproSim_Forest.c PolSARproSim_Procedures.c PolSARproSim_Progress.c PolSARproSim_Short_Vegi.c Ray.c RayCrownIntersection.c Realisation.c SarIMage.c Shuffling.c Sinc.c soilsurface.c Spheroid.c Tree.c YLkp.c -lm</span><br><span class="line">gcc -o PolSARproSimGR_ImgSize.exe PolSARproSimGR_ImgSize.c -lm</span><br><span class="line">gcc -o PolSARproSim_FE_Kz.exe ../lib/PolSARproLib.c PolSARproSim_FE_Kz.c -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> PolSARproSIMsv</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PolSARproSIMsv&quot;</span></span><br><span class="line">gcc -o PolSARproSim_sv.exe PolSARproSim.c Allometrics.c Attenuation.c Branch.c c3Vector.c c33Matrix.c Complex.c Cone.c Crown.c Cylinder.c d3Vector.c d33Matrix.c Drawing.c Facet.c GraphicIMage.c GrgCyl.c Ground.c InfCyl.c JLkp.c Jnz.c Leaf.c LightingMaterials.c MonteCarlo.c Perspective.c Plane.c PolSARproSim_Direct_Ground.c PolSARproSim_Forest.c PolSARproSim_Procedures.c PolSARproSim_Progress.c PolSARproSim_Short_Vegi.c Ray.c RayCrownIntersection.c Realisation.c SarIMage.c Shuffling.c Sinc.c soilsurface.c Spheroid.c Tree.c YLkp.c -lm</span><br><span class="line">gcc -o PolSARproSimSV_ImgSize.exe PolSARproSimSV_ImgSize.c -lm</span><br><span class="line">gcc -o PolSARproSim_FE_Kz.exe ../lib/PolSARproLib.c PolSARproSim_FE_Kz.c -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> SVM</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;SVM&quot;</span></span><br><span class="line">g++ -Wall -g -Wconversion -O3 -c svm.cpp</span><br><span class="line">g++ -Wall -g -Wconversion -O3 svm-predict.c svm.o -o svm_predict_polsarpro.exe -lm</span><br><span class="line">g++ -Wall -g -Wconversion -O3 svm-train.c svm.o -o svm_train_polsarpro.exe -lm</span><br><span class="line">g++ -Wall -g -Wconversion -O3 svm-scale.c svm.o -o svm_scale_polsarpro.exe -lm</span><br><span class="line">gcc -g ../lib/PolSARproLib.c svm_classifier.c -o svm_classifier.exe -lm</span><br><span class="line">gcc -g ../lib/PolSARproLib.c write_best_cv_results.c -o write_best_cv_results.exe -lm</span><br><span class="line">gcc -g ../lib/PolSARproLib.c grid_polsarpro.c -o grid_polsarpro.exe -lm</span><br><span class="line">gcc -g ../lib/PolSARproLib.c svm_confusion_matrix.c -o svm_confusion_matrix.exe -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> PolSARap</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PolSARap&quot;</span></span><br><span class="line">g++ -I ../lib/alglib ../lib/alglib/ap.cpp ../lib/alglib/alglibinternal.cpp ../lib/alglib/linalg.cpp ../lib/alglib/alglibmisc.cpp ../lib/alglib/solvers.cpp ../lib/alglib/optimization.cpp PolSARap_Cryosphere_Decomposition.c -o PolSARap_Cryosphere_Decomposition.exe -lm</span><br><span class="line">gcc -g -Wall ../lib/PolSARproLib.c PolSARap_Cryosphere_Inversion.c -o PolSARap_Cryosphere_Inversion.exe -lm</span><br><span class="line">gcc -g -Wall ../lib/PolSARproLib.c PolSARap_Agriculture_Decomposition.c -o PolSARap_Agriculture_Decomposition.exe -lm</span><br><span class="line">gcc -g -Wall ../lib/PolSARproLib.c PolSARap_Agriculture_Inversion_Dihedral.c -o PolSARap_Agriculture_Inversion_Dihedral.exe -lm</span><br><span class="line">gcc -g -Wall ../lib/PolSARproLib.c PolSARap_Agriculture_Inversion_Surface.c -o PolSARap_Agriculture_Inversion_Surface.exe -lm</span><br><span class="line">gcc -g -Wall ../lib/PolSARproLib.c PolSARap_Forest_Height_Estimation_Dual_Baseline.c -o PolSARap_Forest_Height_Estimation_Dual_Baseline.exe -lm</span><br><span class="line">gcc -g -Wall ../lib/PolSARproLib.c PolSARap_Ocean.c -o PolSARap_Ocean.exe -lm</span><br><span class="line">gcc -g -Wall ../lib/PolSARproLib.c PolSARap_Urban.c -o PolSARap_Urban.exe -lm</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line">LIB_FILES=<span class="string">&quot;lib/PolSARproLib.c&quot;</span></span><br><span class="line">C_FILES=`find ./ \( -name <span class="string">&quot;*.c&quot;</span> \) | egrep -v <span class="string">&quot;lib&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIM&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIMgr&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIMsv&quot;</span>  | egrep -v <span class="string">&quot;SVM&quot;</span>  | egrep -v <span class="string">&quot;PolSARap&quot;</span> `</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> <span class="variable">$C_FILES</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$file</span></span><br><span class="line">gcc -g -Wall <span class="variable">$LIB_FILES</span> <span class="variable">$file</span> -o <span class="variable">$&#123;file%.c&#125;</span>.exe  -lm</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">chmod -R 777 *</span><br></pre></td></tr></table></figure>
+<p>(line47, there are two backslash which is necessery, should not change slash them)</p>
+<p>(47行目に、必要なバックスラッシュが2つあるのでそれはスラッシュに変更しないように注意)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dont change below backslash, caution</span></span><br><span class="line">C_FILES=`find ./ \( -name <span class="string">&quot;*.c&quot;</span> \) | egrep -v <span class="string">&quot;lib&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIM&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIMgr&quot;</span> | egrep -v <span class="string">&quot;PolSARproSIMsv&quot;</span>  | egrep -v <span class="string">&quot;SVM&quot;</span>  | egrep -v <span class="string">&quot;PolSARap&quot;</span> `</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p>and run Compile_PolSARpro_v5_Linux.bat</p>
+<p>で、Compile_PolSARpro_v5_Linux.batを実行する</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod a+x Compile_PolSARpro_v5_Linux.bat</span><br><span class="line">$ sudo ./Compile_PolSARpro_v5_Linux.bat</span><br><span class="line">$ cd ..</span><br><span class="line">$ sudo chmod a+x PolSARpro_v5.0.tcl </span><br><span class="line">$ sudo ./PolSARpro_v5.0.tcl</span><br></pre></td></tr></table></figure>
+<p>PolSARpro is launched by <code>$ sudo ./PolSARpro_v5.0.tcl</code></p>
+<p><code>$ sudo ./PolSARpro_v5.0.tcl</code>をしてPolSARproが立ち上がったら成功</p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro8.jpg" width="300px" height="200px"></p>
+<p><br></p>
+<p>Installation of PolSARpro was finished. but you have to link softwares which install then and PolSARpro</p>
+<p>PolSARproのインストールはこれで終わりだが、下記ソフトを連携させないといけない</p>
+<ul>
+<li>PDF reader (evince)</li>
+<li>Google Earth</li>
+<li>GIMP VIEWER</li>
+<li>IMAGE-MAGICK</li>
+<li>MapReady</li>
+<li>SNAP S1-TBX</li>
+</ul>
+<p><br></p>
+<h2 id="link-softwares"><a href="#link-softwares" class="headerlink" title="link softwares"></a>link softwares</h2><p>after enter PolSARpro, you can see picture below</p>
+<p>you have to link PDF viewer</p>
+<p>PolSARproをEnterすると、最初に下記画像のようなものが出てくる</p>
+<p>PDF viewerと連携させないといけない</p>
+<p><br></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro9.jpg" width="300px" height="200px"></p>
+<div style="text-align:center;">click ok</div>
+
+<p><br></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro10.jpg" width="300px" height="200px"></p>
+<div style="text-align:center;">click Yes</div>
+
+<p><br></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro11.jpg" width="300px" height="200px"></p>
+<div style="text-align:center;">click open file icon</div>
+
+<p><br></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro12.jpg" width="300px" height="200px"></p>
+<div style="text-align:center;"><br><span>1. enter “/usr/bin/evince”</span><br><span>2. click “Filter”</span><br><span>3. check “evince”</span><br><span>4. click “OK”</span><br></div>
+
+<p><br></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro13.jpg" width="300px" height="200px"></p>
+<div style="text-align:center;">click Save &amp; Exit</div>
+
+<p><br></p>
+<p><br></p>
+<p>after that, linking PDF reader is success</p>
+<p>これで、PDFリーダーとリンクさせることができた</p>
+<p>in same way, you can link <code>Google Earth, GIMP, IMAGE-MAGICK, MAP Ready, SNAP S1-TBX</code></p>
+<p>each software paths are below</p>
+<p>同様にして<code>Google Earth, GIMP, IMAGE-MAGICK, MAP Ready, SNAP S1-TBX</code>とリンクさせる</p>
+<p>それぞれのソフトウェアのpathは以下のとおり</p>
+<ul>
+<li>Google Earth: /usr/bin/google-earth</li>
+<li>gimp: /usr/bin/gimp</li>
+<li>ImageMagick: /usr/bin/convert</li>
+<li>ASF MapReady: /usr/local/bin/asf_mapready</li>
+<li>S1 SNAP: /home/linuxlitevm/SNAP/snap-desktop/snap-application/target/snap/bin/snap</li>
+</ul>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro14.jpg" width="300px" height="200px"></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro15.jpg" width="300px" height="200px"></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro16.jpg" width="300px" height="200px"></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro17.jpg" width="300px" height="200px"></p>
+<p><img src="/2017/02/28/install-polsarpro-in-linux/polsarpro18.jpg" width="300px" height="200px"></p>
+<p><br></p>
+<p>that’s all! You can start to use PolSARpro!</p>
+<p>これで全部、PolSARproを使えるようになりました!</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2017/02/28/install-polsarpro-in-linux/" data-id="ckodzxw23001v96z5c8ukh0rr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/03/use-sample-data-by-polsarpro/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          get started PolSARpro by sample data
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/28/linux-in-virtualbox/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VirtualBoxにLinux Liteを入れる</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

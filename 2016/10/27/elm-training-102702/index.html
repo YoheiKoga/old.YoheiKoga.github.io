@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Elm練習11 | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="引き続きElm練習 Elm練習 archives debugger(のように使える?)elm-time-travelを試してみる Elmのバージョンはv0.17.1を使ってます githubのページelm-time-travel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elm練習11">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/10/27/elm-training-102702/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="引き続きElm練習 Elm練習 archives debugger(のように使える?)elm-time-travelを試してみる Elmのバージョンはv0.17.1を使ってます githubのページelm-time-travel">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-10-27T02:19:40.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.575Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="Elm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-elm-training-102702" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/27/elm-training-102702/" class="article-date">
+  <time datetime="2016-10-27T02:19:40.000Z" itemprop="datePublished">2016-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Elm練習11
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>引き続きElm練習</p>
+<p><a href="https://yoheikoga.github.io/tags/Elm/">Elm練習 archives</a></p>
+<p>debugger(のように使える?)elm-time-travelを試してみる</p>
+<p>Elmのバージョンはv0.17.1を使ってます</p>
+<p>githubのページ<br><a target="_blank" rel="noopener" href="https://github.com/jinjor/elm-time-travel">elm-time-travel</a></p>
+<span id="more"></span>
+<p><br></p>
+<hr>
+<h1 id="使い方"><a href="#使い方" class="headerlink" title="使い方"></a>使い方</h1><hr>
+<h3 id="packageをインストールする"><a href="#packageをインストールする" class="headerlink" title="packageをインストールする"></a>packageをインストールする</h3><p>下記コマンドでpackageをインストールする</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ elm-package install jinjor/elm-time-travel -y</span><br></pre></td></tr></table></figure>
+<h3 id="Html-Appの代わりにimportする"><a href="#Html-Appの代わりにimportする" class="headerlink" title="Html.Appの代わりにimportする"></a>Html.Appの代わりにimportする</h3><p>elmのコードはbeginnerProgramまたはprogramを使用するために</p>
+<p>Html.Appを先頭でimportしているが</p>
+<p>その代わりに、<code>TimeTravel.Html.App</code>をimportしてやる</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- import Html.App as App</span></span><br><span class="line"><span class="keyword">import</span> TimeTravel.Html.App <span class="keyword">as</span> TimeTravel</span><br></pre></td></tr></table></figure>
+<p>いくつかサンプルがある<br><a target="_blank" rel="noopener" href="http://jinjor.github.io/elm-time-travel/">http://jinjor.github.io/elm-time-travel/</a></p>
+<p>例えば、公式の<a target="_blank" rel="noopener" href="http://elm-lang.org/examples/field">field</a>をTimeTravelで置き換えるとコードは下記のようになる</p>
+<figure class="highlight elm"><figcaption><span>FieldSample.elm</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Html <span class="keyword">exposing</span> (<span class="type">Html</span>, <span class="type">Attribute</span>, text, div, input)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- import Html.App exposing (beginnerProgram)  -- ここを置き換えてやる</span></span><br><span class="line"><span class="keyword">import</span> TimeTravel.Html.App <span class="keyword">exposing</span> (beginnerProgram)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Html.Attributes <span class="keyword">exposing</span> (..)</span><br><span class="line"><span class="keyword">import</span> Html.Events <span class="keyword">exposing</span> (onInput)</span><br><span class="line"><span class="keyword">import</span> String</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title">main</span> =</span><br><span class="line">  beginnerProgram &#123; model = <span class="string">&quot;&quot;</span>, view = view, update = update &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- UPDATE</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="type">Msg</span> = <span class="type">NewContent</span> <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="title">update</span> (<span class="type">NewContent</span> content) oldContent =</span><br><span class="line">  content</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- VIEW</span></span><br><span class="line"></span><br><span class="line"><span class="title">view</span> content =</span><br><span class="line">  div []</span><br><span class="line">    [ input [ placeholder <span class="string">&quot;Text to reverse&quot;</span>, onInput <span class="type">NewContent</span>, myStyle ] []</span><br><span class="line">    , div [ myStyle ] [ text (<span class="type">String</span>.reverse content) ]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="title">myStyle</span> =</span><br><span class="line">  style</span><br><span class="line">    [ (<span class="string">&quot;width&quot;</span>, <span class="string">&quot;100%&quot;</span>)</span><br><span class="line">    , (<span class="string">&quot;height&quot;</span>, <span class="string">&quot;40px&quot;</span>)</span><br><span class="line">    , (<span class="string">&quot;padding&quot;</span>, <span class="string">&quot;10px 0&quot;</span>)</span><br><span class="line">    , (<span class="string">&quot;font-size&quot;</span>, <span class="string">&quot;2em&quot;</span>)</span><br><span class="line">    , (<span class="string">&quot;text-align&quot;</span>, <span class="string">&quot;center&quot;</span>)</span><br><span class="line">    ]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>また、もちろんApp.programにも適用できるのでexampleの<a target="_blank" rel="noopener" href="http://elm-lang.org/examples/time">time</a>のコードは以下のようにしてやればよい</p>
+<figure class="highlight elm"><figcaption><span>TimeSample.elm</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Html <span class="keyword">exposing</span> (<span class="type">Html</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- import Html.App as App -- ここを置き換える</span></span><br><span class="line"><span class="keyword">import</span> TimeTravel.Html.App <span class="keyword">as</span> App</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Svg <span class="keyword">exposing</span> (..)</span><br><span class="line"><span class="keyword">import</span> Svg.Attributes <span class="keyword">exposing</span> (..)</span><br><span class="line"><span class="keyword">import</span> Time <span class="keyword">exposing</span> (<span class="type">Time</span>, second)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title">main</span> =</span><br><span class="line">  <span class="type">App</span>.program</span><br><span class="line">    &#123; init = init</span><br><span class="line">    , view = view</span><br><span class="line">    , update = update</span><br><span class="line">    , subscriptions = subscriptions</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- MODEL</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="keyword">alias</span> <span class="type">Model</span> = <span class="type">Time</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title">init</span> : (<span class="type">Model</span>, <span class="type">Cmd</span> <span class="type">Msg</span>)</span><br><span class="line"><span class="title">init</span> =</span><br><span class="line">  (<span class="number">0</span>, <span class="type">Cmd</span>.none)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- UPDATE</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="type">Msg</span></span><br><span class="line">  = <span class="type">Tick</span> <span class="type">Time</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title">update</span> : <span class="type">Msg</span> -&gt; <span class="type">Model</span> -&gt; (<span class="type">Model</span>, <span class="type">Cmd</span> <span class="type">Msg</span>)</span><br><span class="line"><span class="title">update</span> msg model =</span><br><span class="line">  <span class="keyword">case</span> msg <span class="keyword">of</span></span><br><span class="line">    <span class="type">Tick</span> newTime -&gt;</span><br><span class="line">      (newTime, <span class="type">Cmd</span>.none)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- SUBSCRIPTIONS</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title">subscriptions</span> : <span class="type">Model</span> -&gt; <span class="type">Sub</span> <span class="type">Msg</span></span><br><span class="line"><span class="title">subscriptions</span> model =</span><br><span class="line">  <span class="type">Time</span>.every second <span class="type">Tick</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- VIEW</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title">view</span> : <span class="type">Model</span> -&gt; <span class="type">Html</span> <span class="type">Msg</span></span><br><span class="line"><span class="title">view</span> model =</span><br><span class="line">  <span class="keyword">let</span></span><br><span class="line">    angle =</span><br><span class="line">      turns (<span class="type">Time</span>.inMinutes model)</span><br><span class="line"></span><br><span class="line">    handX =</span><br><span class="line">      toString (<span class="number">50</span> + <span class="number">40</span> * cos angle)</span><br><span class="line"></span><br><span class="line">    handY =</span><br><span class="line">      toString (<span class="number">50</span> + <span class="number">40</span> * sin angle)</span><br><span class="line">  <span class="keyword">in</span></span><br><span class="line">    svg [ viewBox <span class="string">&quot;0 0 100 100&quot;</span>, width <span class="string">&quot;300px&quot;</span> ]</span><br><span class="line">      [ circle [ cx <span class="string">&quot;50&quot;</span>, cy <span class="string">&quot;50&quot;</span>, r <span class="string">&quot;45&quot;</span>, fill <span class="string">&quot;#0B79CE&quot;</span> ] []</span><br><span class="line">      , line [ x1 <span class="string">&quot;50&quot;</span>, y1 <span class="string">&quot;50&quot;</span>, x2 handX, y2 handY, stroke <span class="string">&quot;#023963&quot;</span> ] []</span><br><span class="line">      ]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>こんな感じで使ってやれば良い</p>
+<p><code>field</code>の例だと、debugとしてNewContentが表示され、<code>time</code>の例だとTickが表示されるので</p>
+<p>Msgの部分がdebugの結果として表示されるのかな？</p>
+<p>と思われる</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/10/27/elm-training-102702/" data-id="ckodzxw1s001696z551af862s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/07/scalawarrior-run-and-solve-error/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          scalawarrior-run-and-solve-error
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/27/elm-training-102701/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Elm練習10</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

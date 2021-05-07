@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RaspberryPi, WebIOPi, HomebridgeでiphoneからLED操作 | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="RaspberryPiのGPIOピンをスマホから操作してみるWebIOPiRaspberryPiのGPIOを制御できるライブラリ、さらにREST APIも同時に制御できるとのこと(つまりWeb上から制御できる)http:&#x2F;&#x2F;todotani.cocolog-nifty.com&#x2F;blog&#x2F;2016&#x2F;01&#x2F;homebridgeraspb.htmlhttp:&#x2F;&#x2F;www.hiramine.com&#x2F;phys">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RaspberryPi, WebIOPi, HomebridgeでiphoneからLED操作">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/08/14/led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="RaspberryPiのGPIOピンをスマホから操作してみるWebIOPiRaspberryPiのGPIOを制御できるライブラリ、さらにREST APIも同時に制御できるとのこと(つまりWeb上から制御できる)http:&#x2F;&#x2F;todotani.cocolog-nifty.com&#x2F;blog&#x2F;2016&#x2F;01&#x2F;homebridgeraspb.htmlhttp:&#x2F;&#x2F;www.hiramine.com&#x2F;phys">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-08-14T06:56:59.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.623Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="RaspberryPi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge/" class="article-date">
+  <time datetime="2016-08-14T06:56:59.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RaspberryPi, WebIOPi, HomebridgeでiphoneからLED操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <h1 id="RaspberryPiのGPIOピンをスマホから操作してみる"><a href="#RaspberryPiのGPIOピンをスマホから操作してみる" class="headerlink" title="RaspberryPiのGPIOピンをスマホから操作してみる"></a>RaspberryPiのGPIOピンをスマホから操作してみる</h1><h1 id="WebIOPi"><a href="#WebIOPi" class="headerlink" title="WebIOPi"></a>WebIOPi</h1><p>RaspberryPiのGPIOを制御できるライブラリ、さらにREST APIも同時に制御できるとのこと(つまりWeb上から制御できる)<br><a target="_blank" rel="noopener" href="http://todotani.cocolog-nifty.com/blog/2016/01/homebridgeraspb.html">http://todotani.cocolog-nifty.com/blog/2016/01/homebridgeraspb.html</a><br><a target="_blank" rel="noopener" href="http://www.hiramine.com/physicalcomputing/raspberrypi/webiopi_install.html">http://www.hiramine.com/physicalcomputing/raspberrypi/webiopi_install.html</a></p>
+<p>インストール方法<br>2016年3月24日現在最新版は 0.7.1みたいなのでそれに合わせた<br>0.7.1はRaspberry Pi 2には、単純インストールは対応してないみたいなので下記リンクなどを参考にインストールすること<br><a target="_blank" rel="noopener" href="http://deviceplus.jp/hobby/raspberrypi_entry_030/">http://deviceplus.jp/hobby/raspberrypi_entry_030/</a></p>
+<span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://sourceforge.net/projects/webiopi/files/WebIOPi-0.7.1.tar.gz</span><br><span class="line">$ tar xvzf WebIOPi-0.7.1.tar.gz</span><br><span class="line">$ cd WebIOPi-0.7.1</span><br><span class="line">$ sudo ./setup.sh</span><br></pre></td></tr></table></figure>
+<p>途中、yes / no を聞かれるのが2回あるのでひとまず y キーをエンターする</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sign-up for free at http://developer.weaved.com then enter your Weaved login: </span><br></pre></td></tr></table></figure>
+<p>みたいなのがでてくるので<br><a target="_blank" rel="noopener" href="http://developer.weaved.com">http://developer.weaved.com</a><br>でsign up しておく</p>
+<p>登録したメールアドレスがlogin IDで、パスワードを入力するとなんかインストールが始まって、終わると</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">We will now register your device with the Weaved backend services. </span><br><span class="line">Please provide an alias for your device: </span><br></pre></td></tr></table></figure>
+<p>と出てくるので適当な名前をつける(aliasは名前という意味なので、意訳すると「あなたのデバイスの名前は何にしますか？」みたいな感じ)<br>raspiqps<br>と名づけてみた</p>
+<p>少し待つと、登録が終わってインストール成功のため以下のようなのが出てくる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">WebIOPi successfully installed</span><br><span class="line">* To start WebIOPi foreground : sudo webiopi [-h] [-c config] [-l log] [-s script] [-d] [port]</span><br><span class="line"></span><br><span class="line">* To start WebIOPi background : sudo /etc/init.d/webiopi start</span><br><span class="line">* To start WebIOPi at boot  : sudo update-rc.d webiopi defaults</span><br><span class="line"></span><br><span class="line">* Weaved IoT Kit installed, log on http://developer.weaved.com to access your device</span><br><span class="line"></span><br><span class="line">* Look in /home/pi/download/WebIOPi-0.7.1/examples for Python library usage examples</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>これでひとまずはセッティングok</p>
+<h2 id="次にRaspberryPi側のセッティング"><a href="#次にRaspberryPi側のセッティング" class="headerlink" title="次にRaspberryPi側のセッティング"></a>次にRaspberryPi側のセッティング</h2><p>Node.jsとHomebridgeのインストールをする<br>Node.jsはC++14のコンパイル環境が必要だが、RaspberryPiのデフォルトはgcc4.6?みたいで対応していないので<br>まずはそこからインストールする</p>
+<p>RaspberryPiのosが wheezyの場合は、apt-getの依存性をjessieに変更してやる必要がある<br><a target="_blank" rel="noopener" href="https://solarianprogrammer.com/2015/01/13/raspberry-pi-raspbian-install-gcc-compile-cpp-14-programs/">https://solarianprogrammer.com/2015/01/13/raspberry-pi-raspbian-install-gcc-compile-cpp-14-programs/</a><br>を参考にして</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br><span class="line">$ sudo vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>これで、一行目のwheezyのところをjessieに変更して保存する</p>
+<p>/etc/apt/sources.list<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrordirector.raspbian.org/raspbian/ wheezy main contrib non-free rpi</span><br><span class="line"># Uncomment line below then &#x27;apt-get update&#x27; to enable &#x27;apt-get source&#x27;</span><br><span class="line">#deb-src http://archive.raspbian.org/raspbian/ wheezy main contrib non-free rpi</span><br><span class="line"></span><br><span class="line">となっているので、一行目を変更する</span><br><span class="line"></span><br><span class="line">deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi</span><br><span class="line"># Uncomment line below then &#x27;apt-get update&#x27; to enable &#x27;apt-get source&#x27;</span><br><span class="line">#deb-src http://archive.raspbian.org/raspbian/ wheezy main contrib non-free rpi</span><br></pre></td></tr></table></figure></p>
+<p>変更後<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install gcc-4.9 g++-4.9</span><br></pre></td></tr></table></figure></p>
+<p>でインストールが開始される(結構時間がかかった)</p>
+<p>終わったら、再び依存性をwheezyに戻す</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">以下のように直す</span><br><span class="line">deb http://mirrordirector.raspbian.org/raspbian/ wheezy main contrib non-free rpi</span><br><span class="line"># Uncomment line below then &#x27;apt-get update&#x27; to enable &#x27;apt-get source&#x27;</span><br><span class="line">#deb-src http://archive.raspbian.org/raspbian/ wheezy main contrib non-free rpi</span><br><span class="line"></span><br><span class="line">:wqで保存</span><br><span class="line"></span><br><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure>
+<p>で環境をwheezyのやつで整える</p>
+<p>この後、<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ g++-4.9 -v</span><br></pre></td></tr></table></figure></p>
+<p>とやればバージョン確認出来るのだが少し手間なので<br>デフォルトのコンパイラとして使うためにちょっと手直ししてやる<br><a target="_blank" rel="noopener" href="https://github.com/nfarina/homebridge/wiki/Running-HomeBridge-on-a-Raspberry-Pi">https://github.com/nfarina/homebridge/wiki/Running-HomeBridge-on-a-Raspberry-Pi</a></p>
+<p>簡単で、コマンドを以下のようにうつだけ<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9</span><br><span class="line">$ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.7</span><br></pre></td></tr></table></figure></p>
+<p>これで、以下のコマンドをうってgccのバージョンが表示されたら成功<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -v</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">gcc version 4.9.2 (Raspbian 4.9.2-10) </span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>出来なかったら、下記ページを参考にする<br><a target="_blank" rel="noopener" href="http://lektiondestages.blogspot.jp/2013/05/installing-and-switching-gccg-versions.html">http://lektiondestages.blogspot.jp/2013/05/installing-and-switching-gccg-versions.html</a></p>
+<p>次にNode.jsをインストールします</p>
+<h2 id="Node-jsインストール"><a href="#Node-jsインストール" class="headerlink" title="Node.jsインストール"></a>Node.jsインストール</h2><p>node.jsは4.x系と5.x系があって、どちらも実はどんどんバージョンが更新されているのですが<br>開発の都合で２つ同時に進んでるみたいです</p>
+<p><a target="_blank" rel="noopener" href="http://www.publickey1.jp/blog/15/nodejs_50.html">Node.js 5.0がリリース。奇数バージョンは最新機能版、偶数バージョンは長期サポート版</a></p>
+<p>よくわからなかったら、長期サポート板である4.x系を使うのが良いのではないでしょうか</p>
+<p>というわけで、2016年3月24日時点での4.x系最新バージョンのv4.4.1 を入れてみます<br>自分はRaspberryPi A+ で試しているので、CPUがARMv6ですので以下のようになります<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://nodejs.org/dist/v4.4.1/node-v4.4.1-linux-armv6l.tar.gz</span><br><span class="line">$ tar -xvf node-v4.4.1-linux-armv6l.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>Raspberry Pi2の場合は、CPUがARMv7なので以下のようになります<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://nodejs.org/dist/v4.4.1/node-v4.4.1-linux-armv7l.tar.gz</span><br><span class="line">$ tar -xvf node-v4.4.1-linux-armv7l.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>ひとまず、解凍されたnodeのディレクトリに移って<br>ファイルをコピーします<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd node-v4.4.1-linux-armv6l/</span><br><span class="line">$ sudo cp -R * /usr/local/</span><br><span class="line"></span><br><span class="line"># 以下コマンドでnodeのバージョンを確認できたらok</span><br><span class="line">$ node -v</span><br><span class="line">v4.4.1</span><br></pre></td></tr></table></figure></p>
+<p>次にAvahiをインストールします</p>
+<h2 id="Avahiインストール"><a href="#Avahiインストール" class="headerlink" title="Avahiインストール"></a>Avahiインストール</h2><p>AvashiはLinuxのmdsnと呼ばれるものみたいです(いまのところ僕はよくわかってません)<br>が必要なので入れます</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libavahi-compat-libdnssd-dev</span><br></pre></td></tr></table></figure>
+<p>以上です、簡単</p>
+<h2 id="Homebridgeをインストール"><a href="#Homebridgeをインストール" class="headerlink" title="Homebridgeをインストール"></a>Homebridgeをインストール</h2><p><a target="_blank" rel="noopener" href="https://github.com/nfarina/homebridge">https://github.com/nfarina/homebridge</a></p>
+<p>Homebridgeをインストールする<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g homebridge</span><br></pre></td></tr></table></figure><br>けっこう時間かかる</p>
+<p>さらに、httpベースのpluginをインストール<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g homebridge-http</span><br></pre></td></tr></table></figure></p>
+<p>次に、pluginのためのconfigファイルを作成する<br>(下のほうに記載してますが、参考サイト通りに下記方法でやってみたけどうまくいかなかった・・・)<br>(さらに下の方に追記してますが、 homebridge-gpioというのを使って一応LEDの操作できました！)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /home/pi/.homebridge/config.json</span><br><span class="line"></span><br><span class="line"># 以下を記述</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;bridge&quot;:</span><br><span class="line">    &#123;</span><br><span class="line">       &quot;name&quot;: &quot;Homebridge&quot;,</span><br><span class="line">       &quot;username&quot;: &quot;CC:E1:D5:15:9D:AE&quot;,</span><br><span class="line">       &quot;port&quot;: 51826,</span><br><span class="line">       &quot;pin&quot;: &quot;031-45-154&quot;</span><br><span class="line">    &#125;,</span><br><span class="line"> </span><br><span class="line">    &quot;accessories&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;accessory&quot;: &quot;Http&quot;,</span><br><span class="line">        &quot;name&quot;: &quot;test&quot;,</span><br><span class="line">        &quot;switchHandling&quot;: &quot;yes&quot;,</span><br><span class="line">        &quot;http_method&quot;: &quot;POST&quot;,</span><br><span class="line">        &quot;on_url&quot;:      &quot;http://localhost:8000/GPIO/17/value/1&quot;,</span><br><span class="line">        &quot;off_url&quot;:     &quot;http://localhost:8000/GPIO/17/value/0&quot;,</span><br><span class="line">        &quot;status_url&quot;:  &quot;http://localhost:8000/GPIO/17/value&quot;,</span><br><span class="line">        &quot;service&quot;: &quot;Light&quot;,</span><br><span class="line">        &quot;brightnessHandling&quot;: &quot;no&quot;,</span><br><span class="line">        &quot;brightness_url&quot;:     &quot;http://localhost/controller/1707/%b&quot;,</span><br><span class="line">        &quot;brightnesslvl_url&quot;:  &quot;http://localhost/status/100054&quot;,</span><br><span class="line">        &quot;sendimmediately&quot;: &quot;&quot;,</span><br><span class="line">        &quot;username&quot; : &quot;webiopi&quot;,</span><br><span class="line">        &quot;password&quot; : &quot;raspberry&quot;                     </span><br><span class="line">     &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>bridgeの username はRaspberryPiのMacアドレス名を登録する<br>Macアドレスは<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig | grep &#x27;HWaddr&#x27;</span><br></pre></td></tr></table></figure></p>
+<p>とすると出てくるHWaddrのことです<br>ちなみに、HWaddrは小文字の英字が出てくるかもしれないですが<br>config.jsonに記載する時は大文字になおしてあげないといけないです</p>
+<p>あと別に設定しなくても動くが<br>RaspberryPiが立ち上がった時に、Homebridgeを実行できるように設定しておくと便利なので<br>その設定をする<br><a target="_blank" rel="noopener" href="https://github.com/nfarina/homebridge/wiki/Running-HomeBridge-on-a-Raspberry-Pi">https://github.com/nfarina/homebridge/wiki/Running-HomeBridge-on-a-Raspberry-Pi</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/init.d/homebridge</span><br><span class="line"></span><br><span class="line">#!/bin/sh</span><br><span class="line">### BEGIN INIT INFO</span><br><span class="line"># Provides: homebridge</span><br><span class="line"># Required-Start:    $network $remote_fs $syslog</span><br><span class="line"># Required-Stop:     $remote_fs $syslog</span><br><span class="line"># Default-Start:     2 3 4 5</span><br><span class="line"># Default-Stop:      0 1 6</span><br><span class="line"># Short-Description: Start daemon at boot time</span><br><span class="line"># Description:       Enable service provided by daemon.</span><br><span class="line">### END INIT INFO</span><br><span class="line"></span><br><span class="line">dir=&quot;/home/pi&quot;</span><br><span class="line">cmd=&quot;DEBUG=* /usr/local/bin/homebridge&quot;</span><br><span class="line">user=&quot;pi&quot;</span><br><span class="line"></span><br><span class="line">:wq</span><br><span class="line"></span><br><span class="line">$ sudo chmod 755 /etc/init.d/homebridge</span><br><span class="line">$ sudo update-rc.d homebridge defaults</span><br></pre></td></tr></table></figure>
+<h2 id="Homekit用のアプリをインストールする"><a href="#Homekit用のアプリをインストールする" class="headerlink" title="Homekit用のアプリをインストールする"></a>Homekit用のアプリをインストールする</h2><p>iphoneにHomekit用のアプリをインストールする<br>ひとまず Insence+というアプリをAppストアからインストールした</p>
+<p>メールアドレスとパスワードを登録した<br>デバイスの登録などは下記を参照<br><a target="_blank" rel="noopener" href="https://datahotel.io/archives/725">https://datahotel.io/archives/725</a></p>
+<p>この方法ではできなかった・・・<br>よくわからないけど、homebridge-gpioのほうがよいのではないか<br>ということで、homebridge-gpioを使った方法でチャレンジ</p>
+<h1 id="以下追記分、こちらの方法でできました"><a href="#以下追記分、こちらの方法でできました" class="headerlink" title="以下追記分、こちらの方法でできました"></a>以下追記分、こちらの方法でできました</h1><h2 id="homebridge-gpioを使ってみる"><a href="#homebridge-gpioを使ってみる" class="headerlink" title="homebridge-gpioを使ってみる"></a>homebridge-gpioを使ってみる</h2><p>homebridge-gpio<br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/homebridge-gpio">https://www.npmjs.com/package/homebridge-gpio</a></p>
+<p>homebridgeは上記方法でインストール済みとしておいて<br>homebridge-gpioとgpo-adminをインストールする</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g homebridge-gpio</span><br><span class="line">$ git clone git://github.com/jamesblanksby/quick2wire-gpio-admin.git</span><br><span class="line">$ cd quick2wire-gpio-admin</span><br><span class="line">$ make</span><br><span class="line">$ sudo make install</span><br><span class="line">$ sudo adduser $USER gpio</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>config.jsonも書き換えてやる<br>GPIO17(ラズパイの11ピン)を用いてLチカするので下記構成になってます<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /home/pi/.homebridge/config.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;bridge&quot;:</span><br><span class="line">    &#123;</span><br><span class="line">       &quot;name&quot;: &quot;Homebridge&quot;,</span><br><span class="line">       &quot;username&quot;: &quot;CC:E1:D5:15:9D:AE&quot;,</span><br><span class="line">       &quot;port&quot;: 51826,</span><br><span class="line">       &quot;pin&quot;: &quot;031-45-154&quot;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;accessories&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;accessory&quot;: &quot;GPIO&quot;,</span><br><span class="line">        &quot;name&quot;: &quot;GPIO17&quot;,</span><br><span class="line">        &quot;pin&quot;: 11,</span><br><span class="line">        &quot;username&quot; : &quot;webiopi&quot;,</span><br><span class="line">        &quot;password&quot; : &quot;raspberry&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>としてやる。</p>
+<p>これで、homebridgeを起動してやると、iphoneのinsence+アプリからgpioのon offが出来る<br>(GPIOピンは17を用いた)</p>
+<p>ただ、この方法でやっても、offの時にLEDが点灯してしまうので<br>何か方法があるはずだが・・・ひとまずうまくいったから置いておこう</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge/" data-id="ckodzxw25002196z5ee4rbng0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/14/ruby-regexp-number-from-one-to-ten/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Rubyの正規表現で数字の1~10を表す
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/14/particle-electron-beginning/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Particle Electronを使ってみる</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

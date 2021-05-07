@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Particle Electronを使ってみる | ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Particle ElectronParticle Electronを入手したので、公式のチュートリアル(Particle GUIDE)を読んでみるhttps:&#x2F;&#x2F;docs.particle.io&#x2F;guide&#x2F;getting-started&#x2F;intro&#x2F;electron&#x2F; 気になるところをメモ Electron3G本体は US$69月$2.99で1MBまで、さらに1MB追加ごとに$1.99http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Particle Electronを使ってみる">
+<meta property="og:url" content="http://yoheikoga.github.io/2016/08/14/particle-electron-beginning/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:description" content="Particle ElectronParticle Electronを入手したので、公式のチュートリアル(Particle GUIDE)を読んでみるhttps:&#x2F;&#x2F;docs.particle.io&#x2F;guide&#x2F;getting-started&#x2F;intro&#x2F;electron&#x2F; 気になるところをメモ Electron3G本体は US$69月$2.99で1MBまで、さらに1MB追加ごとに$1.99http">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoheikoga.github.io/2016/08/14/particle-electron-beginning/datalimit.png">
+<meta property="article:published_time" content="2016-08-14T06:53:58.000Z">
+<meta property="article:modified_time" content="2021-05-07T05:58:58.661Z">
+<meta property="article:author" content="Yohei Koga">
+<meta property="article:tag" content="電子工作">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoheikoga.github.io/2016/08/14/particle-electron-beginning/datalimit.png">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-particle-electron-beginning" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/particle-electron-beginning/" class="article-date">
+  <time datetime="2016-08-14T06:53:58.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Particle Electronを使ってみる
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <h1 id="Particle-Electron"><a href="#Particle-Electron" class="headerlink" title="Particle Electron"></a>Particle Electron</h1><p>Particle Electronを入手したので、公式のチュートリアル(Particle GUIDE)を読んでみる<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/intro/electron/">https://docs.particle.io/guide/getting-started/intro/electron/</a></p>
+<p>気になるところをメモ</p>
+<h3 id="Electron3G本体は-US-69"><a href="#Electron3G本体は-US-69" class="headerlink" title="Electron3G本体は US$69"></a>Electron3G本体は US$69</h3><p>月$2.99で1MBまで、さらに1MB追加ごとに$1.99<br><a target="_blank" rel="noopener" href="https://store.particle.io/?product=particle-electron&amp;utm_source=Proto&amp;utm_medium=Button&amp;utm_content=Electron&amp;utm_campaign=Buy#electron-3g-americas">https://store.particle.io/?product=particle-electron&amp;utm_source=Proto&amp;utm_medium=Button&amp;utm_content=Electron&amp;utm_campaign=Buy#electron-3g-americas</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$3 per month for 1MB and 99 cents for every megabyte afterwards</span><br></pre></td></tr></table></figure>
+<p>ちなみに、購入したらSIMカードが入ってるので、オンライン上でクレジットカード登録すれば直ぐに使い始めれます便利!<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/start/electron/">https://docs.particle.io/guide/getting-started/start/electron/</a></p>
+<p>その他電池(リチウムイオンポリマー(Lipo))とかUSBケーブルとかアンテナとか必要なものは最初から同封されてるのでこれだけでもまずは始めれます</p>
+<p>2Gの通信規格が使えたらもう少し安いが、日本では3Gの通信規格しか電波が使えないので3Gを選ぶように</p>
+<h3 id="消費電力は-800mA-1800mA"><a href="#消費電力は-800mA-1800mA" class="headerlink" title="消費電力は 800mA ~ 1800mA"></a>消費電力は 800mA ~ 1800mA</h3><p>データシートを眺めてみると</p>
+<p><a target="_blank" rel="noopener" href="https://docs.particle.io/datasheets/electron-datasheet/">https://docs.particle.io/datasheets/electron-datasheet/</a></p>
+<p>GSM module (3Gモジュール) が だいたい800mA ~ 1800mA消費するようです<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u-Blox GSM module on the Electron alone can consume a peak of 800mA to 1800mA</span><br></pre></td></tr></table></figure></p>
+<p>消費電流は180mAから1.8Aまで(5V)で変化するが、ディープスリープモードだと130μAの消費になる<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Typical current consumption is around 180mA and upto 1.8A transients at 5VDC. In deep sleep mode, the quiescent current is 130uA (powered from the battery alone).</span><br></pre></td></tr></table></figure></p>
+<p>付属の電池が2000mAh(2000mAの電力を消費するデバイスを一時間使用可能)なので、ずっと使い続けると1日持たないのかな、という感じ<br>(スマホや携帯と似たような間隔ですね)<br>このあたりはGPSモジュールやWiFiモジュールや3G通信の課題かな</p>
+<p>ちなみにUSBは最大500mAしか供給できないので、基本的には電池を接続したまま使用するということになるようです<br>3Gモジュールの電源はUSB以外にbattery(Lipo、リチウムイオンポリマー)を接続しておく必要がある<br>ということはバッテリーはそこそこで切れてしまうかもだけど<br>充電は簡単</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Most USB ports can supply only a maximum of 500mA, but the u-Blox GSM module on the Electron alone can consume a peak of 800mA to 1800mA of current during transmission. In order to compensate of this deficit, one must connect the LiPo battery at all times when powering from a traditional USB port. The Electron will intelligently source power from the USB most of the time and keep the battery charged. During peak current requirements, the additional power will be sourced from the battery. This reduces the charge-discharge cycle load on the battery, thus improving its longevity.</span><br></pre></td></tr></table></figure>
+<p>実際、Lipoをくっつけた状態でUSBと接続させたら赤色のLEDが点灯して、充電中になった<br>この状態でももちろん使用可能</p>
+<h3 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h3><p><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/start/electron/">https://docs.particle.io/guide/getting-started/start/electron/</a></p>
+<p>USB接続すると充電状態になる<br>で、充電状態だと小さなほうのLEDが赤く光る</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ONBOARD POWER MANAGEMENT</span><br><span class="line">The Electron charges its own battery!</span><br><span class="line">If the small red LED is on, the battery is charging</span><br><span class="line">When the LED turns off, the battery is fully charged</span><br></pre></td></tr></table></figure>
+<p>基板上のMODEボタンを1回押すと、LEDが緑色に点灯して接続強度を5段階で示してくれる<br>(緑色の点滅回数で最大5回)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DISPLAY SIGNAL STRENGTH!</span><br><span class="line">Press MODE once quickly when the Electron is breathing cyan</span><br><span class="line">The signal strength (RSSI) will be shown in a 0-5 green blinks, 5 being the strongest</span><br></pre></td></tr></table></figure>
+<p>MODEボタンを2回素早く押すと、LEDが白く光って数秒後消灯する(SOFT POWER DOWN モード)<br>再起動させたい場合は、RESETスイッチを押す<br>SOFT POWER DOWNモードでの消費電流は約0.13mAである<br>単純に2000mAhの電池なので、満充電後だと繋ぎっぱなしでも約15384時間は持つ(約640日)<br>イメージがサイトにあった<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/modes/electron/#listening-mode">https://docs.particle.io/guide/getting-started/modes/electron/#listening-mode</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SOFT POWER DOWN</span><br><span class="line"></span><br><span class="line">Tap MODE twice quickly, then the LED will show white, and then it will turn off in a few seconds</span><br><span class="line">To turn it back on tap RESET once</span><br><span class="line">You can use use soft power down instead of unplugging the battery or power</span><br><span class="line">This uses a deep sleep mode for the Electron, and will still use 0.13mA</span><br></pre></td></tr></table></figure>
+<h3 id="OVERVIEWより"><a href="#OVERVIEWより" class="headerlink" title="OVERVIEWより"></a>OVERVIEWより</h3><p>particleの月の通信容量は初期設定だと5MBが上限に設定されている(無限にデータを上げないように配慮されている)<br>ダッシュボードで容量を変更することもできる(最初は練習がてらなので、不安なら上限を落としておいたほうが良いかもしれない)<br>変更は Dashboardのbillingタブを開いて、estimated costの横にある「・・・」をクリックすると出てきます<br><a target="_blank" rel="noopener" href="https://dashboard.particle.io/user/billing">https://dashboard.particle.io/user/billing</a></p>
+<p>参考画像<br><img src="/2016/08/14/particle-electron-beginning/datalimit.png" width="400px" height="300px"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">OVERVIEW</span><br><span class="line"></span><br><span class="line">Each SIM card will be billed a base rate which includes 1 MB of data</span><br><span class="line">The base rate covers you up to 1.0MB, additional MB are billed at a cheaper rate than the base</span><br><span class="line">We bill your base rate at beginning of a period, additional MB at the end, so you&#x27;ll often see both</span><br><span class="line">Base and additional MB rates are based on your country and Zone</span><br><span class="line">You can set a data limit for each SIM. It defaults to 5MB on new SIMs, but you can change it in the Dashboard</span><br><span class="line">Data limits are soft maximums; we only charge you for the number of MB used, rounded up, and we&#x27;ll cut off usage as quickly as we have updated metering from your carrier</span><br><span class="line">If a SIM goes over the limit, it&#x27;ll be paused and won&#x27;t be able to use more data until the beginning of the next period or you raise the data limit</span><br><span class="line">You can use the Dashboard to manage SIMs, billing, and see data usage</span><br><span class="line">See the full Electron Billing Guide</span><br></pre></td></tr></table></figure>
+<h3 id="iphone-Androidアプリの使い方"><a href="#iphone-Androidアプリの使い方" class="headerlink" title="iphone / Androidアプリの使い方"></a>iphone / Androidアプリの使い方</h3><p><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/tinker/electron/">https://docs.particle.io/guide/getting-started/tinker/electron/</a></p>
+<p>ピンの名前部分をタップすることで配線を設定できる<br>解除する場合はピンを長押しする<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">To begin, tap any of the pins. A menu will pop up showing the functions that pin has available, tap a function name to select the pin functionality. You can reset the pin function by long-pressing it. Each pin can have up to four possible functions:</span><br></pre></td></tr></table></figure></p>
+<p>最大の電圧は3.3Vなので注意<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">digitalWrite: Sets the pin to HIGH or LOW, which either connects it to 3.3V (the maximum voltage of the system) or to GND (ground). Pin D7 is connected to an on-board LED; if you set pin D7 to HIGH, the LED will turn on, and if you set it to LOW, it will turn off.</span><br><span class="line"></span><br><span class="line">analogWrite: Sets the pin to a value between 0 and 255, where 0 is the same as LOW and 255 is the same as HIGH. This is sort of like sending a voltage between 0 and 3.3V, but since this is a digital system, it uses a mechanism called Pulse Width Modulation, or PWM. You could use analogWrite to dim an LED, as an example.</span><br><span class="line"></span><br><span class="line">digitalRead: This will read the digital value of a pin, which can be read as either HIGH or LOW. If you were to connect the pin to 3.3V, it would read HIGH; if you connect it to GND, it would read LOW. Anywhere in between, it&#x27;ll probably read whichever one it&#x27;s closer to, but it gets dicey in the middle.</span><br><span class="line"></span><br><span class="line">analogRead: This will read the analog value of a pin, which is a value from 0 to 4095, where 0 is LOW (GND) and 4095 is HIGH (3.3V). All of the analog pins (A0 to A7) can handle this. analogRead is great for reading data from sensors.</span><br></pre></td></tr></table></figure></p>
+<p>間違っても5Vなどを入力しないこと<br>(最初のチュートリアルではあまりそんなことは無さそうです)</p>
+<h1 id="firmwareの書き込み方"><a href="#firmwareの書き込み方" class="headerlink" title="firmwareの書き込み方"></a>firmwareの書き込み方</h1><h3 id="USB経由で"><a href="#USB経由で" class="headerlink" title="USB経由で"></a>USB経由で</h3><p><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/tools-and-features/cli/electron/#flashing-over-serial-for-the-electron">https://docs.particle.io/guide/tools-and-features/cli/electron/#flashing-over-serial-for-the-electron</a><br>まずは、マシンとUSBでElectronと接続しておく</p>
+<p>1.<br>Electronをlistening modeにしておく<br>Modeボタンを3秒間押しっぱなしにする。LEDが青色に点滅する<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/getting-started/modes/electron/#listening-mode">https://docs.particle.io/guide/getting-started/modes/electron/#listening-mode</a></p>
+<p>2.<br>particle cli をnpmでインストールしておく(要node.js)<br>インストールしている場合はこの手順は不要<br><a target="_blank" rel="noopener" href="https://docs.particle.io/guide/tools-and-features/cli/electron/#installing">https://docs.particle.io/guide/tools-and-features/cli/electron/#installing</a></p>
+<p>$ particle login<br>で、自分のparticleと連携できるようにしておく</p>
+<p>さらに、dfu-utilとopensslをインストールしておく<br><a target="_blank" rel="noopener" href="http://community.particle.io/t/tutorial-particle-cli-on-mac-osx-26-sep-2015/5225">http://community.particle.io/t/tutorial-particle-cli-on-mac-osx-26-sep-2015/5225</a></p>
+<p>要 rubyおよびHomebrew(HomebrewをインストールするのにRubyが、dfu-utilをインストールするのにHomebrewが必要)<br>$ brew install dfu-util</p>
+<p>opensslは以下のようにインストールする<br>参考<br><a target="_blank" rel="noopener" href="http://qiita.com/Chrowa3/items/b04e772be959cdda9ac3">http://qiita.com/Chrowa3/items/b04e772be959cdda9ac3</a></p>
+<ol start="3">
+<li>particle web IDEのコードをコンパイルして、firmwareをインストールしておく<br>「&lt; &gt;」みたいなマークをクリックすると、REMOVE APP とか CREATE NEW APP とかのボタンがあるサイドテーブルが出てくるので<br>そこのクラウドボタン(雲のマーク)をクリックすると、コンパイル後 firmware.bin のインストールが始まるので、自分のパソコンの適当なディレクトリに保存しておく</li>
+</ol>
+<p>4.<br>firmware.binを保存したディレクトリまで(Macの場合はterminalで)移動して、下記のコマンドを実行する<br>$ particle flash –serial firmware.bin</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">! PROTIP: Hold the SETUP button on your device until it blinks blue!</span><br><span class="line">? Press ENTER when your device is blinking BLUE </span><br></pre></td></tr></table></figure>
+<p>と出てくる。「今からファームウェア書き込むけどちゃんとリスニングモードになってる？OKだったらENTERキーを押してね！」<br>って意味なのでENTER キーを押す</p>
+<p>これで書き込みが出来る…はずだが、できない・・・</p>
+<p>— 2016年3月25日追記<br>とりあえずフォーラムで同じ現象が起きてて質問してる人がいたのでそれで解決した<br><a target="_blank" rel="noopener" href="https://community.particle.io/t/solved-can-upgrade-electron-ota-but-not-from-cli/20209">https://community.particle.io/t/solved-can-upgrade-electron-ota-but-not-from-cli/20209</a></p>
+<p>解決1. DFU Modeで書き込みを行う</p>
+<p>まずは試しにDFU経由での書き込みを行ってみる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ particle flash --usb firmware.bin</span><br><span class="line"></span><br><span class="line">running dfu-util -l</span><br><span class="line"></span><br><span class="line">!!! I was unable to detect any devices in DFU mode...</span><br><span class="line"></span><br><span class="line">&gt; Your device will blink yellow when in DFU mode.</span><br><span class="line">&gt; If your device is not blinking yellow, please:</span><br><span class="line"></span><br><span class="line">1) Press and hold both the RESET/RST and MODE/SETUP buttons simultaneously.</span><br><span class="line"></span><br><span class="line">2) Release only the RESET/RST button while continuing to hold the MODE/SETUP button.</span><br><span class="line"></span><br><span class="line">3) Release the MODE/SETUP button once the device begins to blink yellow.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Error writing firmware...No DFU device found</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>DFU Modeになってないので書き込みできませんよ、みたいなのが出てくるので<br>これにならってDFU Modeに以降する</p>
+<p>RESETボタンとMODEボタンを同時押しすると、LEDが消灯する<br>↓<br>RESETボタンだけ離すと、一旦LEDが紫色に点滅した後、黄色に点滅する<br>↓<br>黄色に点滅したら、MODEボタンを離す</p>
+<p>これでDFU Modeに移行するので、後は書き込みコマンドを実行する</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ particle flash --usb firmware.bin </span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Flash success!</span><br></pre></td></tr></table></figure>
+<p>最後に Flash seccess!と出れば成功!<br>なんかよくわからないけどParticle側のバグかなんかなのかな・・・しばらくはこの方法でしのごう</p>
+<h3 id="over-the-air-OTA-インターネット経由で"><a href="#over-the-air-OTA-インターネット経由で" class="headerlink" title="over the air(OTA), インターネット経由で"></a>over the air(OTA), インターネット経由で</h3><p>Particle IDEを開いた状態でイナズママークみたいなやつ(Flash)をクリックすると出来ます<br>注意点としては、通信に数KBかかるので、データ量をコントロールしたいならUSB経由のほうがいいみたいです</p>
+<p>以上ひとまず現状ここまで</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/particle-electron-beginning/" data-id="ckodzxw2a002f96z59l1dht8e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/14/led-control-from-iphone-by-using-raspberrypi-webiopi-homebridge/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RaspberryPi, WebIOPi, HomebridgeでiphoneからLED操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/14/about-shell-script-beginning/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">shellスクリプトについて調べてみた(初心者)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

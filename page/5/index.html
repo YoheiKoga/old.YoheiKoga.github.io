@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ぬわーーーーーーー！！！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="ぬわーーーーーーー！！！">
+<meta property="og:url" content="http://yoheikoga.github.io/page/5/index.html">
+<meta property="og:site_name" content="ぬわーーーーーーー！！！">
+<meta property="og:locale">
+<meta property="article:author" content="Yohei Koga">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@KYhei">
+  
+    <link rel="alternate" href="/atom.xml" title="ぬわーーーーーーー！！！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-47880153-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ぬわーーーーーーー！！！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoheikoga.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-open-weather-map-by-nodejs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/open-weather-map-by-nodejs/" class="article-date">
+  <time datetime="2016-08-14T07:49:17.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/open-weather-map-by-nodejs/">node.jsでOpenWeatherMap APIから天気情報を取得</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p><a href="http://yoheikoga.github.io/2016/08/14/weather-in-the-area-now-on-by-gps-module/">GPSモジュールを使って現在地の天気情報をAPIで取得する</a>でOpenWeatherMap APIを使って天気情報を取得してみたが</p>
+<p>node.jsを使うとどんな感じになるのかやってみた</p>
+<p>nodeのバージョンは、v0.12.7とv5.3.0で試してみたところどちらでもうまくいった</p>
+<h1 id="HTTPモジュールでGETをしてあげればよい"><a href="#HTTPモジュールでGETをしてあげればよい" class="headerlink" title="HTTPモジュールでGETをしてあげればよい"></a>HTTPモジュールでGETをしてあげればよい</h1><p>下記あたりを参考にすると、http GETしてあげて、得られたJSONをパースしてあげればいいみたい<br><a target="_blank" rel="noopener" href="http://qiita.com/n0bisuke/items/788dc4379fd57e8453a3">Node.jsでHTTP GETしてJSONパースするメモ</a><br><a target="_blank" rel="noopener" href="http://blog.sarabande.jp/post/52044588736">Node.js: GET リクエストを行う</a></p>
+<p>requestモジュールでもいいみたいだけどひとまず今回はhttpモジュールを使ってみる<br><a target="_blank" rel="noopener" href="http://blog.sarabande.jp/post/52095868617">Node.js: request モジュールを使って GET リクエストを行う</a></p>
+<p>コードはシンプルで、下記のようになる<br>locationは自分の好きな場所を<br>APIKEYは自分の環境のを入れる</p>
+<p>ファイル名は openWeatherMap.js とした</p>
+<figure class="highlight js"><figcaption><span>openWeatherMap.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> location = <span class="string">&quot;Fukuoka-shi,jp&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> units = <span class="string">&#x27;metric&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> APIKEY = <span class="string">&quot;&#123;your api key&#125;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> URL = <span class="string">&#x27;http://api.openweathermap.org/data/2.5/weather?q=&#x27;</span>+ location +<span class="string">&#x27;&amp;units=&#x27;</span>+ units +<span class="string">&#x27;&amp;appid=&#x27;</span>+ APIKEY;</span><br><span class="line"></span><br><span class="line">http.get(URL, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> body = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  res.setEncoding(<span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  res.on(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">    body += chunk;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  res.on(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">    res = <span class="built_in">JSON</span>.parse(body);</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;).on(<span class="string">&#x27;error&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.message);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>ターミナルなどのコンソール上で、実行してあげると</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ node openWeatherMap.js </span><br><span class="line"></span><br><span class="line">&#123; coord: &#123; lon: 130.42, lat: 33.61 &#125;,</span><br><span class="line">  weather: </span><br><span class="line">   [ &#123; id: 803,</span><br><span class="line">       main: <span class="string">&#x27;Clouds&#x27;</span>,</span><br><span class="line">       description: <span class="string">&#x27;broken clouds&#x27;</span>,</span><br><span class="line">       icon: <span class="string">&#x27;04d&#x27;</span> &#125; ],</span><br><span class="line">  base: <span class="string">&#x27;stations&#x27;</span>,</span><br><span class="line">  main: </span><br><span class="line">   &#123; temp: 23.58,</span><br><span class="line">     pressure: 1009,</span><br><span class="line">     humidity: 69,</span><br><span class="line">     temp_min: 21.67,</span><br><span class="line">     temp_max: 24.44 &#125;,</span><br><span class="line">  visibility: 10000,</span><br><span class="line">  wind: &#123; speed: 2.6, deg: 330 &#125;,</span><br><span class="line">  clouds: &#123; all: 75 &#125;,</span><br><span class="line">  dt: 1465380026,</span><br><span class="line">  sys: </span><br><span class="line">   &#123; <span class="built_in">type</span>: 1,</span><br><span class="line">     id: 7546,</span><br><span class="line">     message: 0.0136,</span><br><span class="line">     country: <span class="string">&#x27;JP&#x27;</span>,</span><br><span class="line">     sunrise: 1465330063,</span><br><span class="line">     sunset: 1465381645 &#125;,</span><br><span class="line">  id: 1863967,</span><br><span class="line">  name: <span class="string">&#x27;Fukuoka-shi&#x27;</span>,</span><br><span class="line">  cod: 200 &#125;</span><br></pre></td></tr></table></figure>
+<p>のようにJSONデータが得られる</p>
+<p>特定の部分が欲しければ、openWeatherMap.js の19行目のresの部分をいじってあげれば良い</p>
+<p>例えばmainの部分が欲しかったら,19行目の部分を<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(res.main);</span><br></pre></td></tr></table></figure></p>
+<p>としてやれば良い</p>
+<p>結果のJSONは以下のようになる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123; temp: 23.58,</span><br><span class="line">  pressure: 1009,</span><br><span class="line">  humidity: 69,</span><br><span class="line">  temp_min: 21.67,</span><br><span class="line">  temp_max: 24.44 &#125;</span><br></pre></td></tr></table></figure>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/open-weather-map-by-nodejs/" data-id="ckodzxw29002d96z58q25hqkw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/" rel="tag">node</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-weather-in-the-area-now-on-by-gps-module" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/weather-in-the-area-now-on-by-gps-module/" class="article-date">
+  <time datetime="2016-08-14T07:45:46.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/weather-in-the-area-now-on-by-gps-module/">GPSモジュールを使って現在地の天気情報をAPIで取得する</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>OpenWeatherMapという天気情報をAPIで提供しているものがあって<br><a target="_blank" rel="noopener" href="http://openweathermap.org/">OpenWeatherMap</a></p>
+<p>緯度経度情報から、天気情報を取得出来るということで<br>GPSモジュールを使って現在地の緯度経度から天気情報を取得してみた</p>
+<p>コードはgithubに上げてます<br><a target="_blank" rel="noopener" href="https://github.com/YoheiKoga/weatherApiWithGPS">weatherApiWithGPS</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/weather-in-the-area-now-on-by-gps-module/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/weather-in-the-area-now-on-by-gps-module/" data-id="ckodzxw2w004c96z5cjyv9290" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-deploy-sinatra-and-rails-app-by-google-app-engine" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/deploy-sinatra-and-rails-app-by-google-app-engine/" class="article-date">
+  <time datetime="2016-08-14T07:44:36.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/deploy-sinatra-and-rails-app-by-google-app-engine/">Google App EngineでsinatraとRailsをデプロイ</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="http://www.publickey1.jp/blog/16/ruby_google_app_engine.html">RubyがGoogle App Engineで利用可能に。ベータ公開開始</a></p>
+<p>というのを見かけて、Ruby使えるのかじゃあSinatraやRailsも動くのかな？と思って調べたら既に先人がいたので倣ってやってみた</p>
+<p>自分のマシンはMacで行った<br>Rubyのversionは2.3.0, railsは4.2.5</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/deploy-sinatra-and-rails-app-by-google-app-engine/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/deploy-sinatra-and-rails-app-by-google-app-engine/" data-id="ckodzxw1f000h96z56zn11fwx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-application-is-not-a-member-of-package-controllers-on-play2-5-x" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/application-is-not-a-member-of-package-controllers-on-play2-5-x/" class="article-date">
+  <time datetime="2016-08-14T07:42:26.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/application-is-not-a-member-of-package-controllers-on-play2-5-x/">play2.5.xでApplication is not a member of package controllersが起こる</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>結論から言うと、Play2.5.xではcontrollersでobjectではなくclassで定義してあげないといけないみたい<br>(2016年5月10時点)</p>
+<p>ついでにPlay Frameworkの使い方を少し捕捉してみた</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/application-is-not-a-member-of-package-controllers-on-play2-5-x/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/application-is-not-a-member-of-package-controllers-on-play2-5-x/" data-id="ckodzxw1c000b96z5boqw4gwp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-unicode-and-byte-code-in-python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/unicode-and-byte-code-in-python/" class="article-date">
+  <time datetime="2016-08-14T07:40:03.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/unicode-and-byte-code-in-python/">Pythonはバイト列やunicode文字列が認識される</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>参考<br><a target="_blank" rel="noopener" href="http://www.tohoho-web.com/python/types.html">http://www.tohoho-web.com/python/types.html</a></p>
+<p>pythonのバージョンは3.4.3を使用</p>
+<p>printした時に、コンソールに b とか u とか出てくることがあるけど<br>これは文字の型を表しているっぽい</p>
+<p>例えば<a href="http://yoheikoga.github.io/2016/08/14/serial-communication-by-python/">シリアル通信の例</a>だと</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> serial</span><br><span class="line"><span class="keyword">import</span> types</span><br><span class="line"></span><br><span class="line">ser = serial.Serial(</span><br><span class="line">      port = <span class="string">&quot;/dev/tty.usbserial-AI03CNY6&quot;</span>,</span><br><span class="line">      baudrate = <span class="number">9600</span>,</span><br><span class="line">      parity = serial.PARITY_NONE,</span><br><span class="line">      bytesize = serial.EIGHTBITS,</span><br><span class="line">      stopbits = serial.STOPBITS_ONE,</span><br><span class="line">      timeout = <span class="literal">None</span>,</span><br><span class="line">      xonxoff = <span class="number">0</span>,</span><br><span class="line">      rtscts = <span class="number">0</span>,</span><br><span class="line">      )</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  <span class="built_in">print</span>(ser.readline())</span><br></pre></td></tr></table></figure>
+<p>だと、コンソール上に</p>
+<p>b’$GPRMC,,,V,,,,,,,,N*48\r\n’</p>
+<p>みたいに表示される<br>これを防ぐには、printする時にdecode(‘utf-8’)してやればよい</p>
+<p>print(ser.readline().decode(‘utf-8’))</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/unicode-and-byte-code-in-python/" data-id="ckodzxw2t004096z5dxe84vt1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-serial-communication-by-python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/serial-communication-by-python/" class="article-date">
+  <time datetime="2016-08-14T07:37:12.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/serial-communication-by-python/">Pythonでシリアル通信</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <p>試しに、GPSモジュールを使ってデータを取得してみる<br>環境はMac OsX 10.9, Python 3.4.3(Anaconda 2.3.0)<br>使用したものは</p>
+<p><a target="_blank" rel="noopener" href="https://www.switch-science.com/catalog/1085/">Adafruit Ultimate 66チャンネル10Hz GPSモジュール Version 3</a><br>(いまだと秋月電子に<a target="_blank" rel="noopener" href="http://akizukidenshi.com/catalog/g/gK-09991/">もっと安いやつ(ＧＰＳ受信機キット　１ＰＰＳ出力付き　「みちびき」対応)</a>があるのでそれでも可)</p>
+<p><a target="_blank" rel="noopener" href="https://www.switch-science.com/catalog/1032/">FTDI USBシリアル変換アダプター(5V/3.3V切り替え機能付き)</a></p>
+<p>その他USBケーブル(A - microB)ジャンパーワイヤーやブレッドボードなどひつようなもの</p>
+<h3 id="pySerialをインストールする"><a href="#pySerialをインストールする" class="headerlink" title="pySerialをインストールする"></a>pySerialをインストールする</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pyserial</span><br></pre></td></tr></table></figure>
+<h3 id="GPSをMacと接続する"><a href="#GPSをMacと接続する" class="headerlink" title="GPSをMacと接続する"></a>GPSをMacと接続する</h3><p>GPSモジュールとUSBシリアル変換アダプターの接続は</p>
+<p>GPSモジュール : USBシリアル変換アダプター<br>Vin : VCC<br>GND : GND<br>TX  : RX<br>RX  : TX</p>
+<p>となるように接続する</p>
+<p><img src="./gps.jpg" width="300px" height="200px"></p>
+<p>Pythonでシリアル通信<br>シリアル変換アダプターのジャンパーピンは、今回のGPSだと3.3Vでも5Vでもどちらでも動くのでひとまず3.3Vにしている</p>
+<p>あとはUSBケーブルでMacと接続して、USBケーブルのポート名を取得しておく<br>ポート名の取得は、terminal上で下記コマンドを打つと出てくる</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls /dev/tty.usbserial*</span><br><span class="line">/dev/tty.usbserial-AI03CNY6</span><br></pre></td></tr></table></figure>
+<p>上記例だと、AI03CNY6の部分を出てきたやつに変えてやると自分のポート名になる</p>
+<p>簡単な例(gpsデータからGPRMCのみ取り出す)<br><figure class="highlight python"><figcaption><span>gps.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> serial</span><br><span class="line"><span class="keyword">import</span> types</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">ser = serial.Serial(</span><br><span class="line">      </span><br><span class="line">      <span class="comment"># Macの場合、 /dev/tty.usbserial-* の形で認識される。WindowsならCOM3とかCOM4とかになるはず</span></span><br><span class="line">      <span class="comment"># ls /dev/tty.usbserial* で出てきたポート名を入れること</span></span><br><span class="line">      port = <span class="string">&quot;/dev/tty.usbserial-AI03CNY6&quot;</span>,</span><br><span class="line">      baudrate = <span class="number">9600</span>,</span><br><span class="line">      parity = serial.PARITY_NONE,</span><br><span class="line">      bytesize = serial.EIGHTBITS,</span><br><span class="line">      stopbits = serial.STOPBITS_ONE,</span><br><span class="line">      timeout = <span class="literal">None</span>,</span><br><span class="line">      xonxoff = <span class="number">0</span>,</span><br><span class="line">      rtscts = <span class="number">0</span>,</span><br><span class="line">      )</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  gpsData = ser.readline().decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> re.search(<span class="string">r&#x27;RMC&#x27;</span>, gpsData):</span><br><span class="line">    <span class="built_in">print</span>(gpsData.strip())</span><br></pre></td></tr></table></figure></p>
+<p>if文のところを取り除いてあげれば出力されるGPSデータ全てが出力される</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/serial-communication-by-python/" data-id="ckodzxw2o003l96z50y0k3g50" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-haskell-on-centos" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/haskell-on-centos/" class="article-date">
+  <time datetime="2016-08-14T07:35:57.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/haskell-on-centos/">CentOSでHaskellプログラミング始め</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Haskellを始めてみる<br>最初はよくわからないのでCentOSに入れてやってみる<br>注意点としては、haskellを入れる際に容量が1.1GB程度と大きいので注意</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/haskell-on-centos/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/haskell-on-centos/" data-id="ckodzxw1y001j96z54c4iedjq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ups-pico-raspberrypi" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/ups-pico-raspberrypi/" class="article-date">
+  <time datetime="2016-08-14T07:34:38.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/ups-pico-raspberrypi/">RaspberryPiバックアップバッテリーUPS PIcoの使い方</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ラズパイを使用していて一番困るのが、いきなり電源が落ちた時などに<br>ファイルシステムが破損する恐れがあること</p>
+<p>そこで、突然の電源停止時にも安全に電源を落とせるようなバックアップとしてのデバイスがUPS PIco<br><a target="_blank" rel="noopener" href="http://www.furutaka-netsel.co.jp/utility/upspico.html">ラズベリーパイ / Raspberry Pi 専用 UPS 無停電電源ボードUPS PIco</a></p>
+<p>基本的には下記リンク公式のsimple Setting Guideを参考にやっていけばいける<br>(PDF注意)<br><a target="_blank" rel="noopener" href="http://pimodules.com/_pdf/Simple_Setting_Guide_for_the_UPS_PIco.pdf">Simple Setting Guide for the UPS PIco</a></p>
+<p>いろいろレジスタなどいじれるがひとまず使ってみる</p>
+<p>2016年4月26日現在<br>使用している環境は</p>
+<p>・RaspberryPi2 B<br>・OS: Raspbian Jessie(2016-02)<br>・UPS PIco (HAT v1.1)</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/ups-pico-raspberrypi/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/ups-pico-raspberrypi/" data-id="ckodzxw2u004596z5di1kdg44" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-raspberrypi-bmp180-munin-data" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/raspberrypi-bmp180-munin-data/" class="article-date">
+  <time datetime="2016-08-14T07:32:32.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/raspberrypi-bmp180-munin-data/">RaspberryPi + BMP180 + muninで温度データをグラフ化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>温度湿度気圧センサのBMP180(Adafruit製)を用いて<br>温度データを取得後、muninというツールを用いてグラフ化した</p>
+<p>用いたもの<br>・RaspberryPi2 B (Raspbian wheezy(2015年5月バージョン))<br>・BMP180</p>
+<p>pythonはRaspbianに入っていたものをそのままなのでバージョンは2.7.3です</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/14/raspberrypi-bmp180-munin-data/#more">Read More</a>
+          </p>
+        
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/raspberrypi-bmp180-munin-data/" data-id="ckodzxw2i003496z50z7mg9pw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-graf-by-python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/graf-by-python/" class="article-date">
+  <time datetime="2016-08-14T07:30:52.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/graf-by-python/">pythonのグラフ描画について</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <h1 id="基本的にはmatplotlibが良い"><a href="#基本的にはmatplotlibが良い" class="headerlink" title="基本的にはmatplotlibが良い"></a>基本的にはmatplotlibが良い</h1><p>技術評論社から出ている<a target="_blank" rel="noopener" href="http://gihyo.jp/book/2015/978-4-7741-7631-4">『データサイエンティスト養成読本　機械学習入門編』</a>を読んでみても、グラフ化の第一選択肢は<code>matplotlib</code>みたいです</p>
+<blockquote>
+<p>“matplotlibは、Pythonでグラフや図などを描画するためのライブラリです。<br>データサイエンスの世界で、データを可視化したい時に威力を発揮します”<br>                                                        (特集2 Pythonによる機械学習入門 より引用)</p>
+</blockquote>
+<p>ネットで検索してみても、どうやらmatplotlibが良く使われているような印象を受けます</p>
+<p><a target="_blank" rel="noopener" href="http://myenigma.hatenablog.com/entry/2015/08/30/223559">MATLABユーザのためのPythonグラフ作成ツールmatplotlib入門</a><br><a target="_blank" rel="noopener" href="http://qiita.com/hausen6/items/b1b54f7325745ae43e47">matplotlibでリアルタイム描画</a><br><a target="_blank" rel="noopener" href="http://symfoware.blog68.fc2.com/blog-entry-1416.html">matplotlibを使ってPythonでグラフを表示する</a><br><a target="_blank" rel="noopener" href="http://bicycle1885.hatenablog.com/entry/2014/02/14/023734">matplotlib入門</a></p>
+<p>さらに、派生したものでSeabornという綺麗なグラフが描けるものもあるみたいです<br><a target="_blank" rel="noopener" href="http://myenigma.hatenablog.com/entry/2015/10/09/223629">簡単に美しいグラフ描画ができるPythonライブラリSeaborn入門</a></p>
+<p>MacやLinuxなどパソコンをそのまま用いるなら上記のもので<br>グラフ化を行うのが良いみたい</p>
+<p>　　
+　　</p>
+<h2 id="センサーからの値をRaspberryPiなどを用いてグラフ化する場合さらに色々なもの-ライブラリ-が用いられている"><a href="#センサーからの値をRaspberryPiなどを用いてグラフ化する場合さらに色々なもの-ライブラリ-が用いられている" class="headerlink" title="センサーからの値をRaspberryPiなどを用いてグラフ化する場合さらに色々なもの(ライブラリ)が用いられている"></a>センサーからの値をRaspberryPiなどを用いてグラフ化する場合さらに色々なもの(ライブラリ)が用いられている</h2><p>センサをラズパイなどで取得する場合はさらに色々なのがあって
+　　
+　　</p>
+<h3 id="matplotlibを用いたもの"><a href="#matplotlibを用いたもの" class="headerlink" title="matplotlibを用いたもの"></a>matplotlibを用いたもの</h3><p><a target="_blank" rel="noopener" href="http://d.hatena.ne.jp/beiz23/20140726/1406378550">Raspberry piで大気圧と温度を記録してグラフにして他のPCからグラフを見る(メモ)</a></p>
+<p><a target="_blank" rel="noopener" href="http://iroha112233.hatenablog.com/entry/2016/03/24/231620">USBマイクの音量をリアルタイムプロットする on raspberry pi 2 B</a>
+　　
+　　</p>
+<h3 id="muninを用いたもの"><a href="#muninを用いたもの" class="headerlink" title="muninを用いたもの"></a>muninを用いたもの</h3><p><a target="_blank" rel="noopener" href="http://blog.bnikka.com/raspberrypi/bmp085raspberrypi.html">気圧センサBMP085をRaspberryPiに接続しグラフ表示</a><br><a target="_blank" rel="noopener" href="http://bey.jp/?p=15709">muninで温度湿度のグラフを表示させたい</a>
+　　
+　　</p>
+<h3 id="Google-Chartsを用いたもの"><a href="#Google-Chartsを用いたもの" class="headerlink" title="Google Chartsを用いたもの"></a>Google Chartsを用いたもの</h3><p><a target="_blank" rel="noopener" href="http://atelier-orchard.blogspot.jp/2014/02/rapsberry-pigoogle-charts.html">Rapsberry Piで気温のログ＋Google Chartsでグラフ化</a>
+　　
+　　</p>
+<h3 id="smbusを用いたもの"><a href="#smbusを用いたもの" class="headerlink" title="smbusを用いたもの"></a>smbusを用いたもの</h3><p><a target="_blank" rel="noopener" href="http://make.bcde.jp/raspberry-pi/%E3%82%BB%E3%83%B3%E3%82%B5%E3%81%AE%E8%A8%98%E9%8C%B2%E3%82%92%E3%82%B0%E3%83%A9%E3%83%95%E5%8C%96/#i-4">センサの記録をグラフ化</a>　　
+　　</p>
+<h3 id="pubnubを用いたもの"><a href="#pubnubを用いたもの" class="headerlink" title="pubnubを用いたもの"></a>pubnubを用いたもの</h3><p><a target="_blank" rel="noopener" href="http://www.itbook.info/web/2015/07/raspberry-pi-pubnub-%E3%81%A7%E6%B8%A9%E5%BA%A6%E3%81%A8%E6%B9%BF%E5%BA%A6%E3%81%AE%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B0%E3%83%A9%E3%83%95%E8%A1%A8%E7%A4%BA.html">Raspberry pi + pubnub で温度と湿度のリアルタイムグラフ表示</a>
+　　
+　　</p>
+<h3 id="dygraphsを用いたもの"><a href="#dygraphsを用いたもの" class="headerlink" title="dygraphsを用いたもの"></a>dygraphsを用いたもの</h3><p><a target="_blank" rel="noopener" href="http://dkpyn.com/blog/2344">RaspberryPiとDS18B20で温度を計ってdygraphsでグラフ化</a></p>
+<p>などが引っかかってきました</p>
+<h1 id="外部ライブラリを用いたもの"><a href="#外部ライブラリを用いたもの" class="headerlink" title="外部ライブラリを用いたもの"></a>外部ライブラリを用いたもの</h1><h3 id="Node-js-ccchart-js"><a href="#Node-js-ccchart-js" class="headerlink" title="Node.js + ccchart.js"></a>Node.js + ccchart.js</h3><p><a target="_blank" rel="noopener" href="http://bitwave.showcase-tv.com/raspberry-pi%E3%81%A8%E3%82%BB%E3%83%B3%E3%82%B5%E3%83%BC%E3%81%A7%E3%83%98%E3%83%AB%E3%82%B9%E6%83%85%E5%A0%B1%E3%81%AE%E5%8F%96%E5%BE%97%EF%BC%88%E5%BF%83%E6%8B%8D%E6%95%B0%E7%B7%A8%EF%BC%89/">Raspberry Piとセンサーでヘルス情報の取得（心拍数編）</a></p>
+<h1 id="外部サービスを用いたもの"><a href="#外部サービスを用いたもの" class="headerlink" title="外部サービスを用いたもの"></a>外部サービスを用いたもの</h1><h3 id="Home-Assistant"><a href="#Home-Assistant" class="headerlink" title="Home Assistant"></a>Home Assistant</h3><p><a target="_blank" rel="noopener" href="http://qiita.com/spicemanjp/items/59032bad6c93c5ac28ab">メモ：Home Assistant + Raspberry Pi + センサー でホームオートメーションしたい #1</a></p>
+<h3 id="IoT-kyoto-VIS-AWS-DynamoDB"><a href="#IoT-kyoto-VIS-AWS-DynamoDB" class="headerlink" title="IoT.kyoto VIS + AWS DynamoDB"></a>IoT.kyoto VIS + AWS DynamoDB</h3><p><a target="_blank" rel="noopener" href="http://qiita.com/Ichiro_Tsuji/items/05a3f84b1d6c8d6e21d7">RaspberryPiでセンサーデータをfluentdを使ってDynamoDBに送って可視化してみよう＜上級編＞</a></p>
+<p>このあたりどれを使うか見極めたら、さらに調べてみるのがいいと思われる</p>
+
+      <br>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="KYhei" data-show-count="false" target="_blank">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a target="_blank" rel="noopener" href="http://b.hatena.ne.jp/entry/yoheikoga.github.io" class="hatena-bookmark-button" data-hatena-bookmark-title="ぬわーーーーーーー！！！" data-hatena-bookmark-layout="simple-balloon" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoheikoga.github.io/2016/08/14/graf-by-python/" data-id="ckodzxw1x001g96z5a16kftnd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; __(&#39;prev&#39;)</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">__(&#39;next&#39;) &amp;raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drupal/" rel="tag">Drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elixir/" rel="tag">Elixir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elm/" rel="tag">Elm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Erlang/" rel="tag">Erlang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Haskell/" rel="tag">Haskell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play-Framework/" rel="tag">Play Framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PolSARpro/" rel="tag">PolSARpro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaspberryPi/" rel="tag">RaspberryPi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby/" rel="tag">Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sinatra/" rel="tag">Sinatra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mbed/" rel="tag">mbed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" rel="tag">プログラミング</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" rel="tag">電子工作</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Drupal/" style="font-size: 11.11px;">Drupal</a> <a href="/tags/Elixir/" style="font-size: 15.56px;">Elixir</a> <a href="/tags/Elm/" style="font-size: 20px;">Elm</a> <a href="/tags/Erlang/" style="font-size: 10px;">Erlang</a> <a href="/tags/Haskell/" style="font-size: 17.78px;">Haskell</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/PolSARpro/" style="font-size: 11.11px;">PolSARpro</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/RaspberryPi/" style="font-size: 18.89px;">RaspberryPi</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Ruby/" style="font-size: 14.44px;">Ruby</a> <a href="/tags/Scala/" style="font-size: 12.22px;">Scala</a> <a href="/tags/Sinatra/" style="font-size: 10px;">Sinatra</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/mbed/" style="font-size: 10px;">mbed</a> <a href="/tags/node/" style="font-size: 11.11px;">node</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/shell/" style="font-size: 11.11px;">shell</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" style="font-size: 15.56px;">プログラミング</a> <a href="/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/" style="font-size: 15.56px;">電子工作</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/03/use-sample-data-by-polsarpro/">get started PolSARpro by sample data</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/install-polsarpro-in-linux/">Install PolSARpro in Linux Lite / Linux LiteにPolSARproいれる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/28/linux-in-virtualbox/">VirtualBoxにLinux Liteを入れる</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/add-remote-github-repository/">Hexoブログをgithubでリモート管理する</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/07/upgrade-to-raspbian-jessie-pixel/">Raspbian jessieからRaspbian jessie Pixelにアップグレードする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <a class="twitter-timeline" target="_blank" rel="noopener" href="https://twitter.com/KYhei">Tweets by KYhei</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yohei Koga<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>
